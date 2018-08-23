@@ -1,0 +1,43 @@
+# Arabic translations for my-gtemplate package.
+# Copyright (C) 2018 THE my-gtemplate'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the my-gtemplate package.
+# Automatically generated, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: my-gtemplate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-19 12:49+0530\n"
+"PO-Revision-Date: 2018-08-19 12:49+0530\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/org.sadiqpk.GTemplate.desktop.in:3 src/mgt-application.c:74
+#: src/mgt-application.c:220
+msgid "My GTemplate"
+msgstr ""
+
+#: data/org.sadiqpk.GTemplate.desktop.in:4
+msgid "Template for Gtk+ Applications"
+msgstr ""
+
+#. Translators: Do NOT translate. This is icon name.
+#: data/org.sadiqpk.GTemplate.desktop.in:7
+msgid "org.sadiqpk.GTemplate"
+msgstr ""
+
+#: src/mgt-application.c:53
+msgid "Quit all running instances of the application"
+msgstr ""
+
+#: src/mgt-application.c:57
+msgid "Show release version"
+msgstr ""
+
+#: src/mgt-application.c:81
+msgid "translator-credits"
+msgstr ""

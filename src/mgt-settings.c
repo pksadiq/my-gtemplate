@@ -1,0 +1,208 @@
+/* mgt-settings.c
+ *
+ * Copyright 2018 Mohammed Sadiq <sadiq@sadiqpk.org>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#define G_LOG_DOMAIN "mgt-settings"
+
+#include "config.h"
+
+#include "mgt-settings.h"
+#include "mgt-trace.h"
+
+/**
+ * SECTION: mgt-settings
+ * @title: MgtSettings
+ * @short_description: The Application settings
+ * @include: "mgt-settings.h"
+ *
+ * A class that handles application specific settings, and
+ * to store them to disk.
+ */
+
+struct _MgtSettings
+{
+  GSettings parent_instance;
+
+  /* Window states */
+  GdkRectangle geometry;
+  gboolean maximized;
+
+  gboolean first_run;
+};
+
+G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
+
+
+static void
+mgt_settings_constructed (GObject *object)
+{
+  MgtSettings *self = (MgtSettings *)object;
+  GSettings *settings = (GSettings *)object;
+  GdkRectangle *geometry = &self->geometry;
+
+  MGT_ENTRY;
+
+  G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
+
+  g_settings_delay (settings);
+  self->first_run = g_settings_get_boolean (settings, "first-run");
+  self->maximized = g_settings_get_boolean (settings, "window-maximized");
+  g_settings_get (settings, "window-size", "(ii)", &geometry->width, &geometry->height);
+  g_settings_get (settings, "window-position", "(ii)", &geometry->x, &geometry->y);
+
+  MGT_EXIT;
+}
+
+static void
+mgt_settings_dispose (GObject *object)
+{
+  GSettings *settings = (GSettings *)object;
+
+  g_settings_set_boolean (settings, "first-run", FALSE);
+  g_settings_apply (settings);
+
+  G_OBJECT_CLASS (mgt_settings_parent_class)->dispose (object);
+}
+
+static void
+mgt_settings_class_init (MgtSettingsClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->constructed = mgt_settings_constructed;
+  object_class->dispose = mgt_settings_dispose;
+}
+
+static void
+mgt_settings_init (MgtSettings *self)
+{
+}
+
+/**
+ * mgt_settings_new:
+ * @schema_id: (not nullable): An application id as string
+ *
+ * Create a new settings for the given application
+ * id @schema_id.  @schema_ids are usually of the form
+ * “org.example.AppName”.
+ *
+ * Returns: (transfer full): A #MgtSettings.
+ * Free with g_object_unref().
+ */
+MgtSettings *
+mgt_settings_new (const gchar *schema_id)
+{
+  g_assert (schema_id != NULL);
+
+  return g_object_new (MGT_TYPE_SETTINGS,
+                       "schema-id", schema_id,
+                       NULL);
+}
+
+/**
+ * mgt_settings_get_is_first_run:
+ * @self: A #MgtSettings
+ *
+ * Get if the application has ever launched after install.
+ * Updating the application to a new version won’t reset
+ * this flag.
+ *
+ * Returns: %TRUE for the first launch of application.
+ * %FALSE otherwise.
+ */
+gboolean
+mgt_settings_get_is_first_run (MgtSettings *self)
+{
+  g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
+
+  return self->first_run;
+}
+
+/**
+ * mgt_settings_get_window_maximized:
+ * @self: A #MgtSettings
+ *
+ * Get the window maximized state as saved in @self.
+ *
+ * Returns: %TRUE if maximized.  %FALSE otherwise.
+ */
+gboolean
+mgt_settings_get_window_maximized (MgtSettings *self)
+{
+  g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
+
+  return self->maximized;
+}
+
+/**
+ * mgt_settings_set_window_maximized:
+ * @self: A #MgtSettings
+ * @maximized: The window state to save
+ *
+ * Set the window maximized state in @self.
+ */
+void
+mgt_settings_set_window_maximized (MgtSettings *self,
+                                   gboolean     maximized)
+{
+  g_return_if_fail (MGT_IS_SETTINGS (self));
+
+  self->maximized = !!maximized;
+  g_settings_set_boolean (G_SETTINGS (self), "window-maximized", !!maximized);
+}
+
+/**
+ * mgt_settings_get_window_geometry:
+ * @self: A #MgtSettings
+ * @geometry: (out) (not nullable): A #GdkRectangle
+ *
+ * Get the window geometry as saved in @self.
+ */
+void
+mgt_settings_get_window_geometry (MgtSettings  *self,
+                                  GdkRectangle *geometry)
+{
+  g_return_if_fail (MGT_IS_SETTINGS (self));
+  g_return_if_fail (geometry != NULL);
+
+  *geometry = self->geometry;
+}
+
+/**
+ * mgt_settings_set_window_geometry:
+ * @self: A #MgtSettings
+ * @geometry: (not nullable): A #GdkRectangle
+ *
+ * Set the window geometry in @self.
+ */
+void
+mgt_settings_set_window_geometry (MgtSettings  *self,
+                                  GdkRectangle *geometry)
+{
+  GSettings *settings;
+
+  g_return_if_fail (MGT_IS_SETTINGS (self));
+  g_return_if_fail (geometry != NULL);
+
+  settings = G_SETTINGS (self);
+  self->geometry = *geometry;
+
+  g_settings_set (settings, "window-size", "(ii)", geometry->width, geometry->height);
+  g_settings_set (settings, "window-position", "(ii)", geometry->x, geometry->y);
+}

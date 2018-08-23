@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+<!ENTITY version SYSTEM "version.xml">
+]>
+
+<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+
+  <bookinfo>
+    <title>My GTemplate Reference Manual</title>
+    <releaseinfo>for My GTemplate &version;</releaseinfo>
+
+    <authorgroup>
+      <author>
+        <firstname>Mohammed</firstname>
+        <surname>Sadiq</surname>
+        <affiliation>
+          <address>
+            <email>sadiq@sadiqpk.org</email>
+          </address>
+        </affiliation>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2017</year>
+      <holder>Mohammed Sadiq</holder>
+    </copyright>
+
+  </bookinfo>
+
+  <part>
+    <title>API Reference</title>
+    <xi:include href="xml/mgt-utils.xml" />
+    <xi:include href="xml/mgt-application.xml" />
+    <xi:include href="xml/mgt-settings.xml" />
+  </part>
+
+  <index id="api-index-full">
+    <title>API Index</title>
+    <xi:include href="xml/api-index-full.xml"><xi:fallback /></xi:include>
+  </index>
+
+  <xi:include href="xml/annotation-glossary.xml"><xi:fallback /></xi:include>
+
+</book>

@@ -1,0 +1,6 @@
+option('man', type: 'boolean', value: true, description: 'Enable generating man pages')
+option('bash_completion', type: 'boolean', value: true, description: 'Enable bash completion')
+option('po', type: 'boolean', value: true, description: 'Enable translations')
+option('help', type: 'boolean', value: false, description: 'Build help documentation')
+option('gtk_doc', type: 'boolean', value: false, description: 'Build code documentation')
+option('tracing', type: 'boolean', value: false, description: 'Enable tracing for troubleshooting')

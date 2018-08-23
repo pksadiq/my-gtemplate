@@ -1,0 +1,196 @@
+#!/bin/bash
+
+
+# Author Name and Email.
+# Used in copyright string and about dialog
+AUTHOR="Random Name"
+FIRST_NAME="Random"
+LAST_NAME="Name"
+
+EMAIL="random@example.com"
+
+# Only "3" or "4" supported
+GTK_VERSION="4"
+
+# Web Addresses
+# Replace the variables with your project URLs.
+URL="https://www.example.com/projects/my-gtemplate.html"
+HELP_URL="https://gitlab.com/sadiq/my-gtemplate/wiki"
+DOWNLOAD_URL="https://www.example.com/projects/my-gtemplate.html"
+BUG_URL="https://gitlab.com/sadiq/my-gtemplate/issues"
+GIT_URL="https://gitlab.com/sadiq/my-gtemplate.git"
+DONATE_URL="https://liberapay.com/sadiq/donate"
+# This is the URL where your screenshots are available.
+# That is, APPDATA_URL/data/appdata/01-window.png should
+# be a direct link to the window image.
+APPDATA_URL="https://gitlab.com/user/my-gtemplate/raw/master"
+
+# APP_NAME will be used as the binary name, directory name.
+# The directory will be created in the project directory
+# (ie, in my-gtemplate directory)
+# WARNING: The content of the directory will be removed,
+# if the directory already exists.
+APP_NAME="gnome-tasks"
+
+# Used for gresource and library name
+# usually the last part of the APP_NAME
+APP_LAST_NAME="tasks"
+
+# Real Application name shown in application list, about/help page.
+APP_REAL_NAME="GNOME Tasks"
+
+# A unique ID for your application.
+# See https://wiki.gnome.org/HowDoI/ChooseApplicationID
+# This is also used as the base resource path (replacing . with /)
+# If you own the domain "example.com" you can use "com.example.Application"
+# Or, if the project is hosted at "gitlab.com/user/application"
+# you can use "com.gitlab.user.Application"
+APP_ID="org.gnome.Tasks"
+
+# Shortform of the application.
+# Used as filename prefix, function name prefix, etc.
+# Usually, the first letters from APP_NAME is used.
+# So for "gnome-taskes" it can be "gt", for example.
+APP_SHRT="gtsk"
+
+# Shortform used as NameSpace.
+APP_SHRT_CAP="GTsk"
+
+# GNOME user ID
+# Fill in you username if you are a GNOME Foundation member
+GNOME_ID=""
+
+
+
+
+# The real actions.  Don’t touch unless you know
+rm -rf "$APP_NAME"
+mkdir -p "$APP_NAME"
+cd "$APP_NAME"
+if [ "$(basename $(pwd))/" != "$APP_NAME/" ]; then
+  echo "could not cd to \"$APP_NAME\". exiting..."
+  exit
+fi
+
+cd ..
+
+# Copy content
+echo "Copying files... "
+cp -r * "$APP_NAME"
+cp .gitignore "$APP_NAME"
+echo "done"
+
+cd "$APP_NAME"
+
+echo -n "Removing unwanted files..."
+rm -rf "$APP_NAME" new-project.sh
+echo "done"
+
+OLD_NAME="my-gtemplate"
+OLD_REAL_NAME="My GTemplate"
+OLD_APP_LAST_NAME="gtemplate"
+OLD_ID="org.sadiqpk.GTemplate"
+OLD_SHRT="mgt"
+OLD_SHRT_CAP="Mgt"
+OLD_AUTHOR="Mohammed Sadiq"
+OLD_EMAIL="sadiq@sadiqpk.org"
+OLD_FIRST_NAME="Mohammed"
+OLD_LAST_NAME="Sadiq"
+
+OLD_URL="https://www.sadiqpk.org/projects/my-gtemplate.html"
+OLD_HELP_URL="https://gitlab.com/sadiq/my-gtemplate/wiki"
+OLD_DOWNLOAD_URL="http://www.sadiqpk.org/projects/my-gtemplate.html"
+OLD_BUG_URL="https://gitlab.com/sadiq/my-gtemplate/issues"
+OLD_GIT_URL="https://gitlab.com/sadiq/my-gtemplate.git"
+OLD_DONATE_URL="https://liberapay.com/sadiq/donate"
+OLD_APPDATA_URL="https://gitlab.com/sadiq/my-gtemplate/raw/master"
+# Remove the postfix '/' if any.
+APPDATA_URL="${APPDATA_URL%/}"
+
+OLD_NAME_="$(tr '-' '_' <<< $OLD_NAME)"
+APP_NAME_="$(tr '-' '_' <<< $APP_NAME)"
+OLD_ID_SLASH="$(tr '.' '/' <<< $OLD_ID)"
+APP_ID_SLASH="$(tr '.' '/' <<< $APP_ID)"
+
+# Adapt to GTK version specified
+if [ "$GTK_VERSION" = '3' ]; then
+  sed -i "s|gtk+-4.0.*)|gtk+-3.0', version: '>= 3.22.0')|" meson.build
+  sed -i "s|gtk+-4.0|gtk+-3.0|" docs/reference/meson.build
+  sed -i "/gtk_css_provider_load_from_file/ s/ file/ file, NULL/" src/mgt-application.c
+  sed -i "/gtk_style_context_add_provider_for_display/ s/display/screen/g" src/mgt-application.c
+  sed -i "s|show-title-buttons|show-close-button|" src/resources/ui/mgt-window.ui
+  sed -i '/gtk+/,/^$/d' build-aux/flatpak/org.sadiqpk.GTemplate.yml
+elif [ "$GTK_VERSION" = '4' ]; then
+  sed -i '/"visible">1/d' src/resources/ui/mgt-window.ui
+  sed -i '/"visible">1/d' src/resources/gtk/help-overlay.ui
+else
+  echo "WARNING: GTK version $GTK_VERSION not supported. Use '3' or '4'"
+  exit 1
+fi
+
+# Replace strings
+echo -n "Mass replacing template..."
+
+# FIXME: May not be a good idea.  This could replace data from
+# binary files.
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_URL}|${URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_BUG_URL}|${BUG_URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_GIT_URL}|${GIT_URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_HELP_URL}|${HELP_URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_DONATE_URL}|${DONATE_URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_DOWNLOAD_URL}|${DOWNLOAD_URL}|g"
+
+# Replace name and email except in shell scripts
+find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_AUTHOR}|${AUTHOR}|g"
+find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_FIRST_NAME}|${FIRST_NAME}|g"
+find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_LAST_NAME}|${LAST_NAME}|g"
+find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_EMAIL}|${EMAIL}|g"
+
+# Reset author changes in configure file
+cp ../configure .
+
+find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID_SLASH|$APP_ID_SLASH|g"
+find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID|$APP_ID|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_ID,,}|${APP_ID,,}|g"
+find . -type f -name "*$OLD_ID*" | while read file; do mv "$file" "${file/$OLD_ID/$APP_ID}"; done
+find . -type f -name "*${OLD_ID,,}*" | while read file; do mv "$file" "${file/${OLD_ID,,}/${APP_ID,,}}"; done
+
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_NAME}|${APP_NAME}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_REAL_NAME}|${APP_REAL_NAME}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_NAME_^^}|${APP_NAME_^^}|g"
+find . -type f -name "*${OLD_NAME}*" | while read file; do mv "$file" "${file/$OLD_NAME/$APP_NAME}"; done
+
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT}|${APP_SHRT}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT^^}|${APP_SHRT^^}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT_CAP}|${APP_SHRT_CAP}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_APP_LAST_NAME}|${APP_LAST_NAME}|g"
+find . -type f -name "*${OLD_SHRT}*" | while read file; do mv "$file" "${file/$OLD_SHRT/$APP_SHRT}"; done
+find . -type f -name "*${OLD_APP_LAST_NAME}*" | while read file; do mv "$file" "${file/$OLD_APP_LAST_NAME/$APP_LAST_NAME}"; done
+
+echo "done"
+
+# Replace CC0 with GPL
+rm -rf COPYING
+mv COPYING.GPL COPYING
+sed -i "s|CC0-1.0</project_license>|GPL3+</project_license>|" \
+    ./data/appdata/${APP_ID}.appdata.xml.in
+
+# Set GNOME user-id
+if [ "$GNOME_ID" ]; then
+  sed -i "s|pksadiq|$GNOME_ID|" ${APP_NAME}.doap
+else
+  sed -i "/pksadiq/d" ${APP_NAME}.doap
+fi
+
+if [ "$(which uncrustify)" ]; then
+  echo "Running uncrustify..."
+  ./uncrustify.sh
+else
+  echo "Please install 'uncrustify' to fix source code style."
+fi
+
+
+echo "creating git repo... "
+git init && echo "done" && exit
+echo "failed"

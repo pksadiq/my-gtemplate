@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="MgtWindow" parent="GtkApplicationWindow">
+    <property name="visible">1</property>
+    <property name="width-request">400</property>
+    <property name="height-request">300</property>
+
+    <!-- Headerbar -->
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="visible">1</property>
+        <property name="title" translatable="yes">My GTemplate</property>
+        <property name="subtitle" translatable="yes">Simple Gtk+ Template</property>
+        <property name="show-title-buttons">1</property>
+
+        <!-- Menu Button -->
+        <child>
+          <object class="GtkMenuButton" id="menu_button">
+            <property name="can-focus">0</property>
+            <property name="visible">1</property>
+            <property name="direction">none</property>
+            <property name="menu-model">win_menu</property>
+            <accelerator key="F10" signal="clicked"/>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+
+      </object> <!-- ./GtkHeaderBar -->
+    </child>
+  </template>
+
+  <menu id="win_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Help</attribute>
+        <attribute name="action">app.help</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+      </item>
+    </section>
+  </menu>
+
+</interface>

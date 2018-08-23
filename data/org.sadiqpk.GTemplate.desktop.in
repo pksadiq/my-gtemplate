@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=My GTemplate
+Comment=Template for Gtk+ Applications
+Exec=my-gtemplate
+# Translators: Do NOT translate. This is an icon file name.
+Icon=org.sadiqpk.GTemplate
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Utility;GTK;GNOME;
+# Translators: Do NOT translate the semicolon. keywords should
+# also end with a semicolon
+Keywords=Template;

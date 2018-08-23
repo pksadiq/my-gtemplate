@@ -1,0 +1,30 @@
+# Check for bash
+[ -z "$BASH_VERSION" ] && return
+
+__app ()
+{
+  local cur prev options
+
+  # Array variable storing the possible completions.
+  COMPREPLY=()
+  CURRENT=${COMP_WORDS[COMP_CWORD]}
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  options="--help --quit --version"
+
+  # An example for file competion
+  # case "$prev" in
+  #   -f|--file)
+  #     _filedir
+  #     return 0
+  # esac
+
+  case "$cur" in
+    *)
+      COMPREPLY=($(compgen -W "${options}" -- $cur));;
+  esac
+
+  return 0
+}
+
+complete -F __app my-gtemplate

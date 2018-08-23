@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="guide"
+      id="index">
+
+  <info>
+    <title type="text">My GTemplate</title>
+    <revision pkgversion="1.1.1" version="0.1" date="2018-01-09"
+              status="draft" />
+    <credit type="author">
+      <name>Mohammed Sadiq</name>
+      <email its:translate="no">sadiq@sadiqpk.org</email>
+    </credit>
+
+    <license>
+      <p>Creative Commons Share Alike 4.0</p>
+    </license>
+
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude" />
+    <desc>A GTK+ template application</desc>
+  </info>
+
+  <title>
+    <media type="image" mime="image/png" its:translate="no"
+           src="images/icon.png" />
+    My GTemplate
+  </title>
+
+  <p>
+    <app>My GTemplate</app> is a simple GTK+ application template in C which
+    will help you to develop your own application without much hassles.
+  </p>
+
+  <note>
+    <p>
+      <app>My GTemplate</app> is not useful by itself.  It is supposed
+      to be used as a template for building GTK+ applications.
+    </p>
+  </note>
+
+  <section id="features" style="2column">
+    <title>Features</title>
+    <links type="topic" groups="first second last" style="2column" />
+  </section>
+
+</page>

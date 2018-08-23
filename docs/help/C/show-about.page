@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://projectmallard.org/1.0/"
+      xmlns:its="http://www.w3.org/2005/11/its"
+      type="guide" style="task 2column"
+      id="show-about">
+
+  <info>
+    <link type="guide" xref="index#features" group="first"/>
+    <revision pkgversion="0.0.1" version="0.1" date="2018-08-21"
+              status="draft" />
+    <credit type="author">
+      <name>Mohammed Sadiq</name>
+      <email its:translate="no">sadiq@sadiqpk.org</email>
+    </credit>
+
+    <license>
+      <p>Creative Commons Share Alike 4.0</p>
+    </license>
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude" />
+
+    <desc>Learn how to show about dialog</desc>
+  </info>
+
+  <title>Show about dialog</title>
+
+  <p>
+    About dialog shows more info about the application.  This include
+    website details, Lincense, etc.
+  </p>
+
+  <p>
+    To Open About dialog click on <gui style="button">☰</gui> button
+    (menu button) and select <gui>About</gui>.
+  </p>
+</page>

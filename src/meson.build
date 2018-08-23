@@ -1,0 +1,36 @@
+src = []
+
+resources = gnome.compile_resources(
+  'resources',
+  'resources/gtemplate.gresource.xml',
+  source_dir: 'resources',
+  c_name: '_gtemplate'
+)
+
+libsrc = [
+  'mgt-utils.c',
+  'mgt-settings.c'
+]
+
+libgtemplate = static_library(
+  'gtemplate', libsrc,
+  install: false,
+  include_directories: top_inc,
+  dependencies: pkg_dep
+)
+
+src += ['main.c',
+        'mgt-utils.c',
+        'mgt-settings.c',
+        'mgt-application.c',
+        'mgt-window.c',
+        resources
+       ]
+
+executable(
+  'my-gtemplate',
+  src,
+  install: true,
+  include_directories: top_inc,
+  dependencies: pkg_dep
+)

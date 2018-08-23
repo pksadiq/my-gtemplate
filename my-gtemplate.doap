@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">My GTemplate</name>
+  <shortdesc xml:lang="en">
+    A simple Gtk+ Template Application
+  </shortdesc>
+  <description xml:lang="en">
+    My GTemplate is a simple Gtk+ Application template with
+    many base features builtin, above which your real application
+    can be developed.
+  </description>
+  <homepage rdf:resource="https://www.sadiqpk.org/projects/my-gtemplate.html" />
+  <download-page rdf:resource="http://www.sadiqpk.org/projects/my-gtemplate.html" />
+  <bug-database rdf:resource="https://gitlab.com/sadiq/my-gtemplate/issues" />
+
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>C</programming-language>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>Mohammed Sadiq</foaf:name>
+      <foaf:mbox rdf:resource="mailto:sadiq@sadiqpk.org" />
+      <gnome:userid>pksadiq</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+
+</Project>

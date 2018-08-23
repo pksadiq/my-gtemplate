@@ -1,0 +1,29 @@
+# -*- mode: gitignore; -*-
+
+# Editor temporary files
+*~
+\#*#
+.#*
+*.swp
+
+*.tar.gz
+*.tar.xz
+
+po/*.template
+*.pot
+
+# Build files/dirs
+Makefile
+/_build
+.flatpak-builder
+
+# Avoid accidental inclusion of GnuPG, ssh keys.
+# This may not happen, but if in case ...
+*.gpg
+*_rsa
+*_rsa\.[0-9]
+
+CTAGS
+GTAGS
+GRTAGS
+GPATH

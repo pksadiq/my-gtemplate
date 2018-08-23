@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+]>
+<refentry id="my-gtemplate">
+
+<refentryinfo>
+  <title>my-gtemplate</title>
+  <productname>GTK+ Template</productname>
+  <authorgroup>
+    <author>
+      <contrib>Developer</contrib>
+      <firstname>Mohammed</firstname>
+      <surname>Sadiq</surname>
+    </author>
+  </authorgroup>
+</refentryinfo>
+
+<refmeta>
+  <refentrytitle>my-gtemplate</refentrytitle>
+  <manvolnum>1</manvolnum>
+  <refmiscinfo class="manual">User Commands</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+  <refname>my-gtemplate</refname>
+  <refpurpose>Gtk+ Template Application</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <cmdsynopsis>
+    <command>my-gtemplate</command>
+    <arg choice="opt">--help</arg>
+    <arg choice="opt">--version</arg>
+    <arg choice="opt">--quit</arg>
+    <arg choice="opt">--dummy <replaceable>EXAMPLE</replaceable></arg>
+  </cmdsynopsis>
+</refsynopsisdiv>
+
+<refsect1>
+  <title>Description</title>
+<para>
+  <command>my-gtemplate</command> is a simple Gtk+ application
+  that can be used as a template for developing Gtk+ applications in C.
+</para>
+<para>
+  The template contains basic Gtk+ application with meson build script,
+  basic tests using glib test, an example man page, help page using
+  mallard, and gtk-doc documentation, etc. are included.
+</para>
+</refsect1>
+
+<refsect1>
+  <title>Options</title>
+<para>The following options are understood:</para>
+<variablelist>
+  <varlistentry>
+    <term>
+      <option>-h</option>, <option>--help</option>
+    </term>
+    <listitem>
+      <para>Show help options</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <option>--version</option>
+    </term>
+    <listitem>
+      <para>
+        Show version information and exit.  This won't quit already
+        running instance of the application.
+      </para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <option>--quit</option>
+    </term>
+    <listitem>
+      <para>Quit the application</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <option>--dummy <optional>EXAMPLE</optional></option>
+    </term>
+    <listitem>
+      <para>
+        This doesn't exist.  Just to show how an optional argument
+        can be added.
+      </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+</refsect1>
+
+</refentry>

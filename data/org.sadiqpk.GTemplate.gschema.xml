@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="my-gtemplate">
+  <schema id="org.sadiqpk.GTemplate" path="/org/sadiqpk/GTemplate/">
+
+    <key name="first-run" type="b">
+      <default>true</default>
+      <summary>First run of the application</summary>
+      <description>Whether the application is launching the first time</description>
+    </key>
+
+    <key name="window-maximized" type="b">
+      <default>false</default>
+      <summary>Window maximized</summary>
+      <description>Window maximized state</description>
+    </key>
+
+    <key name="window-size" type="(ii)">
+      <default>(800, 600)</default>
+      <summary>Window size</summary>
+      <description>Window size (width, height).</description>
+    </key>
+
+    <key name="window-position" type="(ii)">
+      <default>(-1, -1)</default>
+      <summary>Window position</summary>
+      <description>Window position (x, y).</description>
+    </key>
+
+  </schema>
+</schemalist>
