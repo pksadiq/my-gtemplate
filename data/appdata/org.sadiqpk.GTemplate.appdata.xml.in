@@ -44,7 +44,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Main window</caption>
-      <image width="800" height="600">
+      <image width="748" height="548">
         https://gitlab.com/sadiq/my-gtemplate/raw/master/data/appdata/01-window.png
       </image>
     </screenshot>
