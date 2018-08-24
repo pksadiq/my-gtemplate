@@ -48,20 +48,6 @@
         https://gitlab.com/sadiq/my-gtemplate/raw/master/data/appdata/01-window.png
       </image>
     </screenshot>
-
-    <screenshot type="default">
-      <caption>About window</caption>
-      <image width="430" height="360">
-        https://gitlab.com/sadiq/my-gtemplate/raw/master/data/appdata/02-about.png
-      </image>
-    </screenshot>
-
-    <screenshot type="default">
-      <caption>Keyboard shortcuts</caption>
-      <image width="440" height="285">
-        https://gitlab.com/sadiq/my-gtemplate/raw/master/data/appdata/03-keyboard.png
-      </image>
-    </screenshot>
   </screenshots>
 
   <url type="homepage">https://www.sadiqpk.org/projects/my-gtemplate.html</url>
