@@ -48,3 +48,10 @@ do
     create_icons $SIZE $dir $TARGET
   done
 done
+
+if [ "$(which convert) "]; then
+  # Use "-compress None" argument to disable compression
+  convert -density 384 256x256/apps/org.sadiqpk.GTemplate.png icon.ico
+else
+  echo "If you support MS windows, install Image magic to create .ico icons"
+fi
