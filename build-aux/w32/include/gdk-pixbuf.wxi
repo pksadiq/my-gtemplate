@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?require glib2.wxi?>
+<?require libpng.wxi?>
+<?require jasper.wxi?>
+<?require gettext.wxi?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR">
+      <Directory Id="dir4623CC0AACA2EB1E10EFA73807874CF3" Name="bin">
+        <Component Win64="$(var.Win64)" Id="cmp4BF448B47E572302678F2495BDE525FC" Guid="*">
+          <File Id="filC7AB82BEAAE354578D6120B65B5190F4" KeyPath="yes" Source="$(var.SourceDir)/bin/libgdk_pixbuf-2.0-0.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="dirAB3380D35F32B03E3E19AC6D0BC1A2A6" Name="share">
+        <Directory Id="dir22DD6E0ABE40F5BBBB64EFA544ABDD14" Name="locale">
+          <Directory Id="dir20BABB5A596871F2D047F477CF9F5C97" Name="en_CA">
+            <Directory Id="dirEC5E08537D4EA9F4953A76E1A854EC65" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmpA61D6ED1B751A30CCFD88E4521B68687" Guid="*">
+                <File Id="filB6E2EE560246B4FF83548C235C36C0DF" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_CA/LC_MESSAGES/gdk-pixbuf.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          <Directory Id="dirE8146111ACDD65CFB652DCB21BA10DD8" Name="en_GB">
+            <Directory Id="dirCB8F3967C90AAD11B02A6132EC03874E" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp3E15E8643C57BB14C44087F0AFFFFDD8" Guid="*">
+                <File Id="filA216490D06A5ABD4FAA33780AF4AE663" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_GB/LC_MESSAGES/gdk-pixbuf.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          </Directory>
+        </Directory>
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="CG.gdk-pixbuf">
+      <ComponentGroupRef Id="CG.glib2"/>
+      <ComponentGroupRef Id="CG.libpng"/>
+      <ComponentGroupRef Id="CG.jasper"/>
+      <ComponentGroupRef Id="CG.gettext"/>
+      <ComponentRef Id="cmp4BF448B47E572302678F2495BDE525FC"/>
+      <ComponentRef Id="cmpA61D6ED1B751A30CCFD88E4521B68687"/>
+      <ComponentRef Id="cmp3E15E8643C57BB14C44087F0AFFFFDD8"/>
+    </ComponentGroup>
+  </Fragment>
+</Include>

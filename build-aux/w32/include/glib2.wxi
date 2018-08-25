@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?require libffi.wxi?>
+<?require gettext.wxi?>
+<?require pcre.wxi?>
+<?require zlib.wxi?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR">
+      <Directory Id="dirA87D449DAE9E06A008A2EAB6376DF721" Name="bin">
+        <Component Win64="$(var.Win64)" Id="cmpB8A671D3D3CC219C78B3A53D2759C83D" Guid="*">
+          <File Id="filD5363C4E0F884968C961C709C8CC78F4" KeyPath="yes" Source="$(var.SourceDir)/bin/gdbus.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp98E508D7B2C36F345744654DB9FC1B3B" Guid="*">
+          <File Id="filB9F78D9880E017F98454A23C6F69B810" KeyPath="yes" Source="$(var.SourceDir)/bin/gio-querymodules.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp64861BD24667CC0C22F4882CF2001E01" Guid="*">
+          <File Id="fil22D4AA8317E1DD749402516DC724D109" KeyPath="yes" Source="$(var.SourceDir)/bin/gio.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpF1C96DC6EE20030A64EE3B32CBA20326" Guid="*">
+          <File Id="fil50FB1F6D2D94C9A7C6759ACE81AC0460" KeyPath="yes" Source="$(var.SourceDir)/bin/glib-compile-resources.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpF5DF8A6D8D31479D9F16C542980A2834" Guid="*">
+          <File Id="filCD5489D55FB39463DB4BB2B59E26129C" KeyPath="yes" Source="$(var.SourceDir)/bin/glib-compile-schemas.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpA2B8B3769437395F2AAF6F0B6E0E1A0D" Guid="*">
+          <File Id="fil686F655D5B32BDE1C2108B7E13FCB981" KeyPath="yes" Source="$(var.SourceDir)/bin/glib-genmarshal"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp7254E2D860B18C89A412D424EB64C98D" Guid="*">
+          <File Id="filC92315E0403AD4DB7CC89E785D18D1AC" KeyPath="yes" Source="$(var.SourceDir)/bin/glib-gettextize"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp78785270721DC61571F889E284142176" Guid="*">
+          <File Id="filFE8E1A7BFA18F71CA3BF2E89A4E9D5FF" KeyPath="yes" Source="$(var.SourceDir)/bin/glib-mkenums"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp19A8ABF07201E3EF77A3E4360F3C48D4" Guid="*">
+          <File Id="fil0E7FE1F3667E27D1CB1120CEF567FE9F" KeyPath="yes" Source="$(var.SourceDir)/bin/gobject-query.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp3E306934B4E3D451C4C786E5CAEB6246" Guid="*">
+          <File Id="fil0163E6184A84D8C94FD83BD733981B77" KeyPath="yes" Source="$(var.SourceDir)/bin/gresource.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp641F505793C8C044C76414CB6C791C85" Guid="*">
+          <File Id="filA257891410A87696A3ADE5852462FBDE" KeyPath="yes" Source="$(var.SourceDir)/bin/gsettings.exe"/>
+        </Component>
+
+        <!-- FIXME: perhaps not correct to share component id for two
+        versions here, but we lack condition expression evaluation.
+        Also, see GLib bug 697156 to remove that unnecessary kludge -->
+        <Component Win64="$(var.Win64)" Id="cmp6D51B76EDAC50E07576738CC967DF2B8" Guid="*">
+          <File Id="fil4EE00EB97025D93A2059F8C6CE6CE4DF" KeyPath="yes" Source="$(var.SourceDir)/bin/gspawn-$(var.GLIB_ARCH)-helper-console.exe"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpD2B981C370CD6226A814AE8B4C124DDE" Guid="*">
+          <File Id="filEE7F8F0A2194C97E113C07E0A1CD6E6E" KeyPath="yes" Source="$(var.SourceDir)/bin/gspawn-$(var.GLIB_ARCH)-helper.exe"/>
+        </Component>
+
+        <Component Win64="$(var.Win64)" Id="cmp4A6A2B5ACA14940BF3D57B9FF19C9689" Guid="*">
+          <File Id="filE25C44314299AD6EE8F900723C732123" KeyPath="yes" Source="$(var.SourceDir)/bin/libgio-2.0-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp6963CBD009D2E647ED6B3BC39EBC0BB3" Guid="*">
+          <File Id="fil59BC52778510F3E00076C3D43EB6DBEF" KeyPath="yes" Source="$(var.SourceDir)/bin/libglib-2.0-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp138B684B4CD66FF60E9C99AE51C8F6AC" Guid="*">
+          <File Id="fil7227239617B178ACF8E866DB84FEED1C" KeyPath="yes" Source="$(var.SourceDir)/bin/libgmodule-2.0-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp8EE5F4C9CE2553DF32D6BDF41F892F50" Guid="*">
+          <File Id="fil1F353C7DE394B50BD257B302DB09174B" KeyPath="yes" Source="$(var.SourceDir)/bin/libgobject-2.0-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmp699A229A66EA68B2E5BC51927C2397FF" Guid="*">
+          <File Id="filAD5E40341A08639BECC66262B71592B8" KeyPath="yes" Source="$(var.SourceDir)/bin/libgthread-2.0-0.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="dirBE1C76429066C2B019324C2D1D4B7F62" Name="share">
+        <Directory Id="dir8DF6DB0D95533CE863B3A1DC7C17B0C3" Name="glib-2.0">
+          <Directory Id="dir2BADD2E15A33B1BB92ABDD834AC7211C" Name="gdb">
+            <Component Win64="$(var.Win64)" Id="cmpEF5C294574A1582C391C2E2A004F341B" Guid="*">
+              <File Id="fil11A2F5D07F583AE7A5FA4AD40DC9D49E" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/gdb/glib_gdb.py"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmp058ABAE3E4BE796474C695380BAE5224" Guid="*">
+              <File Id="filD089D91479107702C0FC81B3C10FDB2E" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/gdb/gobject_gdb.py"/>
+            </Component>
+          </Directory>
+          <Directory Id="dir307586C93F0178D008A0F0B6CAE39A24" Name="schemas">
+            <Component Win64="$(var.Win64)" Id="cmpF88FF5AF54096E3F6FB53DF45E40A219" Guid="*">
+              <File Id="filCBD4561437D582EAC7D91EB189DA7A5E" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/gschema.dtd"/>
+            </Component>
+          </Directory>
+          <Directory Id="dir81C7ED0429C08C30549E72F264D72C4B" Name="valgrind">
+            <Component Win64="$(var.Win64)"  Id="cmp6F07303B4A9C4F0E85AF1C18960AF040" Guid="*">
+              <File Id="filEE8AB471AB8D0FD841F7BB93C72214BD" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/valgrind/glib.supp"/>
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dir527C2C31726405647895115ACC997601" Name="locale">
+          <Directory Id="dir7ED2C3CF5846E7DB4B76FC4F1D9588D7" Name="en_CA">
+            <Directory Id="dir7F63B46661B1480DC924A2AB10753C13" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp157A9A6C577F1A2236035EE027DBA54E" Guid="*">
+                <File Id="filB9126C1FCA2041CB72954A14883BE766" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_CA/LC_MESSAGES/glib20.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          <Directory Id="dir643470D98E0DFD05768F78C28CA15E82" Name="en_GB">
+            <Directory Id="dirC366572C9B035689F78E0FDC450FC6AC" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmpB0D35FDE3E2DFB660C544F0BD4B85E04" Guid="*">
+                <File Id="filD2F0F6C6D3466A0B8C94D4DDE3E139B7" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_GB/LC_MESSAGES/glib20.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          </Directory>
+        </Directory>
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="CG.glib2">
+      <ComponentGroupRef Id="CG.libffi"/>
+      <ComponentGroupRef Id="CG.gettext"/>
+      <ComponentGroupRef Id="CG.pcre"/>
+      <ComponentGroupRef Id="CG.zlib"/>
+      <ComponentRef Id="cmpB8A671D3D3CC219C78B3A53D2759C83D"/>
+      <ComponentRef Id="cmp98E508D7B2C36F345744654DB9FC1B3B"/>
+      <ComponentRef Id="cmp64861BD24667CC0C22F4882CF2001E01"/>
+      <ComponentRef Id="cmpF1C96DC6EE20030A64EE3B32CBA20326"/>
+      <ComponentRef Id="cmpF5DF8A6D8D31479D9F16C542980A2834"/>
+      <ComponentRef Id="cmpA2B8B3769437395F2AAF6F0B6E0E1A0D"/>
+      <ComponentRef Id="cmp7254E2D860B18C89A412D424EB64C98D"/>
+      <ComponentRef Id="cmp78785270721DC61571F889E284142176"/>
+      <ComponentRef Id="cmp19A8ABF07201E3EF77A3E4360F3C48D4"/>
+      <ComponentRef Id="cmp3E306934B4E3D451C4C786E5CAEB6246"/>
+      <ComponentRef Id="cmp641F505793C8C044C76414CB6C791C85"/>
+      <ComponentRef Id="cmp6D51B76EDAC50E07576738CC967DF2B8"/>
+      <ComponentRef Id="cmpD2B981C370CD6226A814AE8B4C124DDE"/>
+      <ComponentRef Id="cmp4A6A2B5ACA14940BF3D57B9FF19C9689"/>
+      <ComponentRef Id="cmp6963CBD009D2E647ED6B3BC39EBC0BB3"/>
+      <ComponentRef Id="cmp138B684B4CD66FF60E9C99AE51C8F6AC"/>
+      <ComponentRef Id="cmp8EE5F4C9CE2553DF32D6BDF41F892F50"/>
+      <ComponentRef Id="cmp699A229A66EA68B2E5BC51927C2397FF"/>
+      <ComponentRef Id="cmpEF5C294574A1582C391C2E2A004F341B"/>
+      <ComponentRef Id="cmp058ABAE3E4BE796474C695380BAE5224"/>
+      <ComponentRef Id="cmpF88FF5AF54096E3F6FB53DF45E40A219"/>
+      <ComponentRef Id="cmp6F07303B4A9C4F0E85AF1C18960AF040"/>
+      <ComponentRef Id="cmp157A9A6C577F1A2236035EE027DBA54E"/>
+      <ComponentRef Id="cmpB0D35FDE3E2DFB660C544F0BD4B85E04"/>
+    </ComponentGroup>
+  </Fragment>
+</Include>

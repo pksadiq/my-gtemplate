@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?require atk.wxi?>
+<?require cairo.wxi?>
+<?require gdk-pixbuf.wxi?>
+<?require glib2.wxi?>
+<?require libepoxy.wxi?>
+<?require pango.wxi?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR">
+      <Directory Id="dir87531B68F0D027FDC2F5EF26BF02B3A4" Name="bin">
+        <Component Win64="$(var.Win64)" Id="cmpC9962B6D4D6D6E322382AC6BDB0FBEAD" Guid="*">
+          <File Id="fil99C1AD05A1A2BC0D6365DA083F4148FA" KeyPath="yes" Source="$(var.SourceDir)/bin/libgailutil-3-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpC5BC32F79EFCBD409B6E1D2CE4E60E62" Guid="*">
+          <File Id="fil428BF2D6A67CC6E6F9D419B8C3D76A10" KeyPath="yes" Source="$(var.SourceDir)/bin/libgdk-3-0.dll"/>
+        </Component>
+        <Component Win64="$(var.Win64)" Id="cmpB612F3B3AC592DEDB8BA081AD8423C85" Guid="*">
+          <File Id="fil32E672340401E057569C303C4C502FBA" KeyPath="yes" Source="$(var.SourceDir)/bin/libgtk-3-0.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="dir3A2E035104BB0FCDF323FC151FC57E00" Name="etc">
+        <Directory Id="dir1C53A695E3D5927A19A3AFBEF95AE89F" Name="gtk-3.0">
+          <Component Win64="$(var.Win64)" Id="cmpC2433E230D35CF6FC1BB3E468F211C3B" Guid="*">
+            <File Id="fil9895CF790446C39166B5D90D4D3E5572" KeyPath="yes" Source="$(var.SourceDir)/etc/gtk-3.0/gtk.immodules"/>
+          </Component>
+          <Component Win64="$(var.Win64)" Id="cmp8727030A19DF194C1765B906E8A7B23C" Guid="*">
+            <File Id="filE13366A860D9957BB5CAEEA46DB15BB9" KeyPath="yes" Source="$(var.SourceDir)/etc/gtk-3.0/im-multipress.conf"/>
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="dirD92E2C4CB416691DC1095842B12B6D8B" Name="share">
+        <Directory Id="dir6E2F33C9A37F67E743898FE6D648A10C" Name="glib-2.0">
+          <Directory Id="dirAFA4B613AAE036BB025266A7C8757F97" Name="schemas">
+            <Component Win64="$(var.Win64)" Id="cmp7264164C5F224E44EE70A643509D905C" Guid="*">
+              <File Id="fil3068397F3F8BD8089D2B208A53E5FD1F" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/org.gtk.Demo.gschema.xml"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmp20FE3113543B6BA86F54223523D3A7D7" Guid="*">
+              <File Id="fil227388EE2EBA735C88604C75B511FC34" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/org.gtk.Settings.ColorChooser.gschema.xml"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmpF23128B9129B261CEC39944980D4E691" Guid="*">
+              <File Id="fil73330FD1368459CEB8FB0396F8472FEF" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmpA7F39B0DD966BD54FAB65BE15A526107" Guid="*">
+              <File Id="fil98B1B514C4227EDB3627CF8099034CD6" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmp1474604124E92D0424373C749EA51695" Guid="*">
+              <File Id="fil5D242AAD37C2A51CAC371CC27D43F3DB" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/org.gtk.exampleapp.gschema.xml"/>
+            </Component>
+            <Component Win64="$(var.Win64)" Id="cmp031B4F45E31205F8C271CE884D43F17A" Guid="*">
+              <File Id="filDB122D7CBE5FDC90B6F2ABCFE78881D3" KeyPath="yes" Source="$(var.SourceDir)/share/glib-2.0/schemas/gschema.dtd"/>
+            </Component>
+          </Directory>
+        </Directory>
+        <Directory Id="dirF659AD7C977AC574C90FE2E53E3F256A" Name="gtk-3.0">
+          <Component Win64="$(var.Win64)" Id="cmp012376212D9A466EACE8BA6B4DB128AA" Guid="*">
+            <File Id="filB5CBDFF7A406AB4EB7C9BF53C85797DD" KeyPath="yes" Source="$(var.SourceDir)/share/gtk-3.0/gtkbuilder.rng"/>
+          </Component>
+        </Directory>
+        <Directory Id="dirCB42A08839B50B558FD519878367340F" Name="locale">
+          <Directory Id="dir276C93ADAE6C04FD2F6CE47AD7D50C4B" Name="en_CA">
+            <Directory Id="dirB022028554FD6FADD0D7EFF2B427C53F" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp19D891DBE03CB40F8C52C9FE890A49BB" Guid="*">
+                <File Id="filB29EE618C69AE85918B56424282ABF08" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_CA/LC_MESSAGES/gtk30-properties.mo"/>
+              </Component>
+              <Component Win64="$(var.Win64)" Id="cmpD872D4FEA111AF3F255DC021A1524F8B" Guid="*">
+                <File Id="filC5E5B32560B5D0FB3B000D3C783F2E05" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_CA/LC_MESSAGES/gtk30.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          <Directory Id="dir6730BBE747A0B2C175744637F897FF4D" Name="en_GB">
+            <Directory Id="dir210E7EEDD968AA09519571443205683E" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp1CD83E40C8CB5CBA40F651F481DFB2DE" Guid="*">
+                <File Id="fil97DF64AB18B9FDA7DD6F44C58E140271" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_GB/LC_MESSAGES/gtk30-properties.mo"/>
+              </Component>
+              <Component Win64="$(var.Win64)" Id="cmpDF4BEC1108EA099981D461F387D52F93" Guid="*">
+                <File Id="fil33A15C81A2774B96327387E980BB9460" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_GB/LC_MESSAGES/gtk30.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+        <Directory Id="dirE8FDF9D03964D23302EF84D41E785303" Name="themes">
+          <Directory Id="dirD2FB0352F9642DA93531F7A242A37197" Name="Default">
+            <Directory Id="dir519DF438ADA5B35E99AB2BC370ECF21F" Name="gtk-3.0">
+              <Component Win64="$(var.Win64)" Id="cmp422849B6D048571F7F441DEB1D060D4C" Guid="*">
+                <File Id="fil9F415BA65FC24D20B73CC7B16A1F9848" KeyPath="yes" Source="$(var.SourceDir)/share/themes/Default/gtk-3.0/gtk-keys.css"/>
+              </Component>
+            </Directory>
+          </Directory>
+          <Directory Id="dirF1B9663FB3B71312F195FAA46A5548D9" Name="Emacs">
+            <Directory Id="dirE2E254C02FB2CE1DFA9F0B7DBB0D57C1" Name="gtk-3.0">
+              <Component Win64="$(var.Win64)" Id="cmp4F4FBFE16BBF7577F93629A66FA7DC04" Guid="*">
+                <File Id="fil9B0FA180245FF2CECDA68150CF3D944A" KeyPath="yes" Source="$(var.SourceDir)/share/themes/Emacs/gtk-3.0/gtk-keys.css"/>
+              </Component>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="CG.gtk3">
+      <ComponentGroupRef Id="CG.atk"/>
+      <ComponentGroupRef Id="CG.cairo"/>
+      <ComponentGroupRef Id="CG.gdk-pixbuf"/>
+      <ComponentGroupRef Id="CG.glib2"/>
+      <ComponentGroupRef Id="CG.libepoxy"/>
+      <ComponentGroupRef Id="CG.pango"/>
+      <ComponentRef Id="cmpC9962B6D4D6D6E322382AC6BDB0FBEAD"/>
+      <ComponentRef Id="cmpC5BC32F79EFCBD409B6E1D2CE4E60E62"/>
+      <ComponentRef Id="cmpB612F3B3AC592DEDB8BA081AD8423C85"/>
+      <ComponentRef Id="cmpC2433E230D35CF6FC1BB3E468F211C3B"/>
+      <ComponentRef Id="cmp8727030A19DF194C1765B906E8A7B23C"/>
+      <ComponentRef Id="cmp7264164C5F224E44EE70A643509D905C"/>
+      <ComponentRef Id="cmp20FE3113543B6BA86F54223523D3A7D7"/>
+      <ComponentRef Id="cmpF23128B9129B261CEC39944980D4E691"/>
+      <ComponentRef Id="cmpA7F39B0DD966BD54FAB65BE15A526107"/>
+      <ComponentRef Id="cmp1474604124E92D0424373C749EA51695"/>
+      <ComponentRef Id="cmp031B4F45E31205F8C271CE884D43F17A"/>
+      <ComponentRef Id="cmpB81C268F7EC675BC7B7BFA8304BAC2EE"/>
+      <ComponentRef Id="cmp012376212D9A466EACE8BA6B4DB128AA"/>
+      <ComponentRef Id="cmp19D891DBE03CB40F8C52C9FE890A49BB"/>
+      <ComponentRef Id="cmpD872D4FEA111AF3F255DC021A1524F8B"/>
+      <ComponentRef Id="cmp1CD83E40C8CB5CBA40F651F481DFB2DE"/>
+      <ComponentRef Id="cmpDF4BEC1108EA099981D461F387D52F93"/>
+      <ComponentRef Id="cmp422849B6D048571F7F441DEB1D060D4C"/>
+      <ComponentRef Id="cmp4F4FBFE16BBF7577F93629A66FA7DC04"/>
+    </ComponentGroup>
+  </Fragment>
+</Include>

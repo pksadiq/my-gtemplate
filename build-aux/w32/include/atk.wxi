@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?require glib2.wxi?>
+<Include xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <DirectoryRef Id="INSTALLDIR">
+      <Directory Id="dirDBAB5AA0C7D9C6997D60D401D0E624C2" Name="bin">
+        <Component Win64="$(var.Win64)" Id="cmp15DA6819A929E7A065F3ADF82CE27DD6" Guid="*">
+          <File Id="fil497F9BD4A1C427FB74C66EDC7181FC43" KeyPath="yes" Source="$(var.SourceDir)/bin/libatk-1.0-0.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="dirBF869D57F41A683D9C62DC39760A483B" Name="share">
+        <Directory Id="dir1FCB02CAE9F8ED0E0DDE6F6E9FCD1AED" Name="locale">
+          <Directory Id="dirFED13A5FC7FE67C25AC2E0A5C11B7BE5" Name="en_CA">
+            <Directory Id="dirB7AE0F8AB3E096A46F8513C0F15A4CDA" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp7DF1B7154F53E08D0DDE4C4F30B428D9" Guid="*">
+                <File Id="filE644EA9059CF982F969727B0BA6D8317" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_CA/LC_MESSAGES/atk10.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          <Directory Id="dir8D963D207E2C924FE7F75BADDCF51560" Name="en_GB">
+            <Directory Id="dir4965BA36126A3783EBD34F1F8D462725" Name="LC_MESSAGES">
+              <Component Win64="$(var.Win64)" Id="cmp2459F331910C41771A6FF7986B8EE996" Guid="*">
+                <File Id="fil9527B5D35D9729DD487572FE1E7D1B3A" KeyPath="yes" Source="$(var.SourceDir)/share/locale/en_GB/LC_MESSAGES/atk10.mo"/>
+              </Component>
+            </Directory>
+          </Directory>
+          </Directory>
+        </Directory>
+    </DirectoryRef>
+  </Fragment>
+  <Fragment>
+    <ComponentGroup Id="CG.atk">
+      <ComponentGroupRef Id="CG.glib2"/>
+      <ComponentRef Id="cmp15DA6819A929E7A065F3ADF82CE27DD6"/>
+      <ComponentRef Id="cmp7DF1B7154F53E08D0DDE4C4F30B428D9"/>
+      <ComponentRef Id="cmp2459F331910C41771A6FF7986B8EE996"/>
+    </ComponentGroup>
+  </Fragment>
+</Include>
