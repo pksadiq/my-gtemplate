@@ -30,14 +30,14 @@ APPDATA_URL="https://gitlab.com/user/my-gtemplate/raw/master"
 # (ie, in my-gtemplate directory)
 # WARNING: The content of the directory will be removed,
 # if the directory already exists.
-APP_NAME="gnome-tasks"
+APP_NAME="gee-tasks"
 
 # Used for gresource and library name
 # usually the last part of the APP_NAME
 APP_LAST_NAME="tasks"
 
 # Real Application name shown in application list, about/help page.
-APP_REAL_NAME="GNOME Tasks"
+APP_REAL_NAME="Gee Tasks"
 
 # A unique ID for your application.
 # See https://wiki.gnome.org/HowDoI/ChooseApplicationID
@@ -45,7 +45,7 @@ APP_REAL_NAME="GNOME Tasks"
 # If you own the domain "example.com" you can use "com.example.Application"
 # Or, if the project is hosted at "gitlab.com/user/application"
 # you can use "com.gitlab.user.Application"
-APP_ID="org.gnome.Tasks"
+APP_ID="com.example.Tasks"
 
 # Shortform of the application.
 # Used as filename prefix, function name prefix, etc.
