@@ -70,7 +70,8 @@ install_packages ()
   elif [ "$ARCH" =  "x86_64" ]; then
     BIT="64"
   else
-    echo "Arch $ARCH not understood."
+    echo "Arch '$ARCH' not understood."
+    echo "Supported Architectures: i686 x86_64"
     echo "Exiting..."
     exit 1
   fi
