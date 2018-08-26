@@ -21,8 +21,10 @@ The following tools are used to build msi:
 To build for windows and to create an installer do:
 
 ```
-meson _build -Dw32=true
-ninja -C _build dist-msi
+# From build-aux/w32 directory
+./make-w32.sh
+# Follow the instruction given by the script
+# to build msi installer.
 ```
 
 This will create an installable `msi` file.  Please note that
