@@ -39,8 +39,7 @@ conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('PACKAGE_NAME', pkg_name)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 
-vcs_tag(
-  command: ['git', 'describe'],
+vcs_tag = vcs_tag(
   input: configure_file(
     output: 'config.h.in',
     configuration: conf
