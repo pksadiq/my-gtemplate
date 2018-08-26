@@ -1,0 +1,29 @@
+# If ARCH is empty, i686 ARCH will be used.  If i686 binaries
+# are missing, x86_64 will be used
+ARCH=""
+
+# List of Fedora packages to be installed, separated by space
+USER_PACKAGES=""
+
+# Meson build options
+BUILD_OPTIONS="-Dman=false -Dbash_completion=false"
+
+# Name of binary executables that requires a shortcut in start menu.
+# Include the full path.  Separate each item with space.
+# Escape '/' as '\/'.  If you wish to associate an icon, add it
+# followed by a '|'.
+SHORT_FILES="\/bin\/my-gtemplate.exe|icon.ico"
+
+# Items to be shown in Desktop
+DESKTOP_FILES="\/bin\/my-gtemplate.exe|icon.ico"
+
+BUILD_DIR="/tmp/my-gtemplate"
+INSTALL_DIR="/tmp/my-gtemplate-install"
+
+
+
+# Don't edit unless you know what you are doing
+SRC_DIR=@SRC_DIR@
+INSTALLER_ROOT="${SRC_DIR}/installer"
+W32_SRC_DIR="${SRC_DIR/build-aux/w32}"
+VERSION=@VCS_TAG@

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define UpgradeCode = "{61BEA732-A7AB-11E8-8E26-F363BA2DEF12}"?>
+  <?define ProductVersion = "@VCS_TAG@"?>
+  <?define Manufacturer = "SomeManufacturer"?>
+  <?define SrcDir = "@SRC_DIR@"?>
+
+  <?if $(var.ARCH) = x64 ?>
+    <?define ProductName = "My GTemplate (64 bit)"?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder"?>
+    <?define SourceDir = "/usr/x86_64-w64-mingw32/sys-root/mingw"?>
+    <?define GLIB_ARCH = "win64"?>
+    <?define Win64 = "yes"?>
+  <?else?>
+    <?define ProductName = "My GTemplate"?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder"?>
+    <?define SourceDir = "/usr/i686-w64-mingw32/sys-root/mingw"?>
+    <?define GLIB_ARCH = "win32"?>
+    <?define Win64 = "no"?>
+  <?endif ?>
+</Include>

@@ -69,6 +69,10 @@ subdir('data')
 subdir('docs')
 subdir('tests')
 
+if get_option('w32')
+  subdir('build-aux/w32')
+endif
+
 if get_option('po')
   subdir('po')
 endif

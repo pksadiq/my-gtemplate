@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?include defines.wxi?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?require adwaita-icon-theme.wxi?>
+  <?require gtk3.wxi?>
+  <Product Id="*" Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)"
+           Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+    <Package Id="*" Description="$(var.ProductName)" Comments="Contact your local administrator"
+             InstallerVersion="405" Compressed="yes" Keywords="GNOME,GTK" Languages="1033"
+             Manufacturer="$(var.Manufacturer)" InstallScope="perMachine" />
+    <Icon Id="icon.ico" SourceFile="$(var.SrcDir)/data/icons/hicolor/icon.ico" />
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="my-gtemplate" Title="my-gtemplate" Level="1">
+      <ComponentGroupRef Id="binaries" />
+      <ComponentGroupRef Id="CG.adwaita-icon-theme" />
+      <ComponentGroupRef Id="CG.gtk3" />
+      <ComponentGroupRef Id="dist_files" />
+    </Feature>
+
+    <Condition Message="[ProductName] requires at least Windows 7">VersionNT&gt;=601</Condition>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts Before="InstallInitialize" />
+    </InstallExecuteSequence>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(var.PlatformProgramFilesFolder)" Name="$(var.PlatformProgramFilesFolder)">
+        <Directory Name="My GTemplate" Id="app_dir">
+          <Directory Id="INSTALLDIR" />
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" Name="Programs">
+        <Directory Id="ProgramMenuDir" Name="My GTemplate">
+          <Component Id="ProgramMenuDir" Guid="ABCDDCBA-7E98-44CE-B049-C477CC0A2B00">
+            <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+            <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]"
+                           Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="dist_files" Directory="INSTALLDIR">
+      <Component Id="COPYING.rtf" Guid="*">
+        <File Id="COPYING.rtf" Name="COPYING.rtf" Source="COPYING.rtf" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>
