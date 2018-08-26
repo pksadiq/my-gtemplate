@@ -128,5 +128,4 @@ output += '        documentation:   ' + get_option('gtk_doc').to_string() + '\n'
 output += '        help:            ' + get_option('help').to_string() + '\n'
 output += '        translation:     ' + get_option('po').to_string() + '\n'
 output += '        bash-completion: ' + get_option('bash_completion').to_string() + '\n'
-output += '        Now type \'make\' to build ' + pkg_name + '\n'
 message(output)
