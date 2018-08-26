@@ -16,6 +16,8 @@ po/*.template
 Makefile
 /_build
 .flatpak-builder
+binaries.wxs
+*.msi
 
 # Avoid accidental inclusion of GnuPG, ssh keys.
 # This may not happen, but if in case ...
