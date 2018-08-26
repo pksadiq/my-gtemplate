@@ -65,6 +65,7 @@ c_link_args = cc.get_supported_arguments(
    '-Werror=implicit-function-declaration',
    '-fasynchronous-unwind-tables',
    '-pipe',
+   '-mwindows', # For windows builds, to disable prompt display
   ])
 
 pkg_dep = [
