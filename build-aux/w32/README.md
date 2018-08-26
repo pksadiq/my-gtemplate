@@ -5,11 +5,11 @@ for MS windows platform using MinGW environment.  An
 installer can also be created using msitools.
 Until GTK4 is realeased, only GTK3 is supported.
 
+
 ## Required software pieces
 
 To build my-gtemplate for MS windows, latest version
 of Fedora is required (64 bit recommended).
-
 
 The following tools are used to build msi:
 * [msitools](https://wiki.gnome.org/msitools)
