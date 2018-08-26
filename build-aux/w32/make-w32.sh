@@ -101,7 +101,8 @@ else
 fi
 
 
-cat > "$W32_DIR/w32-config.txt" << EOF
+if ! grep "cpu = '$ARCH'" "$W32_DIR/w32-config.txt" 2>/dev/null; then
+  cat > "$W32_DIR/w32-config.txt" << EOF
 [binaries]
 c = '$CC'
 ar = '$AR'
@@ -114,6 +115,7 @@ cpu_family = 'x86'
 cpu = '$ARCH'
 endian = 'little'
 EOF
+fi
 
 meson "$SRC_DIR" "$BUILD_DIR" $BUILD_OPTIONS --prefix="$INSTALL_DIR" \
       --cross-file "$W32_DIR/w32-config.txt"
