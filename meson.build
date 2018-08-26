@@ -54,10 +54,18 @@ configure_file(
 )
 
 common_flags = [
-  '-DHAVE_CONFIG_H'
+  '-DHAVE_CONFIG_H',
+  '-D_FORTIFY_SOURCE=2'
 ]
 
 add_global_arguments(common_flags, language: 'c')
+c_link_args = cc.get_supported_arguments(
+  ['-Wall',
+   '-Werror=format-security',
+   '-Werror=implicit-function-declaration',
+   '-fasynchronous-unwind-tables',
+   '-pipe',
+  ])
 
 pkg_dep = [
   dependency('glib-2.0', version: '>= 2.44.0'),

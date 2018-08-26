@@ -31,6 +31,7 @@ executable(
   'my-gtemplate',
   src,
   install: true,
+  link_args: c_link_args,
   include_directories: top_inc,
   dependencies: pkg_dep
 )
