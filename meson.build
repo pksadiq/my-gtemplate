@@ -5,7 +5,8 @@ project(
   license: 'GPL3+',
   default_options: [
     'c_std=gnu11',
-    'warning_level=1'
+    'warning_level=1',
+    'buildtype=debugoptimized'
   ])
 
 pkg_name      = meson.project_name()
