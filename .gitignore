@@ -16,7 +16,8 @@ po/*.template
 Makefile
 /_build
 .flatpak-builder
-binaries.wxs
+build-aux/w32/binaries.wxs
+build-aux/w32/w32-config.txt
 *.msi
 
 # Avoid accidental inclusion of GnuPG, ssh keys.
