@@ -14,18 +14,12 @@
 
 trap "exit" INT
 
-W32_DIR="$1"
-. "$W32_DIR/build-aux/w32/defaults.sh"
+W32_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SRC_DIR="$(cd "$W32_DIR" && cd ../../ && pwd)"
 
-WIXL_VERSION=$(wixl --version 2>/dev/null)
+. "$W32_DIR/defaults.sh.in"
+ARCH="$1"
 
-if [ -z "$WIXL_VERSION" ]; then
-  echo "wixl binary not found. Please install msitools"
-  exit 1
-fi
-
-WIXL_DIR="/usr/share/wixl-$WIXL_VERSION/include"
-cp "$WIXL_DIR/adwaita-icon-theme.wxi" "$SRC_DIR/build-aux/w32/include"
 
 find_bin ()
 {
@@ -107,7 +101,7 @@ else
 fi
 
 
-cat > w32-config.txt << EOF
+cat > "$W32_DIR/w32-config.txt" << EOF
 [binaries]
 c = '$CC'
 ar = '$AR'
@@ -121,85 +115,11 @@ cpu = '$ARCH'
 endian = 'little'
 EOF
 
-FILE_NAME=my-gtemplate-${VERSION}-${ARCH}.msi
-mkdir -p "$BUILD_DIR"
-mkdir -p "$INSTALL_DIR"
-
-
 meson "$SRC_DIR" "$BUILD_DIR" $BUILD_OPTIONS --prefix="$INSTALL_DIR" \
-      --cross-file w32-config.txt
+      --cross-file "$W32_DIR/w32-config.txt"
 
-# Compile
 ninja -C "$BUILD_DIR" || exit 1
-# Install
-ninja -C "$BUILD_DIR" install || exit 1
+ninja -C "$BUILD_DIR" install
 
-
-TEMP_DIR=$(mktemp my-gtemplate.XXXXX -d -p /tmp)
-mkdir $TEMP_DIR/bin $TEMP_DIR/schemas
-
-# Copy all GSettings schema xml in MinGW glib directory to
-# a temporary path.   Also copy our application specific
-# schemas. Compile it there, and copy the compiled schema
-# back.
-# This is a work around since CustomAction is not working
-# in msitools, which makes it pretty hard to run executables
-# post installation.
-cp $MINGW_DIR/share/glib-2.0/schemas/*.xml "$TEMP_DIR/schemas"
-cp $INSTALL_DIR/share/glib-2.0/schemas/*.xml "$TEMP_DIR/schemas"
-glib-compile-schemas "$TEMP_DIR/schemas"
-mv "$TEMP_DIR/schemas/gschemas.compiled" "$INSTALL_DIR/share/glib-2.0/schemas/"
-
-# Work around to find application icons
-# TODO: Fix this please
-cp "$SRC_DIR/build-aux/w32/index.theme" "$INSTALL_DIR/share/icons/hicolor"
-gtk-update-icon-cache -f "$INSTALL_DIR/share/icons/hicolor"
-
-
-rm -rf "$TEMP_DIR"
-# Generate wxs file from the binaries built
-find "$INSTALL_DIR" | wixl-heat -p "$INSTALL_DIR/" --var var.InstallDir \
-                                --component-group binaries > binaries.wxs
-
-sed -i 's|TARGETDIR|INSTALLDIR|' binaries.wxs
-
-# Create Start menu items
-for item in $SHORT_FILES
-do
-  file="${item%|*}"
-  icon="${item#*|}"
-
-  if [ "$icon" != "" ]; then
-    icon="Icon=\"$icon\""
-  fi
-
-  # This requires GNU sed
-  sed -i "/)$file/a <Shortcut Id=\"startmenu$file\" Directory=\"ProgramMenuDir\"\
- Name=\"My GTemplate\" WorkingDirectory=\"INSTALLDIR\" $icon\
- IconIndex=\"0\" Advertise=\"yes\" \/>" binaries.wxs
-done
-
-# Create desktop items
-for item in $DESKTOP_FILES
-do
-  file="${item%|*}"
-  icon="${item#*|}"
-
-  if [ "$icon" != "" ]; then
-    icon="Icon=\"$icon\""
-  fi
-
-  # This requires GNU sed
-  sed -i "/)$file/a <Shortcut Id=\"desktop$file\" Directory=\"\DesktopFolder\"\
- Name=\"My GTemplate\" WorkingDirectory=\"INSTALLDIR\" $icon\
- IconIndex=\"0\" Advertise=\"yes\" \/>" binaries.wxs
-done
-
-# Now generate msi
-wixl -v -D ARCH="$ARCH_SHORT" -D InstallDir="$INSTALL_DIR" \
-     -I "$W32_DIR/build-aux/w32" -a "$ARCH_SHORT" \
-     --wxidir "$WIXL_DIR" --wxidir "$SRC_DIR/build-aux/w32/include" \
-     -o "$FILE_NAME" my-gtemplate.wxs binaries.wxs || exit 1
-
-echo -n "msi installer for MS Windows created at "
-echo "$SRC_DIR/build-aux/w32/$FILE_NAME"
+echo ""
+echo "Now run 'ninja -C $BUILD_DIR dist-msi' to create installer"

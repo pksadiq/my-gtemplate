@@ -1,4 +1,3 @@
-option('w32', type: 'boolean', value: false, description: 'Enable Cross build for MS Windows')
 option('man', type: 'boolean', value: true, description: 'Enable generating man pages')
 option('bash_completion', type: 'boolean', value: true, description: 'Enable bash completion')
 option('po', type: 'boolean', value: true, description: 'Enable translations')

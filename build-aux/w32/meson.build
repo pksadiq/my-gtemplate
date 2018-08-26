@@ -1,6 +1,7 @@
 conf = configuration_data()
 conf.set('SRC_DIR', pkg_srcdir)
 conf.set('VCS_TAG', '@VCS_TAG@')
+conf.set('ARCH', host_machine.cpu())
 
 sh = vcs_tag(
     input: configure_file(
@@ -23,7 +24,7 @@ wxi = vcs_tag(
 run_target('dist-msi',
            depends: [sh, wxi],
            command: [
-             find_program('make-w32.sh'),
+             find_program('make-w32-msi.sh'),
              pkg_builddir
            ])
 

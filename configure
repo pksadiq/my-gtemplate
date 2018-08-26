@@ -83,7 +83,6 @@ sanitycheck MESONTEST 'mesontest'
 sanitycheck NINJA 'ninja' 'ninja-build'
 
 declare -A default_options=(
-  ['w32']=false
   ['man']=true
   ['bash-completion']=true
   ['po']=true

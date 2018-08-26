@@ -82,7 +82,7 @@ subdir('data')
 subdir('docs')
 subdir('tests')
 
-if get_option('w32') or host_machine.system() == 'windows'
+if host_machine.system() == 'windows'
   subdir('build-aux/w32')
 endif
 

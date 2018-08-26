@@ -1,7 +1,3 @@
-# If ARCH is empty, i686 ARCH will be used.  If i686 binaries
-# are missing, x86_64 will be used
-ARCH=""
-
 # List of Fedora packages to be installed, separated by space
 USER_PACKAGES=""
 
@@ -23,7 +19,7 @@ INSTALL_DIR="/tmp/my-gtemplate-install"
 
 
 # Don't edit unless you know what you are doing
-SRC_DIR=@SRC_DIR@
+ARCH="@ARCH@"
 INSTALLER_ROOT="${SRC_DIR}/installer"
 W32_SRC_DIR="${SRC_DIR/build-aux/w32}"
 VERSION=@VCS_TAG@
