@@ -67,6 +67,11 @@ c_link_args = cc.get_supported_arguments(
    '-mwindows', # For windows builds, to disable prompt display
   ])
 
+if cc.get_id() == 'msvc'
+  warning('Your compiler doesn\'t support C99/C11 features.' +
+          ' Please use MinGW or native GNU/Linux')
+endif
+
 pkg_dep = [
   dependency('glib-2.0', version: '>= 2.44.0'),
   dependency('gtk+-4.0', version: '>= 3.92.0'),
