@@ -83,14 +83,15 @@ cd ..
 echo "Copying files... "
 cp -r * "$APP_NAME"
 cp .gitignore "$APP_NAME"
-if [ "$GTK_VERSION" = "gtk3" ]; then
-  cp .gitlab-ci.yml "$APP_NAME"
-  sed -i '/new-project/d' .gitlab-ci.yml
-  sed -i "/$APP_NAME/d" .gitlab-ci.yml
-fi
 echo "done"
 
 cd "$APP_NAME"
+
+if [ "$GTK_VERSION" = "gtk3" ]; then
+  cp ../.gitlab-ci.yml .
+  sed -i '/new-project/d' .gitlab-ci.yml
+  sed -i "/$APP_NAME/d" .gitlab-ci.yml
+fi
 
 echo -n "Removing unwanted files..."
 rm -rf "$APP_NAME" new-project.sh
