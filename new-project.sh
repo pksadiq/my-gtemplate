@@ -23,7 +23,7 @@ DONATE_URL="https://liberapay.com/sadiq/donate"
 # This is the URL where your screenshots are available.
 # That is, APPDATA_URL/data/appdata/01-window.png should
 # be a direct link to the window image.
-APPDATA_URL="https://gitlab.com/user/my-gtemplate/raw/master"
+APPDATA_URL="https://gitlab.com/sadiq/my-gtemplate/raw/master"
 
 # APP_NAME will be used as the binary name, directory name.
 # The directory will be created in the project directory
@@ -150,7 +150,6 @@ find . -type f -print0 | xargs -0 sed -i "s|${OLD_BUG_URL}|${BUG_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_GIT_URL}|${GIT_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_HELP_URL}|${HELP_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_DONATE_URL}|${DONATE_URL}|g"
-find . -type f -print0 | xargs -0 sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_DOWNLOAD_URL}|${DOWNLOAD_URL}|g"
 
 # Replace name and email except in shell scripts
@@ -179,6 +178,10 @@ find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT_CAP}|${APP_SHRT_CAP}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_APP_LAST_NAME}|${APP_LAST_NAME}|g"
 find . -type f -name "*${OLD_SHRT}*" | while read file; do mv "$file" "${file/$OLD_SHRT/$APP_SHRT}"; done
 find . -type f -name "*${OLD_APP_LAST_NAME}*" | while read file; do mv "$file" "${file/$OLD_APP_LAST_NAME/$APP_LAST_NAME}"; done
+
+# Change this last, so that CI works
+OLD_APPDATA_URL="https://gitlab.com/sadiq/$APP_NAME/raw/master"
+sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/appdata/${APP_ID}.appdata.xml.in
 
 echo "done"
 
