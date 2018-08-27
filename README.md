@@ -52,6 +52,7 @@ along with this software.  If not, see
     Debian, you may better rename `configure` script to something else,
     so that it won’t interfere with the the distribution build scripts.
 * Builtin flatpak support
+* GitLab CI configuration included (Gtk3 only)
 * Microsoft Windows support with MinGW and msitools
 * GtkBuilder .ui templates for UI
 * Application specific CSS

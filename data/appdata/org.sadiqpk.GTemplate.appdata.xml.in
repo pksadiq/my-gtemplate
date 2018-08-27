@@ -24,6 +24,7 @@
       <li>Supports GTK3 and GTK4</li>
       <li>Meson build system with fallback configure script</li>
       <li>Flatpak support included</li>
+      <li>GitLab CI configuration included</li>
       <li>Microsoft Windows support with MinGW and msitools</li>
       <li>GtkBuilder .ui templates for UI</li>
       <li>Application specific CSS</li>
