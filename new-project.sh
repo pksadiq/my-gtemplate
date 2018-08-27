@@ -64,6 +64,11 @@ GNOME_ID=""
 
 
 # The real actions.  Don’t touch unless you know
+# Override if commandline argument present
+if [ "$1" ]; then
+  GTK_VERSION="$1"
+fi
+
 rm -rf "$APP_NAME"
 mkdir -p "$APP_NAME"
 cd "$APP_NAME"
@@ -78,6 +83,11 @@ cd ..
 echo "Copying files... "
 cp -r * "$APP_NAME"
 cp .gitignore "$APP_NAME"
+if [ "$GTK_VERSION" = "gtk3" ]; then
+  cp .gitlab-ci.yml "$APP_NAME"
+  sed -i '/new-project/d' .gitlab-ci.yml
+  sed -i "/$APP_NAME/d" .gitlab-ci.yml
+fi
 echo "done"
 
 cd "$APP_NAME"
@@ -118,11 +128,6 @@ OLD_NAME_UPPER="$(echo "$OLD_NAME" | tr a-z A-Z)"
 APP_NAME_UPPER="$(echo "$APP_NAME" | tr a-z A-Z)"
 OLD_SHRT_UPPER="$(echo "$OLD_SHRT" | tr a-z A-Z)"
 APP_SHRT_UPPER="$(echo "$APP_SHRT" | tr a-z A-Z)"
-
-# Override if commandline argument present
-if [ "$1" ]; then
-  GTK_VERSION="$1"
-fi
 
 # Adapt to GTK version specified
 if [ "$GTK_VERSION" = "gtk3" ]; then

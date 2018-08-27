@@ -1,0 +1,20 @@
+stages:
+  - build
+
+.on_fail: &on_fail
+  artifacts:
+    when: on_failure
+    name: "app-${CI_COMMIT_REF_NAME}"
+    paths:
+
+build:
+  image: pksadiq/gtk:alpine-amd64
+  stage: build
+  variables:
+    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
+  script:
+    - mkdir -p "${CI_PROJECT_DIR}/_build/meson-logs"
+    - meson ${MESON_ARGS} _build
+    - ninja -C _build
+    - meson test -C _build
+  <<: *on_fail
