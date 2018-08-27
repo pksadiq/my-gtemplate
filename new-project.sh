@@ -9,8 +9,8 @@ LAST_NAME="Name"
 
 EMAIL="random@example.com"
 
-# Only "3" or "4" supported
-GTK_VERSION="4"
+# Only "gtk3" or "gtk4" supported
+GTK_VERSION="gtk4"
 
 # Web Addresses
 # Replace the variables with your project URLs.
@@ -112,19 +112,24 @@ APP_NAME_="$(tr '-' '_' <<< $APP_NAME)"
 OLD_ID_SLASH="$(tr '.' '/' <<< $OLD_ID)"
 APP_ID_SLASH="$(tr '.' '/' <<< $APP_ID)"
 
+# Override if commandline argument present
+if [ "$1" ]; then
+  GTK_VERSION="$1"
+fi
+
 # Adapt to GTK version specified
-if [ "$GTK_VERSION" = '3' ]; then
+if [ "$GTK_VERSION" = "gtk3" ]; then
   sed -i "s|gtk+-4.0.*)|gtk+-3.0', version: '>= 3.22.0')|" meson.build
   sed -i "s|gtk+-4.0|gtk+-3.0|" docs/reference/meson.build
   sed -i "/gtk_css_provider_load_from_file/ s/ file/ file, NULL/" src/mgt-application.c
   sed -i "/gtk_style_context_add_provider_for_display/ s/display/screen/g" src/mgt-application.c
   sed -i "s|show-title-buttons|show-close-button|" src/resources/ui/mgt-window.ui
   sed -i '/gtk+/,/^$/d' build-aux/flatpak/org.sadiqpk.GTemplate.yml
-elif [ "$GTK_VERSION" = '4' ]; then
+elif [ "$GTK_VERSION" = 'gtk4' ]; then
   sed -i '/"visible">1/d' src/resources/ui/mgt-window.ui
   sed -i '/"visible">1/d' src/resources/gtk/help-overlay.ui
 else
-  echo "WARNING: GTK version $GTK_VERSION not supported. Use '3' or '4'"
+  echo "WARNING: GTK version $GTK_VERSION not supported. Use 'gtk3' or 'gtk4'"
   exit 1
 fi
 
