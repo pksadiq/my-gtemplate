@@ -195,7 +195,4 @@ else
   echo "Please install 'uncrustify' to fix source code style."
 fi
 
-
-echo "creating git repo... "
-git init && echo "done" && exit
-echo "failed"
+echo "Done"
