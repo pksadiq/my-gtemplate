@@ -14,6 +14,8 @@ build:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
     - mkdir -p "${CI_PROJECT_DIR}/_build/meson-logs"
+    - ./new-project.sh gtk3
+    - cd gee-tasks
     - meson ${MESON_ARGS} _build
     - ninja -C _build
     - meson test -C _build
