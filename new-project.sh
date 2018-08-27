@@ -107,10 +107,17 @@ OLD_APPDATA_URL="https://gitlab.com/sadiq/my-gtemplate/raw/master"
 # Remove the postfix '/' if any.
 APPDATA_URL="${APPDATA_URL%/}"
 
-OLD_NAME_="$(tr '-' '_' <<< $OLD_NAME)"
-APP_NAME_="$(tr '-' '_' <<< $APP_NAME)"
-OLD_ID_SLASH="$(tr '.' '/' <<< $OLD_ID)"
-APP_ID_SLASH="$(tr '.' '/' <<< $APP_ID)"
+OLD_NAME_="$(echo "$OLD_NAME" | tr '-' '_')"
+APP_NAME_="$(echo "$APP_NAME" | tr '-' '_')"
+OLD_ID_SLASH="$(echo "$OLD_ID" | tr '.' '/')"
+APP_ID_SLASH="$(echo "$APP_ID" | tr '.' '/')"
+
+OLD_ID_LOWER="$(echo "$OLD_ID" | tr A-Z a-z)"
+APP_ID_LOWER="$(echo "$APP_ID" | tr A-Z a-z)"
+OLD_NAME_UPPER="$(echo "$OLD_NAME" | tr a-z A-Z)"
+APP_NAME_UPPER="$(echo "$APP_NAME" | tr a-z A-Z)"
+OLD_SHRT_UPPER="$(echo "$OLD_SHRT" | tr a-z A-Z)"
+APP_SHRT_UPPER="$(echo "$APP_SHRT" | tr a-z A-Z)"
 
 # Override if commandline argument present
 if [ "$1" ]; then
@@ -157,17 +164,17 @@ cp ../configure .
 
 find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID_SLASH|$APP_ID_SLASH|g"
 find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID|$APP_ID|g"
-find . -type f -print0 | xargs -0 sed -i "s|${OLD_ID,,}|${APP_ID,,}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_ID_LOWER}|${APP_ID_LOWER}|g"
 find . -type f -name "*$OLD_ID*" | while read file; do mv "$file" "${file/$OLD_ID/$APP_ID}"; done
-find . -type f -name "*${OLD_ID,,}*" | while read file; do mv "$file" "${file/${OLD_ID,,}/${APP_ID,,}}"; done
+find . -type f -name "*${OLD_ID_LOWER}*" | while read file; do mv "$file" "${file/${OLD_ID_LOWER}/${APP_ID_LOWER}}"; done
 
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_NAME}|${APP_NAME}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_REAL_NAME}|${APP_REAL_NAME}|g"
-find . -type f -print0 | xargs -0 sed -i "s|${OLD_NAME_^^}|${APP_NAME_^^}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_NAME_UPPER}|${APP_NAME_UPPER}|g"
 find . -type f -name "*${OLD_NAME}*" | while read file; do mv "$file" "${file/$OLD_NAME/$APP_NAME}"; done
 
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT}|${APP_SHRT}|g"
-find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT^^}|${APP_SHRT^^}|g"
+find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT_UPPER}|${APP_SHRT_UPPER}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_SHRT_CAP}|${APP_SHRT_CAP}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_APP_LAST_NAME}|${APP_LAST_NAME}|g"
 find . -type f -name "*${OLD_SHRT}*" | while read file; do mv "$file" "${file/$OLD_SHRT/$APP_SHRT}"; done
