@@ -185,7 +185,7 @@ echo "done"
 # Replace CC0 with GPL
 rm -rf COPYING
 mv COPYING.GPL COPYING
-sed -i "s|CC0-1.0</project_license>|GPL3+</project_license>|" \
+sed -i "s|CC0-1.0</project_license>|GPL-3.0-or-later</project_license>|" \
     ./data/appdata/${APP_ID}.appdata.xml.in
 
 # Set GNOME user-id
