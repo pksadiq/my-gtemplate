@@ -103,8 +103,8 @@ mgt_window_init (MgtWindow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-MgtWindow *
-mgt_window_new (MgtApplication *application)
+GtkWidget *
+mgt_window_new (GtkApplication *application)
 {
   g_assert (GTK_IS_APPLICATION (application));
 

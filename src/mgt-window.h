@@ -30,6 +30,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (MgtWindow, mgt_window, MGT, WINDOW, GtkApplicationWindow)
 
-MgtWindow *mgt_window_new (MgtApplication *application);
+GtkWidget *mgt_window_new (GtkApplication *application);
 
 G_END_DECLS

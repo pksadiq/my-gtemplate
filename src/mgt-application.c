@@ -203,12 +203,15 @@ mgt_application_command_line (GApplication            *application,
 static void
 mgt_application_activate (GApplication *application)
 {
+  GtkApplication *app = (GtkApplication *)application;
   GtkWindow *window;
 
-  window = gtk_application_get_active_window (GTK_APPLICATION (application));
+  g_assert (GTK_IS_APPLICATION (app));
+
+  window = gtk_application_get_active_window (app);
 
   if (window == NULL)
-    window = GTK_WINDOW (mgt_window_new (MGT_APPLICATION (application)));
+    window = GTK_WINDOW (mgt_window_new (app));
 
   gtk_window_present (window);
 }
