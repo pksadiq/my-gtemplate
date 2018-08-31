@@ -78,7 +78,7 @@ install_packages ()
 
   DEFAULT_PACKAGES="mingw${BIT}-gtk3 meson gcc gtk3-devel msitools"
 
-  dnf install -y $DEFAULT_PACKAGES $USER_PACKAGES
+  sudo dnf install -y $DEFAULT_PACKAGES $USER_PACKAGES
 }
 
 # Check if the system is Fedora or derivatives
