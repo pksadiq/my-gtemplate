@@ -1,11 +1,6 @@
 stages:
   - build
-
-.on_fail: &on_fail
-  artifacts:
-    when: on_failure
-    name: "app-${CI_COMMIT_REF_NAME}"
-    paths:
+  - test
 
 build:
   image: pksadiq/gtk:alpine-amd64
@@ -13,10 +8,19 @@ build:
   variables:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
-    - mkdir -p "${CI_PROJECT_DIR}/_build/meson-logs"
     - ./new-project.sh gtk3
     - cd gee-tasks
     - meson ${MESON_ARGS} _build
     - ninja -C _build
+    - cd ..
+  artifacts:
+    name: "app-${CI_COMMIT_REF_NAME}"
+    paths:
+      - gee-tasks
+
+test:
+  image: pksadiq/gtk:alpine-amd64
+  stage: test
+  script:
+    - cd gee-tasks
     - meson test -C _build
-  <<: *on_fail
