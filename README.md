@@ -5,15 +5,15 @@
   <br>
 
   <a href="https://www.sadiqpk.org/projects/my-gtemplate.html"><b>My GTemplate</b></a>
-  <br><br>
+  <br>
+
+  A Simple feature rich GTK3/GTK4 Application template in C
+  <br>
 
   <a href="https://gitlab.com/sadiq/my-gtemplate/commits/master"><img
        src="https://gitlab.com/sadiq/my-gtemplate/badges/master/build.svg" /></a>
   <a href="https://gitlab.com/sadiq/my-gtemplate/commits/master"><img
        src="https://gitlab.com/sadiq/my-gtemplate/badges/master/coverage.svg" /></a>
-  <br>
-
-  A Simple feature rich GTK3/GTK4 Application template in C
 </div>
 
 ---
