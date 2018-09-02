@@ -1,4 +1,23 @@
-# My GTemplate
+<div align="center">
+  <a href="https://www.sadiqpk.org/projects/my-gtemplate.html">
+    <img src="https://gitlab.com/sadiq/my-gtemplate/raw/master/data/icons/hicolor/256x256/apps/org.sadiqpk.GTemplate.png" width="150" />
+  </a>
+  <br>
+
+  <a href="https://www.sadiqpk.org/projects/my-gtemplate.html"><b>My GTemplate</b></a>
+  <br><br>
+
+  <a href="https://gitlab.com/sadiq/my-gtemplate/commits/master"><img
+       src="https://gitlab.com/sadiq/my-gtemplate/badges/master/build.svg" /></a>
+
+  <a href="https://gitlab.com/sadiq/my-gtemplate/commits/master"><img
+       src="https://gitlab.com/sadiq/my-gtemplate/badges/master/coverage.svg" /></a>
+  <br>
+
+  A Simple feature rich GTK3/GTK4 Application template in C
+</div>
+
+---
 
 My GTemplate is a simple Gtk+ Application that can be used as a
 template to begin your Gtk+ Application developement.
@@ -11,10 +30,11 @@ your own application.
 If you wish to support me, you may kindly donate me at
 https://liberapay.com/sadiq/donate
 
-Website: https://www.sadiqpk.org/projects/my-gtemplate.html
+Source Repository: [GitLab][gitlab], [GitHub][github]
 
-Source : https://gitlab.com/sadiq/my-gtemplate
+Issues and Feature Requests: [GitLab][issues]
 
+Please visit the [website][home] for more details.
 
 ## License
 
@@ -147,3 +167,9 @@ my-gtemplate
 ├── uncrustify.cfg
 └── uncrustify.sh ── Script to keep your code clean and tidy
 ```
+
+<!-- Links referenced elsewhere -->
+[home]: https://www.sadiqpk.org/projects/my-gtemplate.html
+[gitlab]: https://gitlab.com/sadiq/my-gtemplate
+[github]: https://github.com/pksadiq/my-gtemplate
+[issues]: https://gitlab.com/sadiq/my-gtemplate/issues
