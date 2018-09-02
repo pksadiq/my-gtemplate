@@ -12,11 +12,10 @@ build:
     - cd gee-tasks
     - meson ${MESON_ARGS} _build
     - ninja -C _build
-    - cd ..
   artifacts:
     name: "app-${CI_COMMIT_REF_NAME}"
     paths:
-      - gee-tasks
+      - gee-tasks/
 
 test:
   image: pksadiq/gtk:alpine-amd64

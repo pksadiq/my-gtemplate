@@ -90,7 +90,8 @@ cd "$APP_NAME"
 if [ "$GTK_VERSION" = "gtk3" ]; then
   cp ../.gitlab-ci.yml .
   sed -i '/new-project/d' .gitlab-ci.yml
-  sed -i "/$APP_NAME/d" .gitlab-ci.yml
+  sed -i "s|gee-tasks/|_build|" .gitlab-ci.yml
+  sed -i "/gee-tasks/d" .gitlab-ci.yml
 fi
 
 echo -n "Removing unwanted files..."
