@@ -36,6 +36,7 @@ coverage:
   script:
     - cd gee-tasks
     - ninja -C _build coverage
+  coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
   artifacts:
     paths:
       - gee-tasks/
