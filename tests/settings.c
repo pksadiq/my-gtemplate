@@ -23,7 +23,7 @@
 #include "mgt-settings.h"
 
 static void
-test_geometry_settings (void)
+test_settings_geometry (void)
 {
   g_autoptr(MgtSettings) settings = NULL;
   GdkRectangle geometry = {100, 200, 300, 400};
@@ -74,7 +74,7 @@ test_geometry_settings (void)
 }
 
 static void
-test_first_run_settings (void)
+test_settings_first_run (void)
 {
   g_autoptr(MgtSettings) settings = NULL;
   gboolean is_first_run;
@@ -105,8 +105,8 @@ main (int   argc,
    * to be changing only on the first run.  Changing this order will
    * result in test failure.
    */
-  g_test_add_func ("/first_run/settings", test_first_run_settings);
-  g_test_add_func ("/geometry/settings", test_geometry_settings);
+  g_test_add_func ("/settings/first_run", test_settings_first_run);
+  g_test_add_func ("/settings/geometry", test_settings_geometry);
 
   return g_test_run ();
 }

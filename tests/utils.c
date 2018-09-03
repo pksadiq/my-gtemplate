@@ -35,7 +35,7 @@ test_main_thread (gpointer user_data)
 }
 
 static void
-test_thread_utils (void)
+test_utils_main_thread (void)
 {
   g_autoptr(GThread) thread = NULL;
 
@@ -55,7 +55,7 @@ main (int   argc,
 {
   g_test_init (&argc, &argv, NULL);
 
-  g_test_add_func ("/thread/utils", test_thread_utils);
+  g_test_add_func ("/utils/main_thread", test_utils_main_thread);
 
   return g_test_run ();
 }
