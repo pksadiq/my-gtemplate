@@ -83,6 +83,7 @@ cd ..
 # Copy content
 echo "Copying files... "
 cp -r * "$APP_NAME"
+cp -r .gitlab "$APP_NAME"
 cp .gitignore "$APP_NAME"
 echo "done"
 
