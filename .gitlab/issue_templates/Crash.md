@@ -13,19 +13,16 @@ My GTemplate crashes when
 1.
 
 
-# Backtrace
-
+<!-- Delete this section if you have no terminal output -->
+# Terminal output
+```
+Replace this text with terminal output
 ```
 
-run the application in 'gdb' as:
-gdb my-gtemplate <Enter>
-r <Enter>
 
-Make the application crash, then run:
-thread apply all bt full
+# Backtrace
 
-Press enter until you get the (gdb) prompt.
-Replace this text with the one you got.
-
-
+<!-- https://wiki.gnome.org/Community/GettingInTouch/Bugzilla/GettingTraces/Details#gdb-not-yet-running -->
+```
+Replace this text with the traces
 ```
