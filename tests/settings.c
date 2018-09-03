@@ -32,6 +32,7 @@ test_settings_geometry (void)
   gboolean is_maximized;
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
+  g_assert (g_type_is_a (MGT_TYPE_SETTINGS, G_TYPE_SETTINGS));
   g_assert (MGT_IS_SETTINGS (settings));
 
   mgt_settings_set_window_maximized (settings, 0);
