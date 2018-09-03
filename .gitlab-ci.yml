@@ -1,16 +1,18 @@
 stages:
   - build
   - test
+  - coverage
+  - pages
 
 build:
-  image: pksadiq/gtk:alpine-amd64
+  image: pksadiq/gtk:fedora-amd64
   stage: build
   variables:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
     - ./new-project.sh gtk3
     - cd gee-tasks
-    - meson ${MESON_ARGS} _build
+    - meson ${MESON_ARGS} -Db_coverage=true _build
     - ninja -C _build
   artifacts:
     name: "app-${CI_COMMIT_REF_NAME}"
@@ -18,8 +20,33 @@ build:
       - gee-tasks/
 
 test:
-  image: pksadiq/gtk:alpine-amd64
+  image: pksadiq/gtk:fedora-amd64
   stage: test
   script:
     - cd gee-tasks
     - meson test -C _build
+    - ninja -C _build coverage
+  artifacts:
+    paths:
+      - gee-tasks/
+
+coverage:
+  image: pksadiq/gtk:fedora-amd64
+  stage: coverage
+  script:
+    - cd gee-tasks
+    - ninja -C _build coverage
+  artifacts:
+    paths:
+      - gee-tasks/
+
+pages:
+  image: pksadiq/gtk:fedora-amd64
+  stage: pages
+  script:
+    - mkdir public
+    - cd gee-tasks
+    - mv _build/meson-logs/coveragereport ${CI_PROJECT_DIR}/public/coverage
+  artifacts:
+    paths:
+      - public
