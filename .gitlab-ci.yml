@@ -1,3 +1,5 @@
+image: pksadiq/gtk:fedora-amd64
+
 stages:
   - build
   - test
@@ -5,7 +7,6 @@ stages:
   - pages
 
 build:
-  image: pksadiq/gtk:fedora-amd64
   stage: build
   variables:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
@@ -20,7 +21,6 @@ build:
       - gee-tasks/
 
 test:
-  image: pksadiq/gtk:fedora-amd64
   stage: test
   script:
     - cd gee-tasks
@@ -31,7 +31,6 @@ test:
       - gee-tasks/
 
 coverage:
-  image: pksadiq/gtk:fedora-amd64
   stage: coverage
   script:
     - cd gee-tasks
@@ -42,7 +41,6 @@ coverage:
       - gee-tasks/
 
 pages:
-  image: pksadiq/gtk:fedora-amd64
   stage: pages
   script:
     - mkdir public
