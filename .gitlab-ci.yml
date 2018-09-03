@@ -4,7 +4,6 @@ stages:
   - build
   - test
   - coverage
-  - pages
 
 build:
   stage: build
@@ -41,7 +40,7 @@ coverage:
       - gee-tasks/
 
 pages:
-  stage: pages
+  stage: deploy
   script:
     - mkdir public
     - cd gee-tasks
