@@ -17,3 +17,12 @@ settings = executable(
   dependencies: pkg_dep
 )
 test('settings', settings, env: env)
+
+utils = executable(
+  'utils',
+  'utils.c',
+  include_directories: tests_inc,
+  link_with: libgtemplate,
+  dependencies: pkg_dep
+)
+test('utils', utils, env: env)
