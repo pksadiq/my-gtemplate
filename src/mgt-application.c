@@ -100,14 +100,6 @@ mgt_application_show_help (GSimpleAction *action,
 }
 
 static void
-mgt_application_quit (GSimpleAction *action,
-                      GVariant      *parameter,
-                      gpointer       user_data)
-{
-  g_application_quit (G_APPLICATION (user_data));
-}
-
-static void
 mgt_application_finalize (GObject *object)
 {
   MgtApplication *self = (MgtApplication *)object;
@@ -137,7 +129,6 @@ mgt_application_add_actions (MgtApplication *self)
   static const GActionEntry application_entries[] = {
     { "about", mgt_application_show_about },
     { "help", mgt_application_show_help   },
-    { "quit", mgt_application_quit        },
   };
 
   struct
@@ -146,7 +137,6 @@ mgt_application_add_actions (MgtApplication *self)
     const gchar *accel[2];
   } accels[] = {
     { "app.help", { "F1", NULL } },
-    { "app.quit", { "<Primary>q", NULL } },
   };
 
   g_assert (MGT_IS_APPLICATION (self));
