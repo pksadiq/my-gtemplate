@@ -12,20 +12,6 @@ EMAIL="random@example.com"
 # Only "gtk3" or "gtk4" supported
 GTK_VERSION="gtk4"
 
-# Web Addresses
-# Replace the variables with your project URLs.
-URL="https://www.example.com/projects/my-gtemplate.html"
-HELP_URL="https://gitlab.com/sadiq/my-gtemplate/wiki"
-DOWNLOAD_URL="https://www.example.com/projects/my-gtemplate.html"
-COVERAGE_URL="https://sadiq.gitlab.io/my-gtemplate/coverage"
-BUG_URL="https://gitlab.com/sadiq/my-gtemplate/issues"
-GIT_URL="https://gitlab.com/sadiq/my-gtemplate.git"
-DONATE_URL="https://liberapay.com/sadiq/donate"
-# This is the URL where your screenshots are available.
-# That is, APPDATA_URL/data/appdata/01-window.png should
-# be a direct link to the window image.
-APPDATA_URL="https://gitlab.com/sadiq/my-gtemplate/raw/master"
-
 # APP_NAME will be used as the binary name, directory name.
 # The directory will be created in the project directory
 # (ie, in my-gtemplate directory)
@@ -56,6 +42,26 @@ APP_SHRT="gtsk"
 
 # Shortform used as NameSpace.
 APP_SHRT_CAP="GTsk"
+
+# Web Addresses
+# Replace the variables with your project URLs.  If
+# you are hosting at GitLab.com, you may require to
+# change USER_NAME only, and sometime BASE_URL too.
+USER_NAME="sadiq"
+BASE_URL="https://gitlab.com/$USER_NAME/$APP_NAME"
+URL="https://$USER_NAME.gitlab.io/$APP_NAME"
+HELP_URL="$BASE_URL/wikis/home"
+DOWNLOAD_URL="$BASE_URL/tags"
+COVERAGE_URL="$URL/coverage"
+BUG_URL="$BASE_URL/issues"
+GIT_URL="$BASE_URL.git"
+# Replace with your donation link
+DONATE_URL="https://liberapay.com/sadiq/donate"
+
+# This is the URL where your screenshots are available.
+# That is, APPDATA_URL/data/appdata/01-window.png should
+# be a direct link to the window image.
+APPDATA_URL="$BASE_URL/raw/master"
 
 # GNOME user ID
 # Fill in you username if you are a GNOME Foundation member
