@@ -27,6 +27,7 @@ test:
     - ninja -C _build coverage
   coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
   artifacts:
+    when: always
     paths:
       - gee-tasks/
 
