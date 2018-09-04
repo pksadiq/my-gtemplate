@@ -161,6 +161,7 @@ echo -n "Mass replacing template..."
 
 # FIXME: May not be a good idea.  This could replace data from
 # binary files.
+sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/appdata/$OLD_ID.appdata.xml.in
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_URL}|${URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_BUG_URL}|${BUG_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_GIT_URL}|${GIT_URL}|g"
@@ -197,8 +198,6 @@ find . -type f -name "*${OLD_SHRT}*" | while read file; do mv "$file" "${file/$O
 find . -type f -name "*${OLD_APP_LAST_NAME}*" | while read file; do mv "$file" "${file/$OLD_APP_LAST_NAME/$APP_LAST_NAME}"; done
 
 # Change this last, so that CI works
-OLD_APPDATA_URL="https://gitlab.com/sadiq/$APP_NAME/raw/master"
-sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/appdata/${APP_ID}.appdata.xml.in
 
 echo "done"
 
@@ -220,6 +219,12 @@ if [ "$(which uncrustify)" ]; then
   ./uncrustify.sh
 else
   echo "Please install 'uncrustify' to fix source code style."
+fi
+
+# Reset some values so that CI works
+if [ "$CI" ]; then
+  echo "Setting Continues Integration changes"
+  sed -i "s|${APPDATA_URL}|${OLD_APPDATA_URL}|" ./data/appdata/${APP_ID}.appdata.xml.in
 fi
 
 echo "Done"
