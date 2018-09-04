@@ -34,7 +34,7 @@ fi
 
 find_bin ()
 {
-  ARCH="$2"
+  ARCH="$1"
 
   if [ "$ARCH" = "x86_64" ]; then
     ARCH_SHORT="x64"
@@ -58,7 +58,7 @@ find_bin ()
 
 exit_with_arch_fail ()
 {
-  ARCH=$2
+  ARCH=$1
 
   if [ "$CC" = "" ]; then
     echo "Failed to find MinGW GCC compiler"
