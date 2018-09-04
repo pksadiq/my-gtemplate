@@ -18,12 +18,23 @@ W32_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$(cd "$W32_DIR" && cd ../../ && pwd)"
 
 . "$W32_DIR/defaults.sh.in"
-ARCH="$1"
+OPTIMIZE="$1"
+ARCH="$2"
 
+
+if [ "$OPTIMIZE" = "no" ]; then
+  OPTIMIZE=""
+fi
+
+if [ "$OPTIMIZE" ]; then
+  MESON_OPT="-Doptimize=true"
+else
+  MESON_OPT="-Doptimize=false"
+fi
 
 find_bin ()
 {
-  ARCH="$1"
+  ARCH="$2"
 
   if [ "$ARCH" = "x86_64" ]; then
     ARCH_SHORT="x64"
@@ -47,7 +58,7 @@ find_bin ()
 
 exit_with_arch_fail ()
 {
-  ARCH=$1
+  ARCH=$2
 
   if [ "$CC" = "" ]; then
     echo "Failed to find MinGW GCC compiler"
@@ -118,11 +129,18 @@ endian = 'little'
 EOF
 fi
 
-meson "$SRC_DIR" "$BUILD_DIR" $BUILD_OPTIONS --prefix="$INSTALL_DIR" \
+meson "$SRC_DIR" "$BUILD_DIR" --prefix="$INSTALL_DIR" \
       --cross-file "$W32_DIR/w32-config.txt"
+meson configure "$BUILD_DIR" $MESON_OPT $BUILD_OPTIONS
 
 ninja -C "$BUILD_DIR" || exit 1
 ninja -C "$BUILD_DIR" install
+
+if [ "$OPTIMIZE" ]; then
+  pushd "$INSTALL_DIR/bin/"
+  $STRIP *.exe
+  popd
+fi
 
 echo ""
 echo "Now run 'ninja -C $BUILD_DIR dist-msi' to create installer"

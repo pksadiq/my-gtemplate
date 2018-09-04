@@ -21,10 +21,16 @@ wxi = vcs_tag(
   output: 'defines.wxi'
 )
 
+if get_option('optimize')
+  optimize='yes'
+else
+  optimize='no'
+endif
+
 run_target('dist-msi',
            depends: [sh, wxi],
            command: [
              find_program('make-w32-msi.sh'),
-             pkg_builddir
+             optimize
            ])
 

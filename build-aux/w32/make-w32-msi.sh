@@ -16,10 +16,16 @@ trap "exit" INT
 
 . "$MESON_BUILD_ROOT/build-aux/w32/defaults.sh"
 
+OPTIMIZE="$1"
 SRC_DIR="$MESON_SOURCE_ROOT"
 BUILD_DIR="$MESON_BUILD_ROOT"
+WXS_FILE="my-gtemplate"
 
 WIXL_VERSION=$(wixl --version 2>/dev/null)
+
+if [ "$OPTIMIZE" = "no" ]; then
+  OPTIMIZE=""
+fi
 
 if [ "$ARCH" = "x86_64" ]; then
   ARCH_SHORT="x64"
@@ -38,8 +44,10 @@ if [ -z "$WIXL_VERSION" ]; then
 fi
 
 WIXL_DIR="/usr/share/wixl-$WIXL_VERSION/include"
-cp "$WIXL_DIR/adwaita-icon-theme.wxi" "$SRC_DIR/build-aux/w32/include"
 
+if [ -z "$OPTIMIZE" ]; then
+  cp "$WIXL_DIR/adwaita-icon-theme.wxi" "$SRC_DIR/build-aux/w32/include"
+fi
 
 FILE_NAME=my-gtemplate-${VERSION}-${ARCH}.msi
 mkdir -p "$BUILD_DIR"
@@ -60,6 +68,15 @@ cp $MINGW_DIR/share/glib-2.0/schemas/*.xml "$TEMP_DIR/schemas"
 cp $INSTALL_DIR/share/glib-2.0/schemas/*.xml "$TEMP_DIR/schemas"
 glib-compile-schemas "$TEMP_DIR/schemas"
 mv "$TEMP_DIR/schemas/gschemas.compiled" "$INSTALL_DIR/share/glib-2.0/schemas/"
+
+rm -rf "$INSTALL_DIR/share/icons/Adwaita"
+if [ "$OPTIMIZE" ]; then
+  MINGW_DIR="/usr/i686-w64-mingw32/sys-root/mingw"
+  ADWAITA_DIR="$MINGW_DIR/share/icons/Adwaita"
+  "$SRC_DIR/build-aux/common/minimal-adwaita.sh" "$ADWAITA_DIR" "$INSTALL_DIR"
+  sed '/adwaita/d' my-gtemplate.wxs > temp.wxs
+  WXS_FILE="temp"
+fi
 
 # Work around to find application icons
 # TODO: Fix this please
@@ -110,7 +127,7 @@ done
 wixl -v -D ARCH="$ARCH_SHORT" -D InstallDir="$INSTALL_DIR" \
      -I "$BUILD_DIR/build-aux/w32" -a "$ARCH_SHORT" \
      --wxidir "$SRC_DIR/build-aux/w32/include" \
-     -o "$FILE_NAME" my-gtemplate.wxs binaries.wxs || exit 1
+     -o "$FILE_NAME" $WXS_FILE.wxs binaries.wxs || exit 1
 
 echo -n "msi installer for MS Windows created at "
 echo "$SRC_DIR/build-aux/w32/$FILE_NAME"
