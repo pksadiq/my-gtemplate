@@ -3,7 +3,6 @@ image: pksadiq/gtk:fedora-amd64
 stages:
   - build
   - test
-  - coverage
   - deploy
 
 build:
@@ -25,15 +24,6 @@ test:
   script:
     - cd gee-tasks
     - meson test -C _build
-    - ninja -C _build coverage
-  artifacts:
-    paths:
-      - gee-tasks/
-
-coverage:
-  stage: coverage
-  script:
-    - cd gee-tasks
     - ninja -C _build coverage
   coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
   artifacts:
