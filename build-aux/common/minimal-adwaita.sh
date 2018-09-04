@@ -43,7 +43,6 @@ copy_svg_icons ()
 {
   icon="$1"
 
-  echo "is svg icon"
   cp "$ADWAITA_DIR/scalable/$icon" "$ADWAITA_INST_DIR/scalable/$icon"
   for icon_dir in $ICON_DIRS
   do
@@ -59,7 +58,6 @@ copy_png_icons ()
 {
   icon="$1"
 
-  echo "is png icon"
   for icon_dir in $ICON_DIRS
   do
     FILE="$ADWAITA_DIR/$icon_dir/$icon"
