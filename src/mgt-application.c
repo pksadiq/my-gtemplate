@@ -218,7 +218,7 @@ mgt_application_class_init (MgtApplicationClass *klass)
   application_class->command_line = mgt_application_command_line;
   application_class->activate = mgt_application_activate;
 
-  mgt_utils_get_main_thread ();
+  g_assert (MGT_IS_MAIN_THREAD ());
 }
 
 static void
