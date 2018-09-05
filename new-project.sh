@@ -144,7 +144,6 @@ APP_SHRT_UPPER="$(echo "$APP_SHRT" | tr a-z A-Z)"
 if [ "$GTK_VERSION" = "gtk3" ]; then
   sed -i "s|gtk+-4.0.*)|gtk+-3.0', version: '>= 3.22.0')|" meson.build
   sed -i "s|gtk+-4.0|gtk+-3.0|" docs/reference/meson.build
-  sed -i "/gtk_css_provider_load_from_file/ s/ file/ file, NULL/" src/mgt-application.c
   sed -i "/gtk_style_context_add_provider_for_display/ s/display/screen/g" src/mgt-application.c
   sed -i "s|show-title-buttons|show-close-button|" src/resources/ui/mgt-window.ui
   sed -i '/gtk+/,/^$/d' build-aux/flatpak/org.sadiqpk.GTemplate.yml

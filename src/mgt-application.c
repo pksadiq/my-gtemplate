@@ -153,7 +153,6 @@ static void
 mgt_application_startup (GApplication *application)
 {
   MgtApplication *self = (MgtApplication *)application;
-  g_autoptr(GFile) file = NULL;
 
   G_APPLICATION_CLASS (mgt_application_parent_class)->startup (application);
 
@@ -163,8 +162,8 @@ mgt_application_startup (GApplication *application)
 
   self->settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   self->css_provider = gtk_css_provider_new ();
-  file = g_file_new_for_uri ("resource:///org/sadiqpk/GTemplate/css/style.css");
-  gtk_css_provider_load_from_file (self->css_provider, file);
+  gtk_css_provider_load_from_resource (self->css_provider,
+                                       "/org/sadiqpk/GTemplate/css/gtk.css");
 
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (self->css_provider),
