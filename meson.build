@@ -38,6 +38,7 @@ conf.set('G_DISABLE_CAST_CHECKS', (not pkg_is_debug))
 conf.set_quoted('GETTEXT_PACKAGE', pkg_name)
 conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('PACKAGE_NAME', pkg_name)
+conf.set_quoted('PACKAGE_ID', 'org.sadiqpk.GTemplate')
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 
 vcs_tag = vcs_tag(

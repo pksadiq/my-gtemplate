@@ -77,7 +77,7 @@ mgt_application_show_about (GSimpleAction *action,
                          "copyright", "Copyright \xC2\xA9 2018 Mohammed Sadiq",
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "authors", authors,
-                         "logo-icon-name", "org.sadiqpk.GTemplate",
+                         "logo-icon-name", PACKAGE_ID,
                          "translator-credits", _("translator-credits"),
                          NULL);
 }
@@ -93,7 +93,7 @@ mgt_application_show_help (GSimpleAction *action,
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
   if (!gtk_show_uri_on_window (window,
-                               "help:org.sadiqpk.GTemplate",
+                               "help:" PACKAGE_ID,
                                GDK_CURRENT_TIME,
                                &error))
     g_warning ("Failed to launch help: %s", error->message);
@@ -158,9 +158,9 @@ mgt_application_startup (GApplication *application)
 
   mgt_application_add_actions (self);
   g_set_application_name (_("My GTemplate"));
-  gtk_window_set_default_icon_name ("org.sadiqpk.GTemplate");
+  gtk_window_set_default_icon_name (PACKAGE_ID);
 
-  self->settings = mgt_settings_new ("org.sadiqpk.GTemplate");
+  self->settings = mgt_settings_new (PACKAGE_ID);
   self->css_provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (self->css_provider,
                                        "/org/sadiqpk/GTemplate/css/gtk.css");
@@ -231,7 +231,7 @@ MgtApplication *
 mgt_application_new (void)
 {
   return g_object_new (MGT_TYPE_APPLICATION,
-                       "application-id", "org.sadiqpk.GTemplate",
+                       "application-id", PACKAGE_ID,
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
 }
