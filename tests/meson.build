@@ -9,20 +9,18 @@ env.set('G_DEBUG', 'gc-friendly')
 env.set('MALLOC_CHECK_', '2')
 env.set('MALLOC_PERTURB_', '4') # Guaranteed to be random
 
-settings = executable(
+test_items = [
   'settings',
-  'settings.c',
-  include_directories: tests_inc,
-  link_with: libgtemplate,
-  dependencies: pkg_dep
-)
-test('settings', settings, env: env)
+  'utils'
+]
 
-utils = executable(
-  'utils',
-  'utils.c',
-  include_directories: tests_inc,
-  link_with: libgtemplate,
-  dependencies: pkg_dep
-)
-test('utils', utils, env: env)
+foreach item: test_items
+  t = executable(
+    item,
+    item + '.c',
+    include_directories: tests_inc,
+    link_with: libgtemplate,
+    dependencies: pkg_dep
+  )
+  test(item, t, env: env)
+endforeach
