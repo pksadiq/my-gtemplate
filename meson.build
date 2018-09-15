@@ -82,7 +82,10 @@ pkg_dep = [
 subdir('src')
 subdir('data')
 subdir('docs')
-subdir('tests')
+
+if get_option('tests')
+  subdir('tests')
+endif
 
 if host_machine.system() == 'windows'
   subdir('build-aux/w32')
