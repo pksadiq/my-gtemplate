@@ -37,7 +37,7 @@ test_main_thread (gpointer user_data)
 static void
 test_utils_main_thread (void)
 {
-  g_autoptr(GThread) thread = NULL;
+  GThread *thread = NULL;
 
   /*
    * This is the first call to MGT_IS_MAIN_THREAD().
