@@ -66,7 +66,7 @@ mgt_application_show_about (GSimpleAction *action,
 {
   GtkApplication *application = GTK_APPLICATION (user_data);
   const gchar *authors[] = {
-    "Mohammed Sadiq <sadiq@sadiqpk.org>",
+    "Mohammed Sadiq https://www.sadiqpk.org",
     NULL
   };
 

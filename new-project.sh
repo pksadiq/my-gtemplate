@@ -9,6 +9,10 @@ LAST_NAME="Name"
 
 EMAIL="random@example.com"
 
+# If you have no website/blog leave it blank so
+# that your email will be used in the About window.
+WEBSITE="https://www.sadiqpk.org"
+
 # Only "gtk3" or "gtk4" supported
 GTK_VERSION="gtk4"
 
@@ -114,6 +118,7 @@ OLD_SHRT="mgt"
 OLD_SHRT_CAP="Mgt"
 OLD_AUTHOR="Mohammed Sadiq"
 OLD_EMAIL="sadiq@sadiqpk.org"
+OLD_WEBSITE="https://www.sadiqpk.org"
 OLD_FIRST_NAME="Mohammed"
 OLD_LAST_NAME="Sadiq"
 
@@ -160,6 +165,14 @@ echo -n "Mass replacing template..."
 
 # FIXME: May not be a good idea.  This could replace data from
 # binary files.
+
+# Update About window details
+if [ "$WEBSITE" ]; then
+  sed -i "s|${OLD_WEBSITE}\"|${WEBSITE}\"|" src/$OLD_SHRT-application.c
+else
+  sed -i "s|${OLD_WEBSITE}\"|<${EMAIL}>\"|" src/$OLD_SHRT-application.c
+fi
+
 sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/appdata/$OLD_ID.appdata.xml.in
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_URL}|${URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_BUG_URL}|${BUG_URL}|g"
