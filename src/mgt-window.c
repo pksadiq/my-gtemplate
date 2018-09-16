@@ -43,16 +43,14 @@ mgt_window_constructed (GObject *object)
   GtkWindow *window = (GtkWindow *)object;
   MgtSettings *settings;
   GdkRectangle geometry;
-  gboolean is_maximized;
 
   settings = mgt_application_get_settings (MGT_APPLICATION_DEFAULT ());
   mgt_settings_get_window_geometry (settings, &geometry);
-  is_maximized = mgt_settings_get_window_maximized (settings);
 
   gtk_window_set_default_size (window, geometry.width, geometry.height);
   gtk_window_move (window, geometry.x, geometry.y);
 
-  if (is_maximized)
+  if (mgt_settings_get_window_maximized (settings))
     gtk_window_maximize (window);
 
   G_OBJECT_CLASS (mgt_window_parent_class)->constructed (object);
