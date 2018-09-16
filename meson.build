@@ -119,13 +119,18 @@ run_target('make-help-po',
              'true'
            ])
 
+system = host_machine.system()
+if system == 'linux'
+  system = 'GNU/Linux'
+endif
+
 output = '\n        ' + pkg_name + ' ' + pkg_version + '\n'
 output += '        ==============================\n\n'
 output += '        prefix:          ' + pkg_prefix + '\n'
 output += '        compiler:        ' + cc.get_id() + ' ' + cc.version()+ '\n'
 output += '        compiler args:   ' + ' '.join(c_link_args) + '\n'
 output += '        build type:      ' + get_option('buildtype') + '\n'
-output += '        host system:     ' + host_machine.system() + '\n'
+output += '        host system:     ' + system + '\n'
 output += '        tracing:         ' + get_option('tracing').to_string() + '\n'
 output += '        tests:           ' + get_option('tests').to_string() + '\n'
 output += '        manpage:         ' + get_option('man').to_string() + '\n'
