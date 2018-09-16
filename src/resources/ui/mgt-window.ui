@@ -20,7 +20,7 @@
             <property name="visible">1</property>
             <property name="direction">none</property>
             <property name="menu-model">win_menu</property>
-            <accelerator key="F10" signal="clicked"/>
+            <accelerator key="F10" signal="clicked" />
           </object>
           <packing>
             <property name="pack-type">end</property>
