@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-  input: 'org.sadiqpk.GTemplate.desktop.in',
-  output: 'org.sadiqpk.GTemplate.desktop',
+  input: pkg_id + '.desktop.in',
+  output: pkg_id + '.desktop',
   type: 'desktop',
   po_dir: pkg_po_dir,
   install: true,
@@ -8,7 +8,7 @@ desktop_file = i18n.merge_file(
 )
 
 install_data(
-  'org.sadiqpk.GTemplate.gschema.xml',
+  pkg_id + '.gschema.xml',
   install_dir: pkg_schemadir
 )
 

@@ -10,6 +10,7 @@ project(
   ])
 
 pkg_name      = meson.project_name()
+pkg_id        = 'org.sadiqpk.GTemplate'
 pkg_version   = meson.project_version()
 pkg_is_debug  = get_option('buildtype').startswith('debug')
 
@@ -38,7 +39,7 @@ conf.set('G_DISABLE_CAST_CHECKS', (not pkg_is_debug))
 conf.set_quoted('GETTEXT_PACKAGE', pkg_name)
 conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('PACKAGE_NAME', pkg_name)
-conf.set_quoted('PACKAGE_ID', 'org.sadiqpk.GTemplate')
+conf.set_quoted('PACKAGE_ID', pkg_id)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 
 vcs_tag = vcs_tag(
@@ -112,7 +113,7 @@ run_target('make-po',
 run_target('make-help-po',
            command: [
              find_program('build-aux/make_po.sh'),
-             'org.sadiqpk.GTemplate',
+             pkg_id,
              meson.current_build_dir(),
              join_paths(pkg_srcdir, 'docs/help'),
              'help-',
