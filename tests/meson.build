@@ -7,7 +7,8 @@ env.set('GSETTINGS_SCHEMA_DIR', join_paths(meson.build_root(), 'data'))
 env.set('GSETTINGS_BACKEND', 'memory')
 env.set('G_DEBUG', 'gc-friendly')
 env.set('MALLOC_CHECK_', '2')
-env.set('MALLOC_PERTURB_', '4') # Guaranteed to be random
+# Guaranteed to be random
+env.set('MALLOC_PERTURB_', '4')
 
 test_items = [
   'settings',
