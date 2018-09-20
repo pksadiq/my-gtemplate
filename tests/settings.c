@@ -36,12 +36,10 @@ test_settings_geometry (void)
   g_assert (MGT_IS_SETTINGS (settings));
 
   mgt_settings_set_window_maximized (settings, 0);
-  is_maximized = mgt_settings_get_window_maximized (settings);
-  g_assert_false (is_maximized);
+  g_assert_false (mgt_settings_get_window_maximized (settings));
 
   mgt_settings_set_window_maximized (settings, 1);
-  is_maximized = mgt_settings_get_window_maximized (settings);
-  g_assert_true (is_maximized);
+  g_assert_true (mgt_settings_get_window_maximized (settings));
 
   /*
    * gbooleans are typedef to gint.  So test if non boolean
@@ -78,21 +76,18 @@ static void
 test_settings_first_run (void)
 {
   g_autoptr(MgtSettings) settings = NULL;
-  gboolean is_first_run;
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert (MGT_IS_SETTINGS (settings));
 
-  is_first_run = mgt_settings_get_is_first_run (settings);
-  g_assert_true (is_first_run);
+  g_assert_true (mgt_settings_get_is_first_run (settings));
 
   /* Save the settings, create a new object, and check again */
   g_object_unref (settings);
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert (MGT_IS_SETTINGS (settings));
 
-  is_first_run = mgt_settings_get_is_first_run (settings);
-  g_assert_false (is_first_run);
+  g_assert_false (mgt_settings_get_is_first_run (settings));
 }
 
 int
