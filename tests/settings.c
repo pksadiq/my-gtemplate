@@ -76,6 +76,12 @@ static void
 test_settings_first_run (void)
 {
   g_autoptr(MgtSettings) settings = NULL;
+  g_autoptr(GSettings) gsettings = NULL;
+
+  /* Reset the first-run settings */
+  gsettings = g_settings_new ("org.sadiqpk.GTemplate");
+  g_settings_reset (gsettings, "first-run");
+  g_clear_object (&gsettings);
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert (MGT_IS_SETTINGS (settings));
@@ -96,11 +102,6 @@ main (int   argc,
 {
   g_test_init (&argc, &argv, NULL);
 
-  /*
-   * "/first_run/settings" should be the first test as it is supposed
-   * to be changing only on the first run.  Changing this order will
-   * result in test failure.
-   */
   g_test_add_func ("/settings/first_run", test_settings_first_run);
   g_test_add_func ("/settings/geometry", test_settings_geometry);
 
