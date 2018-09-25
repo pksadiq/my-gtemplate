@@ -32,7 +32,7 @@ test_settings_geometry (void)
   gboolean is_maximized;
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
-  g_assert (MGT_IS_SETTINGS (settings));
+  g_assert_true (MGT_IS_SETTINGS (settings));
 
   mgt_settings_set_window_maximized (settings, 0);
   g_assert_false (mgt_settings_get_window_maximized (settings));
@@ -59,7 +59,7 @@ test_settings_geometry (void)
   /* Save the settings, create a new object, and check again */
   g_object_unref (settings);
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
-  g_assert (MGT_IS_SETTINGS (settings));
+  g_assert_true (MGT_IS_SETTINGS (settings));
 
   is_maximized = mgt_settings_get_window_maximized (settings);
   g_assert_cmpint (is_maximized, ==, 1);
@@ -83,14 +83,14 @@ test_settings_first_run (void)
   g_clear_object (&gsettings);
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
-  g_assert (MGT_IS_SETTINGS (settings));
+  g_assert_true (MGT_IS_SETTINGS (settings));
 
   g_assert_true (mgt_settings_get_is_first_run (settings));
 
   /* Save the settings, create a new object, and check again */
   g_object_unref (settings);
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
-  g_assert (MGT_IS_SETTINGS (settings));
+  g_assert_true (MGT_IS_SETTINGS (settings));
 
   g_assert_false (mgt_settings_get_is_first_run (settings));
 }
