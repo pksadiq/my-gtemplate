@@ -40,7 +40,6 @@ struct _MgtApplication
 {
   GtkApplication  parent_instance;
 
-  GtkCssProvider *css_provider;
   MgtSettings *settings;
 };
 
@@ -105,7 +104,6 @@ mgt_application_finalize (GObject *object)
   MgtApplication *self = (MgtApplication *)object;
 
   g_clear_object (&self->settings);
-  g_clear_object (&self->css_provider);
 
   G_OBJECT_CLASS (mgt_application_parent_class)->finalize (object);
 }
@@ -153,6 +151,7 @@ static void
 mgt_application_startup (GApplication *application)
 {
   MgtApplication *self = (MgtApplication *)application;
+  g_autoptr(GtkCssProvider) css_provider = NULL;
 
   G_APPLICATION_CLASS (mgt_application_parent_class)->startup (application);
 
@@ -161,12 +160,12 @@ mgt_application_startup (GApplication *application)
   gtk_window_set_default_icon_name (PACKAGE_ID);
 
   self->settings = mgt_settings_new (PACKAGE_ID);
-  self->css_provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (self->css_provider,
+  css_provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (css_provider,
                                        "/org/sadiqpk/GTemplate/css/gtk.css");
 
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (self->css_provider),
+                                              GTK_STYLE_PROVIDER (css_provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
