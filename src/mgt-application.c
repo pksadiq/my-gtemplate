@@ -59,29 +59,6 @@ static GOptionEntry cmd_options[] = {
 };
 
 static void
-mgt_application_show_about (GSimpleAction *action,
-                            GVariant      *parameter,
-                            gpointer       user_data)
-{
-  GtkApplication *application = GTK_APPLICATION (user_data);
-  const gchar *authors[] = {
-    "Mohammed Sadiq https://www.sadiqpk.org",
-    NULL
-  };
-
-  gtk_show_about_dialog (gtk_application_get_active_window (application),
-                         "program-name", _("My GTemplate"),
-                         "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
-                         "version", PACKAGE_VERSION,
-                         "copyright", "Copyright \xC2\xA9 2018 Mohammed Sadiq",
-                         "license-type", GTK_LICENSE_GPL_3_0,
-                         "authors", authors,
-                         "logo-icon-name", PACKAGE_ID,
-                         "translator-credits", _("translator-credits"),
-                         NULL);
-}
-
-static void
 mgt_application_show_help (GSimpleAction *action,
                            GVariant      *parameter,
                            gpointer       user_data)
@@ -125,7 +102,6 @@ static void
 mgt_application_add_actions (MgtApplication *self)
 {
   static const GActionEntry application_entries[] = {
-    { "about", mgt_application_show_about },
     { "help", mgt_application_show_help   },
   };
 

@@ -22,6 +22,8 @@
 
 #include "config.h"
 
+#include <glib/gi18n.h>
+
 #include "mgt-settings.h"
 #include "mgt-application.h"
 #include "mgt-window.h"
@@ -36,6 +38,29 @@ struct _MgtWindow
 
 G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
 
+
+static void
+mgt_window_show_about (MgtWindow *self,
+                       GtkWidget *button)
+{
+  const gchar *authors[] = {
+    "Mohammed Sadiq https://www.sadiqpk.org",
+    NULL
+  };
+
+  g_assert (MGT_IS_WINDOW (self));
+
+  gtk_show_about_dialog (GTK_WINDOW (self),
+                         "program-name", _("My GTemplate"),
+                         "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
+                         "version", PACKAGE_VERSION,
+                         "copyright", "Copyright \xC2\xA9 2018 Mohammed Sadiq",
+                         "license-type", GTK_LICENSE_GPL_3_0,
+                         "authors", authors,
+                         "logo-icon-name", PACKAGE_ID,
+                         "translator-credits", _("translator-credits"),
+                         NULL);
+}
 
 static void
 mgt_window_constructed (GObject *object)
@@ -93,6 +118,8 @@ mgt_window_class_init (MgtWindowClass *klass)
                                                "ui/mgt-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_button);
+
+  gtk_widget_class_bind_template_callback (widget_class, mgt_window_show_about);
 }
 
 static void

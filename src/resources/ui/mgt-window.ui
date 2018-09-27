@@ -52,7 +52,7 @@
         <child>
           <object class="GtkModelButton">
             <property name="text" translatable="yes">_About</property>
-            <property name="action-name">app.about</property>
+            <signal name="clicked" handler="mgt_window_show_about" swapped="1" />
           </object>
         </child>
 
