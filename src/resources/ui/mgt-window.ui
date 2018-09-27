@@ -35,22 +35,26 @@
   <object class="GtkPopoverMenu" id="main_menu">
     <child>
       <object class="GtkBox">
+        <property name="visible">1</property>
         <property name="orientation">vertical</property>
 
         <child>
           <object class="GtkModelButton">
+            <property name="visible">1</property>
             <property name="text" translatable="yes">_Keyboard Shortcuts</property>
             <property name="action-name">win.show-help-overlay</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
+            <property name="visible">1</property>
             <property name="text" translatable="yes">_Help</property>
             <property name="action-name">app.help</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
+            <property name="visible">1</property>
             <property name="text" translatable="yes">_About</property>
             <signal name="clicked" handler="mgt_window_show_about" swapped="1" />
           </object>
