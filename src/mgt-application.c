@@ -153,6 +153,12 @@ mgt_application_command_line (GApplication            *application,
 
   options = g_application_command_line_get_options_dict (command_line);
 
+  /*
+   * NOTE: g_application_quit() is almost always a bad idea.
+   * This simply kills the application.  So active process like
+   * Saving file will get stopped midst the process.  If you
+   * find it bad, find your luck with g_application_release()
+   */
   if (g_variant_dict_contains (options, "quit"))
     {
       g_application_quit (application);
