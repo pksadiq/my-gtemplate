@@ -21,6 +21,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#undef NDEBUG
+#undef G_DISABLE_ASSERT
+#undef G_DISABLE_CAST_CHECKS
+#undef G_LOG_DOMAIN
+
 #include <glib.h>
 
 #include "mgt-utils.h"
