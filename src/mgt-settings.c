@@ -41,12 +41,6 @@
 struct _MgtSettings
 {
   GSettings parent_instance;
-
-  /* Window states */
-  GdkRectangle geometry;
-  gboolean maximized;
-
-  gboolean first_run;
 };
 
 G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
@@ -55,21 +49,9 @@ G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
 static void
 mgt_settings_constructed (GObject *object)
 {
-  MgtSettings *self = (MgtSettings *)object;
-  GSettings *settings = (GSettings *)object;
-  GdkRectangle *geometry = &self->geometry;
-
-  MGT_ENTRY;
-
   G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
 
-  g_settings_delay (settings);
-  self->first_run = g_settings_get_boolean (settings, "first-run");
-  self->maximized = g_settings_get_boolean (settings, "window-maximized");
-  g_settings_get (settings, "window-size", "(ii)", &geometry->width, &geometry->height);
-  g_settings_get (settings, "window-position", "(ii)", &geometry->x, &geometry->y);
-
-  MGT_EXIT;
+  g_settings_delay (G_SETTINGS (object));
 }
 
 static void
@@ -134,7 +116,7 @@ mgt_settings_get_is_first_run (MgtSettings *self)
 {
   g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
 
-  return self->first_run;
+  return g_settings_get_boolean (G_SETTINGS (self), "first-run");
 }
 
 /**
@@ -150,7 +132,7 @@ mgt_settings_get_window_maximized (MgtSettings *self)
 {
   g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
 
-  return self->maximized;
+  return g_settings_get_boolean (G_SETTINGS (self), "window-maximized");
 }
 
 /**
@@ -166,7 +148,6 @@ mgt_settings_set_window_maximized (MgtSettings *self,
 {
   g_return_if_fail (MGT_IS_SETTINGS (self));
 
-  self->maximized = !!maximized;
   g_settings_set_boolean (G_SETTINGS (self), "window-maximized", !!maximized);
 }
 
@@ -181,10 +162,17 @@ void
 mgt_settings_get_window_geometry (MgtSettings  *self,
                                   GdkRectangle *geometry)
 {
+  GdkRectangle size;
+  GSettings *settings;
+
   g_return_if_fail (MGT_IS_SETTINGS (self));
   g_return_if_fail (geometry != NULL);
 
-  *geometry = self->geometry;
+  settings = G_SETTINGS (self);
+  g_settings_get (settings, "window-size", "(ii)", &size.width, &size.height);
+  g_settings_get (settings, "window-position", "(ii)", &size.x, &size.y);
+
+  *geometry = size;
 }
 
 /**
@@ -204,7 +192,6 @@ mgt_settings_set_window_geometry (MgtSettings  *self,
   g_return_if_fail (geometry != NULL);
 
   settings = G_SETTINGS (self);
-  self->geometry = *geometry;
 
   g_settings_set (settings, "window-size", "(ii)", geometry->width, geometry->height);
   g_settings_set (settings, "window-position", "(ii)", geometry->x, geometry->y);
