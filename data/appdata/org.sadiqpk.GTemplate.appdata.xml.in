@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>org.sadiqpk.GTemplate.desktop</id>
+  <id>org.sadiqpk.GTemplate</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>CC0-1.0</project_license>
   <name>My GTemplate</name>
   <summary>A GTK+ template application</summary>
+  <developer_name>Mohammed Sadiq</developer_name>
+  <launchable type="desktop-id">org.sadiqpk.GTemplate.desktop</launchable>
 
   <description>
     <p>
@@ -53,7 +55,7 @@
   </screenshots>
 
   <url type="homepage">https://www.sadiqpk.org/projects/my-gtemplate.html</url>
-  <url type="bugtracker">https://gitlab.gnome.org/GNOME/gnome-builder/issues</url>
+  <url type="bugtracker">https://gitlab.com/sadiq/my-gtemplate/issues</url>
   <url type="donation">https://liberapay.com/sadiq/donate</url>
   <url type="help">https://gitlab.com/sadiq/my-gtemplate/wiki</url>
   <project_group>GNOME</project_group>
