@@ -154,7 +154,7 @@ mgt_settings_set_window_maximized (MgtSettings *self,
 /**
  * mgt_settings_get_window_geometry:
  * @self: A #MgtSettings
- * @geometry: (out) (not nullable): A #GdkRectangle
+ * @geometry: (out): A #GdkRectangle
  *
  * Get the window geometry as saved in @self.
  */
@@ -178,7 +178,7 @@ mgt_settings_get_window_geometry (MgtSettings  *self,
 /**
  * mgt_settings_set_window_geometry:
  * @self: A #MgtSettings
- * @geometry: (not nullable): A #GdkRectangle
+ * @geometry: A #GdkRectangle
  *
  * Set the window geometry in @self.
  */
