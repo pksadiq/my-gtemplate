@@ -79,7 +79,6 @@ echooption() {
 }
 
 sanitycheck MESON 'meson'
-sanitycheck MESONTEST 'mesontest'
 sanitycheck NINJA 'ninja' 'ninja-build'
 
 declare -A default_options=(
