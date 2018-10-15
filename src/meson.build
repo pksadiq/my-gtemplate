@@ -21,12 +21,10 @@ libgtemplate = static_library(
 )
 
 src += ['main.c',
-        'mgt-utils.c',
-        'mgt-settings.c',
         'mgt-application.c',
         'mgt-window.c',
+        libsrc,
         resources,
-        revision_tag,
        ]
 
 executable(
