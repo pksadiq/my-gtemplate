@@ -105,7 +105,7 @@ static void
 mgt_application_add_actions (MgtApplication *self)
 {
   static const GActionEntry application_entries[] = {
-    { "help", mgt_application_show_help   },
+    { "help", mgt_application_show_help },
   };
 
   struct
