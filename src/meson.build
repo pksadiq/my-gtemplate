@@ -9,7 +9,8 @@ resources = gnome.compile_resources(
 
 libsrc = [
   'mgt-utils.c',
-  'mgt-settings.c'
+  'mgt-settings.c',
+  revision_tag,
 ]
 
 libgtemplate = static_library(
@@ -24,7 +25,8 @@ src += ['main.c',
         'mgt-settings.c',
         'mgt-application.c',
         'mgt-window.c',
-        resources
+        resources,
+        revision_tag,
        ]
 
 executable(

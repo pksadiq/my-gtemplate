@@ -42,17 +42,12 @@ conf.set_quoted('PACKAGE_NAME', pkg_name)
 conf.set_quoted('PACKAGE_ID', pkg_id)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 
-vcs_tag = vcs_tag(
+revision_tag = vcs_tag(
   input: configure_file(
     output: 'config.h.in',
     configuration: conf
   ),
   output: 'config.h'
-)
-
-configure_file(
-  output : 'config.h',
-  configuration : conf,
 )
 
 common_flags = [
