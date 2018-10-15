@@ -6,12 +6,12 @@ icon_sizes = [
   '256x256',
   '512x512',
   'scalable',
-  'symbolic'
+  'symbolic',
 ]
 
 foreach icon_size: icon_sizes
   install_subdir(
     icon_size,
-    install_dir: join_paths(pkg_datadir, 'icons', 'hicolor')
+    install_dir: join_paths(pkg_datadir, 'icons', 'hicolor'),
   )
 endforeach

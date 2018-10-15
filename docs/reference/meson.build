@@ -2,7 +2,7 @@ docs_conf = configuration_data()
 docs_conf.set('PACKAGE_VERSION', pkg_version)
 
 private_headers = [
-  'config.h'
+  'config.h',
 ]
 
 docpath = join_paths(get_option('datadir'), 'gtk-doc', 'html')
@@ -16,7 +16,7 @@ gtk_docpath = join_paths(gtk_prefix, 'share', 'gtk-doc', 'html')
 docs_version = configure_file(
   input: 'version.xml.in',
   output: 'version.xml',
-  configuration: docs_conf
+  configuration: docs_conf,
 )
 
 gnome.gtkdoc(

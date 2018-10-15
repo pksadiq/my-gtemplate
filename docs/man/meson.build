@@ -28,6 +28,6 @@ foreach man: man_files
       '@INPUT@',
     ],
     install: true,
-    install_dir: join_paths(get_option('mandir'), 'man@0@'.format(man_section))
+    install_dir: join_paths(get_option('mandir'), 'man@0@'.format(man_section)),
   )
 endforeach

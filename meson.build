@@ -45,14 +45,14 @@ conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 revision_tag = vcs_tag(
   input: configure_file(
     output: 'config.h.in',
-    configuration: conf
+    configuration: conf,
   ),
-  output: 'config.h'
+  output: 'config.h',
 )
 
 common_flags = [
   '-DHAVE_CONFIG_H',
-  '-D_FORTIFY_SOURCE=2'
+  '-D_FORTIFY_SOURCE=2',
 ]
 
 add_global_arguments(common_flags, language: 'c')
@@ -102,7 +102,7 @@ run_target('make-po',
              find_program('build-aux/make_po.sh'),
              pkg_name,
              meson.current_build_dir(),
-             join_paths(pkg_srcdir, 'po')
+             join_paths(pkg_srcdir, 'po'),
            ])
 
 run_target('make-help-po',
@@ -112,7 +112,7 @@ run_target('make-help-po',
              meson.current_build_dir(),
              join_paths(pkg_srcdir, 'docs/help'),
              'help-',
-             'true'
+             'true',
            ])
 
 system = host_machine.system()
