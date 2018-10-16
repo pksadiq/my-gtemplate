@@ -104,7 +104,7 @@ mgt_application_handle_local_options (GApplication *application,
 static void
 mgt_application_add_actions (MgtApplication *self)
 {
-  static const GActionEntry application_entries[] = {
+  static const GActionEntry app_entries[] = {
     { "help", mgt_application_show_help },
   };
 
@@ -118,8 +118,8 @@ mgt_application_add_actions (MgtApplication *self)
 
   g_assert (MGT_IS_APPLICATION (self));
 
-  g_action_map_add_action_entries (G_ACTION_MAP (self), application_entries,
-                                   G_N_ELEMENTS (application_entries), self);
+  g_action_map_add_action_entries (G_ACTION_MAP (self), app_entries,
+                                   G_N_ELEMENTS (app_entries), self);
 
   for (gsize i = 0; i < G_N_ELEMENTS (accels); i++)
     gtk_application_set_accels_for_action (GTK_APPLICATION (self),
