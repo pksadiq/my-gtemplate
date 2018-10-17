@@ -32,6 +32,7 @@ test:
       - gee-tasks/
 
 pages:
+  image: alpine:3.8
   stage: deploy
   script:
     - mkdir public
