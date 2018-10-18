@@ -24,6 +24,7 @@
 #define G_LOG_DOMAIN "mgt-application"
 
 #include "config.h"
+#include "version.h"
 
 #include <glib/gi18n.h>
 

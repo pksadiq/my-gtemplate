@@ -37,17 +37,13 @@ conf.set('NDEBUG', (not pkg_is_debug))
 conf.set('G_DISABLE_ASSERT', (not pkg_is_debug))
 conf.set('G_DISABLE_CAST_CHECKS', (not pkg_is_debug))
 conf.set_quoted('GETTEXT_PACKAGE', pkg_name)
-conf.set_quoted('PACKAGE_VERSION', '@VCS_TAG@')
 conf.set_quoted('PACKAGE_NAME', pkg_name)
 conf.set_quoted('PACKAGE_ID', pkg_id)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
 
-revision_tag = vcs_tag(
-  input: configure_file(
-    output: 'config.h.in',
-    configuration: conf,
-  ),
+configure_file(
   output: 'config.h',
+  configuration: conf,
 )
 
 common_flags = [

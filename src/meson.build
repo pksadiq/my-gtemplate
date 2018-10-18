@@ -1,5 +1,10 @@
 src = []
 
+revision_tag = vcs_tag(
+  input: 'version.h.in',
+  output: 'version.h',
+)
+
 resources = gnome.compile_resources(
   'resources',
   'resources/gtemplate.gresource.xml',
