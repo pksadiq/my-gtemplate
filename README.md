@@ -26,12 +26,6 @@ an empty window.
 The template includes lots of features above which you can build
 your own application.
 
-The [code coverage report][coverage] mentions GeeTask project and
-several symbols beginning with `gtsk_`.  This is because the CI
-for this project creates a new project with the default values in
-`new-project.sh` and publishes code coverage report of that
-created project.
-
 If you wish to support me, you may kindly donate me at
 https://liberapay.com/sadiq/donate
 
