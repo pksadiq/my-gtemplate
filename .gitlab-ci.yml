@@ -1,11 +1,10 @@
-image: pksadiq/gtk:fedora-amd64
-
 stages:
   - build
   - test
   - deploy
 
 build-gtk3:
+  image: pksadiq/gtk:alpine-amd64
   stage: build
   variables:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
@@ -16,6 +15,7 @@ build-gtk3:
     - ninja -C _build
 
 build:
+  image: pksadiq/gtk:fedora-amd64
   stage: build
   variables:
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
