@@ -30,7 +30,7 @@ build:
       - _build
 
 pages:
-  image: alpine:3.8
+  image: busybox:1
   stage: deploy
   script:
     - mkdir public
