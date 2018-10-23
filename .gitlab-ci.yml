@@ -13,8 +13,8 @@ build-gtk3:
   script:
     - ./new-project.sh gtk3
     - cd gee-tasks
-    - ccache --zero-stats
     - meson ${MESON_ARGS} -Db_coverage=true _build
+    - ccache --zero-stats
     - ninja -C _build
     - ccache --show-stats
   cache:
@@ -30,8 +30,8 @@ build:
     CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk4"
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
-    - ccache --zero-stats
     - meson ${MESON_ARGS} -Db_coverage=true _build
+    - ccache --zero-stats
     - meson test -C _build
     - ccache --show-stats
     - ninja -C _build coverage
