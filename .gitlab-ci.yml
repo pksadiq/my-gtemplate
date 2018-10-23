@@ -34,7 +34,7 @@ build:
     - ccache --zero-stats
     - meson test -C _build
     - ccache --show-stats
-    - ninja -C _build coverage
+    - ninja -C _build coverage-html
   coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
   cache:
     key: build-gtk4
