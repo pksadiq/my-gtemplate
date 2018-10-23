@@ -13,7 +13,7 @@ build-gtk3:
   script:
     - ./new-project.sh gtk3
     - cd gee-tasks
-    - meson ${MESON_ARGS} -Db_coverage=true _build
+    - meson ${MESON_ARGS} _build
     - ccache --zero-stats
     - ninja -C _build
     - ccache --show-stats
