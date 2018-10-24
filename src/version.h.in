@@ -23,5 +23,5 @@
 
 #pragma once
 
-#define PACKAGE_VERSION "@VCS_TAG@"
+#define PACKAGE_VCS_VERSION "@VCS_TAG@"
 

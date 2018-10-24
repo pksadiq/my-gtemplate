@@ -95,7 +95,7 @@ mgt_application_handle_local_options (GApplication *application,
 {
   if (g_variant_dict_contains (options, "version"))
     {
-      g_print ("%s %s\n", PACKAGE_NAME, PACKAGE_VERSION);
+      g_print ("%s %s\n", PACKAGE_NAME, PACKAGE_VCS_VERSION);
       return 0;
     }
 
