@@ -2,10 +2,10 @@
 <schemalist gettext-domain="my-gtemplate">
   <schema id="org.sadiqpk.GTemplate" path="/org/sadiqpk/GTemplate/">
 
-    <key name="first-run" type="b">
-      <default>true</default>
-      <summary>First run of the application</summary>
-      <description>Whether the application is launching the first time</description>
+    <key name="version" type="s">
+      <default>""</default>
+      <summary>Version of the application</summary>
+      <description>Version of the application</description>
     </key>
 
     <key name="window-maximized" type="b">

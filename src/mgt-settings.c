@@ -41,6 +41,8 @@
 struct _MgtSettings
 {
   GSettings parent_instance;
+
+  gboolean first_run;
 };
 
 G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
@@ -49,7 +51,16 @@ G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
 static void
 mgt_settings_constructed (GObject *object)
 {
+  MgtSettings *self = (MgtSettings *)object;
+  GSettings *settings = (GSettings *)object;
+  g_autofree gchar *version = NULL;
+
   G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
+
+  version = g_settings_get_string (settings, "version");
+
+  if (!g_str_equal (version, PACKAGE_VERSION))
+    self->first_run = TRUE;
 
   g_settings_delay (G_SETTINGS (object));
 }
@@ -59,7 +70,7 @@ mgt_settings_dispose (GObject *object)
 {
   GSettings *settings = (GSettings *)object;
 
-  g_settings_set_boolean (settings, "first-run", FALSE);
+  g_settings_set_string (settings, "version", PACKAGE_VERSION);
   g_settings_apply (settings);
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->dispose (object);
@@ -104,19 +115,18 @@ mgt_settings_new (const gchar *schema_id)
  * mgt_settings_get_is_first_run:
  * @self: A #MgtSettings
  *
- * Get if the application has ever launched after install.
- * Updating the application to a new version won’t reset
- * this flag.
+ * Get if the application has ever launched after install
+ * or update.
  *
- * Returns: %TRUE for the first launch of application.
- * %FALSE otherwise.
+ * Returns: %TRUE for the first launch of application after
+ * install or update.  %FALSE otherwise.
  */
 gboolean
 mgt_settings_get_is_first_run (MgtSettings *self)
 {
   g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
 
-  return g_settings_get_boolean (G_SETTINGS (self), "first-run");
+  return self->first_run;
 }
 
 /**
