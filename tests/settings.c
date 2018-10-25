@@ -33,7 +33,7 @@
 static void
 test_settings_geometry (void)
 {
-  g_autoptr(MgtSettings) settings = NULL;
+  MgtSettings *settings;
   GdkRectangle geometry = {100, 200, 300, 400};
   GdkRectangle reset = {0, 0, 0, 0};
   GdkRectangle out;
@@ -63,9 +63,9 @@ test_settings_geometry (void)
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
   out = reset;
-
-  /* Save the settings, create a new object, and check again */
   g_object_unref (settings);
+
+  /* create a new object, and check again */
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert_true (MGT_IS_SETTINGS (settings));
 
@@ -77,18 +77,19 @@ test_settings_geometry (void)
   g_assert_cmpint (out.y, ==, geometry.y);
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
+  g_object_unref (settings);
 }
 
 static void
 test_settings_first_run (void)
 {
-  g_autoptr(MgtSettings) settings = NULL;
-  g_autoptr(GSettings) gsettings = NULL;
+  MgtSettings *settings;
+  GSettings *gsettings;
 
   /* Reset the first-run settings */
   gsettings = g_settings_new ("org.sadiqpk.GTemplate");
   g_settings_reset (gsettings, "version");
-  g_clear_object (&gsettings);
+  g_object_unref (gsettings);
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert_true (MGT_IS_SETTINGS (settings));
@@ -107,11 +108,12 @@ test_settings_first_run (void)
   */
   gsettings = g_settings_new ("org.sadiqpk.GTemplate");
   g_settings_set_string (gsettings, "version", "0.0.0.0");
-  g_clear_object (&gsettings);
+  g_object_unref (gsettings);
 
   settings = mgt_settings_new ("org.sadiqpk.GTemplate");
   g_assert_true (MGT_IS_SETTINGS (settings));
   g_assert_true (mgt_settings_get_is_first_run (settings));
+  g_object_unref (settings);
 }
 
 int
