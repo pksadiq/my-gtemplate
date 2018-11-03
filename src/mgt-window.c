@@ -44,8 +44,7 @@ G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
 
 
 static void
-mgt_window_show_about (MgtWindow *self,
-                       GtkWidget *widget)
+mgt_window_show_about (MgtWindow *self)
 {
   const gchar *authors[] = {
     "Mohammed Sadiq https://www.sadiqpk.org",
