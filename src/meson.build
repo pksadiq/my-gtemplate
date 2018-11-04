@@ -15,7 +15,6 @@ resources = gnome.compile_resources(
 libsrc = [
   'mgt-utils.c',
   'mgt-settings.c',
-  revision_tag,
 ]
 
 libgtemplate = static_library(
@@ -29,7 +28,7 @@ src += [
   'main.c',
   'mgt-application.c',
   'mgt-window.c',
-  libsrc,
+  revision_tag,
   resources,
 ]
 
@@ -38,6 +37,7 @@ executable(
   src,
   install: true,
   link_args: c_link_args,
+  link_with: libgtemplate,
   include_directories: top_inc,
   dependencies: pkg_dep,
 )
