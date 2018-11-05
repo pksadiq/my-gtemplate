@@ -12,7 +12,9 @@ install_data(
   install_dir: pkg_schemadir,
 )
 
-compiled = gnome.compile_schemas(build_by_default: true)
+if get_option('tests')
+  compiled = gnome.compile_schemas()
+endif
 
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
