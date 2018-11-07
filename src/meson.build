@@ -36,6 +36,7 @@ executable(
   'my-gtemplate',
   src,
   install: true,
+  gui_app: true,
   link_args: c_link_args,
   link_with: libgtemplate,
   include_directories: top_inc,
