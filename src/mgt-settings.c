@@ -172,17 +172,14 @@ void
 mgt_settings_get_window_geometry (MgtSettings  *self,
                                   GdkRectangle *geometry)
 {
-  GdkRectangle size;
   GSettings *settings;
 
   g_return_if_fail (MGT_IS_SETTINGS (self));
   g_return_if_fail (geometry != NULL);
 
   settings = G_SETTINGS (self);
-  g_settings_get (settings, "window-size", "(ii)", &size.width, &size.height);
-  g_settings_get (settings, "window-position", "(ii)", &size.x, &size.y);
-
-  *geometry = size;
+  g_settings_get (settings, "window-size", "(ii)", &geometry->width, &geometry->height);
+  g_settings_get (settings, "window-position", "(ii)", &geometry->x, &geometry->y);
 }
 
 /**
