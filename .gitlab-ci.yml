@@ -35,7 +35,7 @@ build:
     - meson test -C _build
     - ccache --show-stats
     - mkdir -p _build/meson-logs/coveragereport
-    - gcovr --root=_build --html --print-summary
+    - gcovr --root=_build --html-details --print-summary
       -o _build/meson-logs/coveragereport/index.html
   coverage: '/^lines:.*\s+(\S+\%).*$/'
   cache:
