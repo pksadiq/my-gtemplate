@@ -34,8 +34,10 @@ build:
     - ccache --zero-stats
     - meson test -C _build
     - ccache --show-stats
-    - ninja -C _build coverage-html
-  coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
+    - mkdir -p _build/meson-logs/coveragereport
+    - gcovr --root=_build --html --print-summary
+      -o _build/meson-logs/coveragereport/index.html
+  coverage: '/^lines:.*\s+(\S+\%).*$/'
   cache:
     key: build-gtk4
     paths:
