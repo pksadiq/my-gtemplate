@@ -41,6 +41,7 @@ conf.set_quoted('PACKAGE_NAME', pkg_name)
 conf.set_quoted('PACKAGE_VERSION', pkg_version)
 conf.set_quoted('PACKAGE_ID', pkg_id)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
+conf.set('PACKAGE_HELP_ENABLED', get_option('help'))
 
 configure_file(
   output: 'config.h',

@@ -45,7 +45,7 @@
           </object>
         </child>
         <child>
-          <object class="GtkModelButton">
+          <object class="GtkModelButton" id="menu_help_button">
             <property name="visible">1</property>
             <property name="text" translatable="yes">_Help</property>
             <property name="action-name">app.help</property>

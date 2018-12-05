@@ -38,6 +38,7 @@ struct _MgtWindow
   GtkApplicationWindow parent_instance;
 
   GtkWidget *menu_button;
+  GtkWidget *menu_help_button;
 };
 
 G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
@@ -68,6 +69,7 @@ mgt_window_show_about (MgtWindow *self)
 static void
 mgt_window_constructed (GObject *object)
 {
+  MgtWindow *self = (MgtWindow *)object;
   GtkWindow *window = (GtkWindow *)object;
   MgtSettings *settings;
   GdkRectangle geometry;
@@ -81,6 +83,10 @@ mgt_window_constructed (GObject *object)
 
   if (mgt_settings_get_window_maximized (settings))
     gtk_window_maximize (window);
+
+#ifndef PACKAGE_HELP_ENABLED
+  gtk_widget_hide (self->menu_help_button);
+#endif
 
   G_OBJECT_CLASS (mgt_window_parent_class)->constructed (object);
 }
@@ -122,6 +128,7 @@ mgt_window_class_init (MgtWindowClass *klass)
                                                "ui/mgt-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_button);
+  gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_help_button);
 
   gtk_widget_class_bind_template_callback (widget_class, mgt_window_show_about);
 }
