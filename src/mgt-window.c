@@ -74,9 +74,10 @@ mgt_window_constructed (GObject *object)
 
   settings = mgt_application_get_settings (MGT_APPLICATION_DEFAULT ());
   mgt_settings_get_window_geometry (settings, &geometry);
-
   gtk_window_set_default_size (window, geometry.width, geometry.height);
-  gtk_window_move (window, geometry.x, geometry.y);
+
+  if (geometry.width > -1)
+    gtk_window_move (window, geometry.x, geometry.y);
 
   if (mgt_settings_get_window_maximized (settings))
     gtk_window_maximize (window);
