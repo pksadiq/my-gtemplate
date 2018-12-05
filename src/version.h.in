@@ -24,4 +24,3 @@
 #pragma once
 
 #define PACKAGE_VCS_VERSION "@VCS_TAG@"
-
