@@ -11,3 +11,4 @@ Categories=Utility;GTK;GNOME;
 # Translators: Do NOT translate the semicolon. keywords should
 # also end with a semicolon
 Keywords=Template;
+DBusActivatable=true

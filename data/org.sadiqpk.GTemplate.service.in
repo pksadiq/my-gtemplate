@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.sadiqpk.GTemplate
+Exec=@bindir@/my-gtemplate --gapplication-service
