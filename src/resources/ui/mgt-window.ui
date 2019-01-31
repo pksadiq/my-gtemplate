@@ -59,8 +59,8 @@
           </object>
         </child>
 
-      </object>
+      </object> <!-- ./GtkBox -->
     </child>
-  </object>
+  </object> <!-- ./GtkPopoverMenu main_menu -->
 
 </interface>
