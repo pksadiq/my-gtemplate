@@ -23,8 +23,10 @@
 
 #define G_LOG_DOMAIN "mgt-window"
 
-#include "config.h"
-#include "version.h"
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+# include "version.h"
+#endif
 
 #include <glib/gi18n.h>
 

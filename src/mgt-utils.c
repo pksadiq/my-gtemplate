@@ -23,7 +23,9 @@
 
 #define G_LOG_DOMAIN "mgt-utils"
 
-#include "config.h"
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
 #include "mgt-utils.h"
 #include "mgt-trace.h"
