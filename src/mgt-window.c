@@ -80,9 +80,6 @@ mgt_window_constructed (GObject *object)
   mgt_settings_get_window_geometry (settings, &geometry);
   gtk_window_set_default_size (window, geometry.width, geometry.height);
 
-  if (geometry.width > -1)
-    gtk_window_move (window, geometry.x, geometry.y);
-
   if (mgt_settings_get_window_maximized (settings))
     gtk_window_maximize (window);
 
@@ -109,7 +106,6 @@ mgt_window_unmap (GtkWidget *widget)
     return;
 
   gtk_window_get_size (window, &geometry.width, &geometry.height);
-  gtk_window_get_position (window, &geometry.x, &geometry.y);
   mgt_settings_set_window_geometry (settings, &geometry);
 
   GTK_WIDGET_CLASS (mgt_window_parent_class)->unmap (widget);

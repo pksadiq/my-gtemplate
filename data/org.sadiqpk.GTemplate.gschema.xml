@@ -20,11 +20,5 @@
       <description>Window size (width, height).</description>
     </key>
 
-    <key name="window-position" type="(ii)">
-      <default>(-1, -1)</default>
-      <summary>Window position</summary>
-      <description>Window position (x, y).</description>
-    </key>
-
   </schema>
 </schemalist>

@@ -181,7 +181,7 @@ mgt_settings_get_window_geometry (MgtSettings  *self,
 
   settings = G_SETTINGS (self);
   g_settings_get (settings, "window-size", "(ii)", &geometry->width, &geometry->height);
-  g_settings_get (settings, "window-position", "(ii)", &geometry->x, &geometry->y);
+  geometry->x = geometry->y = -1;
 }
 
 /**
@@ -203,5 +203,4 @@ mgt_settings_set_window_geometry (MgtSettings  *self,
   settings = G_SETTINGS (self);
 
   g_settings_set (settings, "window-size", "(ii)", geometry->width, geometry->height);
-  g_settings_set (settings, "window-position", "(ii)", geometry->x, geometry->y);
 }

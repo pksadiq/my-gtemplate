@@ -58,8 +58,6 @@ test_settings_geometry (void)
 
   mgt_settings_set_window_geometry (settings, &geometry);
   mgt_settings_get_window_geometry (settings, &out);
-  g_assert_cmpint (out.x, ==, geometry.x);
-  g_assert_cmpint (out.y, ==, geometry.y);
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
   out = reset;
@@ -73,8 +71,6 @@ test_settings_geometry (void)
   g_assert_cmpint (is_maximized, ==, 1);
 
   mgt_settings_get_window_geometry (settings, &out);
-  g_assert_cmpint (out.x, ==, geometry.x);
-  g_assert_cmpint (out.y, ==, geometry.y);
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
   g_object_unref (settings);
