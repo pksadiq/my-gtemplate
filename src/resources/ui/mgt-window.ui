@@ -36,6 +36,7 @@
       <object class="GtkBox">
         <property name="visible">1</property>
         <property name="orientation">vertical</property>
+        <property name="margin">12</property>
 
         <child>
           <object class="GtkModelButton">
