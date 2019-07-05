@@ -13,9 +13,6 @@ EMAIL="random@example.com"
 # that your email will be used in the About window.
 WEBSITE="https://www.sadiqpk.org"
 
-# Only "gtk3" or "gtk4" supported
-GTK_VERSION="gtk4"
-
 # APP_NAME will be used as the binary name, directory name.
 # The directory will be created in the project directory
 # (ie, in my-gtemplate directory)
@@ -76,9 +73,6 @@ GNOME_ID=""
 
 # The real actions.  Don’t touch unless you know
 # Override if commandline argument present
-if [ "$1" ]; then
-  GTK_VERSION="$1"
-fi
 
 rm -rf "$APP_NAME"
 mkdir -p "$APP_NAME"
@@ -99,12 +93,10 @@ echo "done"
 
 cd "$APP_NAME"
 
-if [ "$GTK_VERSION" = "gtk3" ]; then
-  cp ../.gitlab-ci.yml .
-  sed -i '/new-project/d' .gitlab-ci.yml
-  sed -i "s|gee-tasks/|_build|" .gitlab-ci.yml
-  sed -i "/gee-tasks/d" .gitlab-ci.yml
-fi
+cp ../.gitlab-ci.yml .
+sed -i '/new-project/d' .gitlab-ci.yml
+sed -i "s|gee-tasks/|_build|" .gitlab-ci.yml
+sed -i "/gee-tasks/d" .gitlab-ci.yml
 
 echo -n "Removing unwanted files..."
 rm -rf "$APP_NAME" new-project.sh
@@ -144,21 +136,6 @@ OLD_NAME_UPPER="$(echo "$OLD_NAME" | tr a-z A-Z)"
 APP_NAME_UPPER="$(echo "$APP_NAME" | tr a-z A-Z)"
 OLD_SHRT_UPPER="$(echo "$OLD_SHRT" | tr a-z A-Z)"
 APP_SHRT_UPPER="$(echo "$APP_SHRT" | tr a-z A-Z)"
-
-# Adapt to GTK version specified
-if [ "$GTK_VERSION" = "gtk3" ]; then
-  sed -i "s|gtk+-4.0.*)|gtk+-3.0', version: '>= 3.22.0')|" meson.build
-  sed -i "s|gtk+-4.0|gtk+-3.0|" docs/reference/meson.build
-  sed -i "/gtk_style_context_add_provider_for_display/ s/display/screen/g" src/mgt-application.c
-  sed -i "s|show-title-buttons|show-close-button|" src/resources/ui/mgt-window.ui
-  sed -i '/gtk+/,/^$/d' build-aux/flatpak/org.sadiqpk.GTemplate.yml
-elif [ "$GTK_VERSION" = 'gtk4' ]; then
-  sed -i '/"visible">1/d' src/resources/ui/mgt-window.ui
-  sed -i '/"visible">1/d' src/resources/gtk/help-overlay.ui
-else
-  echo "WARNING: GTK version $GTK_VERSION not supported. Use 'gtk3' or 'gtk4'"
-  exit 1
-fi
 
 # Replace strings
 echo -n "Mass replacing template..."

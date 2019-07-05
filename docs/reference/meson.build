@@ -10,7 +10,7 @@ docpath = join_paths(get_option('datadir'), 'gtk-doc', 'html')
 # External dependencies to fix cross referencing.
 glib_prefix = dependency('glib-2.0').get_pkgconfig_variable('prefix')
 glib_docpath = join_paths(glib_prefix, 'share', 'gtk-doc', 'html')
-gtk_prefix = dependency('gtk+-4.0').get_pkgconfig_variable('prefix')
+gtk_prefix = dependency('gtk+-3.0').get_pkgconfig_variable('prefix')
 gtk_docpath = join_paths(gtk_prefix, 'share', 'gtk-doc', 'html')
 
 docs_version = configure_file(

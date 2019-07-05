@@ -146,9 +146,9 @@ mgt_application_startup (GApplication *application)
   gtk_css_provider_load_from_resource (css_provider,
                                        "/org/sadiqpk/GTemplate/css/gtk.css");
 
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (css_provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (css_provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static gint

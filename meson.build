@@ -94,7 +94,7 @@ endif
 
 pkg_dep = [
   dependency('glib-2.0', version: '>= 2.44.0'),
-  dependency('gtk+-4.0', version: '>= 3.92.0'),
+  dependency('gtk+-3.0', version: '>= 3.22.0'),
 ]
 
 subdir('src')
