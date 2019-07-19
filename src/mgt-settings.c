@@ -1,3 +1,4 @@
+/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* mgt-settings.c
  *
  * Copyright 2019 Mohammed Sadiq <sadiq@sadiqpk.org>
@@ -15,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
+ * Author(s):
  *   Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * SPDX-License-Identifier: GPL-3.0-or-later

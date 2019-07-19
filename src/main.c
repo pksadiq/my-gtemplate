@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Authors:
+ * Author(s):
  *   Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * SPDX-License-Identifier: GPL-3.0-or-later
