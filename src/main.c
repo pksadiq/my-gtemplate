@@ -1,3 +1,4 @@
+/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* main.c
  *
  * Copyright 2019 Mohammed Sadiq <sadiq@sadiqpk.org>
