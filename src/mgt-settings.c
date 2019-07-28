@@ -110,6 +110,23 @@ mgt_settings_new ()
 }
 
 /**
+ * mgt_settings_save:
+ * @self: A #MgtSettings
+ *
+ * Save modified settings to disk.  By default,
+ * the modified settings are saved to disk only
+ * when #MgtSettings is disposed.  Use this
+ * to force save to disk.
+ */
+void
+mgt_settings_save (MgtSettings *self)
+{
+  g_return_if_fail (MGT_IS_SETTINGS (self));
+
+  g_settings_apply (G_SETTINGS (self));
+}
+
+/**
  * mgt_settings_get_is_first_run:
  * @self: A #MgtSettings
  *
