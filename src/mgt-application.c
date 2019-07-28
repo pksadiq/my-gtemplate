@@ -142,7 +142,7 @@ mgt_application_startup (GApplication *application)
   g_set_application_name (_("My GTemplate"));
   gtk_window_set_default_icon_name (PACKAGE_ID);
 
-  self->settings = mgt_settings_new (PACKAGE_ID);
+  self->settings = mgt_settings_new ();
   css_provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (css_provider,
                                        "/org/sadiqpk/GTemplate/css/gtk.css");

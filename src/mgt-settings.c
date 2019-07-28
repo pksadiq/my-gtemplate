@@ -71,10 +71,10 @@ mgt_settings_constructed (GObject *object)
 static void
 mgt_settings_dispose (GObject *object)
 {
-  GSettings *settings = (GSettings *)object;
+  MgtSettings *settings = (MgtSettings *)object;
 
-  g_settings_set_string (settings, "version", PACKAGE_VERSION);
-  g_settings_apply (settings);
+  g_settings_set_string (G_SETTINGS (settings), "version", PACKAGE_VERSION);
+  g_settings_apply (G_SETTINGS (settings));
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->dispose (object);
 }
@@ -95,22 +95,17 @@ mgt_settings_init (MgtSettings *self)
 
 /**
  * mgt_settings_new:
- * @schema_id: (not nullable): An application id as string
  *
- * Create a new settings for the given application
- * id @schema_id.  @schema_ids are usually of the form
- * “org.example.AppName”.
+ * Create a new #MgtSettings
  *
  * Returns: (transfer full): A #MgtSettings.
  * Free with g_object_unref().
  */
 MgtSettings *
-mgt_settings_new (const gchar *schema_id)
+mgt_settings_new ()
 {
-  g_assert (schema_id != NULL);
-
   return g_object_new (MGT_TYPE_SETTINGS,
-                       "schema-id", schema_id,
+                       "schema-id", PACKAGE_ID,
                        NULL);
 }
 
