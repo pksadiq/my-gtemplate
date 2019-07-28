@@ -31,8 +31,6 @@
 
 #include <glib/gi18n.h>
 
-#include "mgt-settings.h"
-#include "mgt-application.h"
 #include "mgt-window.h"
 #include "mgt-trace.h"
 
@@ -40,12 +38,22 @@ struct _MgtWindow
 {
   GtkApplicationWindow parent_instance;
 
-  GtkWidget *menu_button;
-  GtkWidget *menu_help_button;
+  MgtSettings *settings;
+
+  GtkWidget   *menu_button;
+  GtkWidget   *menu_help_button;
 };
 
 G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
 
+
+enum {
+  PROP_0,
+  PROP_SETTINGS,
+  N_PROPS
+};
+
+static GParamSpec *properties[N_PROPS];
 
 static void
 mgt_window_show_about (MgtWindow *self)
@@ -70,18 +78,35 @@ mgt_window_show_about (MgtWindow *self)
 }
 
 static void
+mgt_window_set_property (GObject      *object,
+                         guint         prop_id,
+                         const GValue *value,
+                         GParamSpec   *pspec)
+{
+  MgtWindow *self = (MgtWindow *)object;
+
+  switch (prop_id)
+    {
+    case PROP_SETTINGS:
+      self->settings = g_value_get_object (value);
+      break;
+
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
 mgt_window_constructed (GObject *object)
 {
   MgtWindow *self = (MgtWindow *)object;
   GtkWindow *window = (GtkWindow *)object;
-  MgtSettings *settings;
   GdkRectangle geometry;
 
-  settings = mgt_application_get_settings (MGT_APPLICATION_DEFAULT ());
-  mgt_settings_get_window_geometry (settings, &geometry);
+  mgt_settings_get_window_geometry (self->settings, &geometry);
   gtk_window_set_default_size (window, geometry.width, geometry.height);
 
-  if (mgt_settings_get_window_maximized (settings))
+  if (mgt_settings_get_window_maximized (self->settings))
     gtk_window_maximize (window);
 
 #ifndef PACKAGE_HELP_ENABLED
@@ -94,20 +119,19 @@ mgt_window_constructed (GObject *object)
 static void
 mgt_window_unmap (GtkWidget *widget)
 {
+  MgtWindow *self = (MgtWindow *)widget;
   GtkWindow *window = (GtkWindow *)widget;
-  MgtSettings *settings;
   GdkRectangle geometry;
   gboolean is_maximized;
 
-  settings = mgt_application_get_settings (MGT_APPLICATION_DEFAULT ());
   is_maximized = gtk_window_is_maximized (window);
-  mgt_settings_set_window_maximized (settings, is_maximized);
+  mgt_settings_set_window_maximized (self->settings, is_maximized);
 
   if (is_maximized)
     return;
 
   gtk_window_get_size (window, &geometry.width, &geometry.height);
-  mgt_settings_set_window_geometry (settings, &geometry);
+  mgt_settings_set_window_geometry (self->settings, &geometry);
 
   GTK_WIDGET_CLASS (mgt_window_parent_class)->unmap (widget);
 }
@@ -118,9 +142,24 @@ mgt_window_class_init (MgtWindowClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = mgt_window_constructed;
+  object_class->set_property = mgt_window_set_property;
+  object_class->constructed  = mgt_window_constructed;
 
   widget_class->unmap = mgt_window_unmap;
+
+  /**
+   * MgtWindow:settings:
+   *
+   * The Application Settings
+   */
+  properties[PROP_SETTINGS] =
+    g_param_spec_object ("settings",
+                         "Settings",
+                         "The Application Settings",
+                         MGT_TYPE_SETTINGS,
+                         G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/sadiqpk/GTemplate/"
@@ -139,11 +178,14 @@ mgt_window_init (MgtWindow *self)
 }
 
 GtkWidget *
-mgt_window_new (GtkApplication *application)
+mgt_window_new (GtkApplication *application,
+                MgtSettings    *settings)
 {
   g_assert (GTK_IS_APPLICATION (application));
+  g_assert (MGT_IS_SETTINGS (settings));
 
   return g_object_new (MGT_TYPE_WINDOW,
                        "application", application,
+                       "settings", settings,
                        NULL);
 }

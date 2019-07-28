@@ -26,7 +26,7 @@
 
 #include <gtk/gtk.h>
 
-#include "mgt-application.h"
+#include "mgt-settings.h"
 
 G_BEGIN_DECLS
 
@@ -34,6 +34,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (MgtWindow, mgt_window, MGT, WINDOW, GtkApplicationWindow)
 
-GtkWidget *mgt_window_new (GtkApplication *application);
+GtkWidget *mgt_window_new (GtkApplication *application,
+                           MgtSettings    *settings);
 
 G_END_DECLS

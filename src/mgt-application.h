@@ -35,7 +35,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (MgtApplication, mgt_application, MGT, APPLICATION, GtkApplication)
 
-MgtApplication *mgt_application_new           (void);
-MgtSettings    *mgt_application_get_settings  (MgtApplication *self);
+MgtApplication *mgt_application_new    (void);
 
 G_END_DECLS

@@ -180,15 +180,13 @@ mgt_application_command_line (GApplication            *application,
 static void
 mgt_application_activate (GApplication *application)
 {
-  GtkApplication *app = (GtkApplication *)application;
+  MgtApplication *self = (MgtApplication *)application;
   GtkWindow *window;
 
-  g_assert (GTK_IS_APPLICATION (app));
-
-  window = gtk_application_get_active_window (app);
+  window = gtk_application_get_active_window (GTK_APPLICATION (self));
 
   if (window == NULL)
-    window = GTK_WINDOW (mgt_window_new (app));
+    window = GTK_WINDOW (mgt_window_new (GTK_APPLICATION (self), self->settings));
 
   gtk_window_present (window);
 }
@@ -222,20 +220,4 @@ mgt_application_new (void)
                        "application-id", PACKAGE_ID,
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
-}
-
-/**
- * mgt_application_get_settings:
- * @self: A #MgtApplication
- *
- * Get the default #MgtSettings.
- *
- * Returns: (transfer none): A #MgtSettings
- */
-MgtSettings *
-mgt_application_get_settings (MgtApplication *self)
-{
-  g_return_val_if_fail (MGT_IS_APPLICATION (self), NULL);
-
-  return self->settings;
 }
