@@ -69,7 +69,6 @@ c_link_args = cc.get_supported_arguments(
    '-Werror=vla',
    '-Werror=write-strings',
    '-Wfloat-equal',
-   '-Wfloat-equal',
    '-Wformat=2',
    '-Wimplicit-fallthrough',
    '-Wlogical-op',
