@@ -33,6 +33,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (MgtSettings, mgt_settings, MGT, SETTINGS, GSettings)
 
 MgtSettings *mgt_settings_new                  (void);
+void         mgt_settings_save                 (MgtSettings *self);
 
 gboolean     mgt_settings_get_is_first_run     (MgtSettings *self);
 gboolean     mgt_settings_get_window_maximized (MgtSettings *self);
