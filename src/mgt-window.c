@@ -78,6 +78,26 @@ mgt_window_show_about (MgtWindow *self)
 }
 
 static void
+mgt_window_unmap (GtkWidget *widget)
+{
+  MgtWindow *self = (MgtWindow *)widget;
+  GtkWindow *window = (GtkWindow *)widget;
+  GdkRectangle geometry;
+  gboolean is_maximized;
+
+  is_maximized = gtk_window_is_maximized (window);
+  mgt_settings_set_window_maximized (self->settings, is_maximized);
+
+  if (is_maximized)
+    return;
+
+  gtk_window_get_size (window, &geometry.width, &geometry.height);
+  mgt_settings_set_window_geometry (self->settings, &geometry);
+
+  GTK_WIDGET_CLASS (mgt_window_parent_class)->unmap (widget);
+}
+
+static void
 mgt_window_set_property (GObject      *object,
                          guint         prop_id,
                          const GValue *value,
@@ -114,26 +134,6 @@ mgt_window_constructed (GObject *object)
 #endif
 
   G_OBJECT_CLASS (mgt_window_parent_class)->constructed (object);
-}
-
-static void
-mgt_window_unmap (GtkWidget *widget)
-{
-  MgtWindow *self = (MgtWindow *)widget;
-  GtkWindow *window = (GtkWindow *)widget;
-  GdkRectangle geometry;
-  gboolean is_maximized;
-
-  is_maximized = gtk_window_is_maximized (window);
-  mgt_settings_set_window_maximized (self->settings, is_maximized);
-
-  if (is_maximized)
-    return;
-
-  gtk_window_get_size (window, &geometry.width, &geometry.height);
-  mgt_settings_set_window_geometry (self->settings, &geometry);
-
-  GTK_WIDGET_CLASS (mgt_window_parent_class)->unmap (widget);
 }
 
 static void
