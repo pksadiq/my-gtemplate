@@ -55,17 +55,16 @@ static void
 mgt_settings_constructed (GObject *object)
 {
   MgtSettings *self = (MgtSettings *)object;
-  GSettings *settings = (GSettings *)object;
   g_autofree gchar *version = NULL;
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
 
-  version = g_settings_get_string (settings, "version");
+  version = g_settings_get_string (G_SETTINGS (self), "version");
 
   if (!g_str_equal (version, PACKAGE_VERSION))
     self->first_run = TRUE;
 
-  g_settings_delay (G_SETTINGS (object));
+  g_settings_delay (G_SETTINGS (self));
 }
 
 static void
