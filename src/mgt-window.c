@@ -108,7 +108,7 @@ mgt_window_set_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_SETTINGS:
-      self->settings = g_value_get_object (value);
+      self->settings = g_value_dup_object (value);
       break;
 
     default:
@@ -137,6 +137,16 @@ mgt_window_constructed (GObject *object)
 }
 
 static void
+mgt_window_finalize (GObject *object)
+{
+  MgtWindow *self = (MgtWindow *)object;
+
+  g_object_unref (self->settings);
+
+  G_OBJECT_CLASS (mgt_window_parent_class)->finalize (object);
+}
+
+static void
 mgt_window_class_init (MgtWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -144,6 +154,7 @@ mgt_window_class_init (MgtWindowClass *klass)
 
   object_class->set_property = mgt_window_set_property;
   object_class->constructed  = mgt_window_constructed;
+  object_class->finalize     = mgt_window_finalize;
 
   widget_class->unmap = mgt_window_unmap;
 
