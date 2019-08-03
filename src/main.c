@@ -30,6 +30,7 @@
 #include <libintl.h>
 #include <locale.h>
 
+#include "mgt-utils.h"
 #include "mgt-application.h"
 
 int
@@ -37,6 +38,8 @@ main (int   argc,
       char *argv[])
 {
   g_autoptr(MgtApplication) application = mgt_application_new ();
+
+  g_assert (MGT_IS_MAIN_THREAD ());
 
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);

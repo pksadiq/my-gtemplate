@@ -31,7 +31,6 @@
 
 #include <glib/gi18n.h>
 
-#include "mgt-utils.h"
 #include "mgt-window.h"
 #include "mgt-application.h"
 #include "mgt-trace.h"
@@ -203,8 +202,6 @@ mgt_application_class_init (MgtApplicationClass *klass)
   application_class->startup = mgt_application_startup;
   application_class->command_line = mgt_application_command_line;
   application_class->activate = mgt_application_activate;
-
-  g_assert (MGT_IS_MAIN_THREAD ());
 }
 
 static void
