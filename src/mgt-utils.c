@@ -47,9 +47,9 @@
  * to check if current thread is the main UI thread
  * or not.  This is used by MGT_IS_MAIN_THREAD() macro.
  *
- * The first call to this function should be done in
- * the UI thread, the class_init() of #GApplication
- * is a good place to do.
+ * The first call to this function should be done in the
+ * UI thread.  The <function>main()</function> function
+ * is a good place to do so.
  *
  * Returns: (transfer none): a #GThread
  */
