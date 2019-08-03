@@ -9,7 +9,6 @@ MGT_IS_MAIN_THREAD
 <TITLE>MgtApplication</TITLE>
 MgtApplication
 mgt_application_new
-mgt_application_get_settings
 </SECTION>
 
 <SECTION>
