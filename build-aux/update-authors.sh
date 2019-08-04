@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Written in 2017, 2018 by Mohammed Sadiq <sadiq@sadiqpk.org>
 
