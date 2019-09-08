@@ -147,14 +147,15 @@ APP_SHRT_UPPER="$(echo "$APP_SHRT" | tr a-z A-Z)"
 
 # Adapt to GTK version specified
 if [ "$GTK_VERSION" = "gtk3" ]; then
-  sed -i "s|gtk+-4.0.*)|gtk+-3.0', version: '>= 3.22.0')|" meson.build
-  sed -i "s|gtk+-4.0|gtk+-3.0|" docs/reference/meson.build
+  sed -i "s|gtk4.*|gtk+-3.0', version: '>= 3.22.0')|" meson.build
+  sed -i "s|gtk4|gtk+-3.0|" docs/reference/meson.build
   sed -i "/gtk_style_context_add_provider_for_display/ s/display/screen/g" src/mgt-application.c
   sed -i "s|show-title-buttons|show-close-button|" src/resources/ui/mgt-window.ui
   sed -i '/gtk+/,/^$/d' build-aux/flatpak/org.sadiqpk.GTemplate.yml
 elif [ "$GTK_VERSION" = 'gtk4' ]; then
   sed -i '/"visible">1/d' src/resources/ui/mgt-window.ui
   sed -i '/"visible">1/d' src/resources/gtk/help-overlay.ui
+  sed -i '/pack/d' src/resources/ui/mgt-window.ui
 else
   echo "WARNING: GTK version $GTK_VERSION not supported. Use 'gtk3' or 'gtk4'"
   exit 1
