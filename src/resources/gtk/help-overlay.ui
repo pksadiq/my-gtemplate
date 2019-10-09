@@ -5,17 +5,14 @@
 
     <child>
       <object class="GtkShortcutsSection">
-        <property name="visible">1</property>
         <property name="section-name">shortcuts</property>
 
         <child>
           <object class="GtkShortcutsGroup">
-            <property name="visible">1</property>
             <property name="title" translatable="yes" context="shortcut window">General</property>
 
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
                 <property name="accelerator">F10</property>
                 <property name="title" translatable="yes" context="shortcut window">Open Menu</property>
               </object>
@@ -23,7 +20,6 @@
 
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
                 <property name="accelerator">F1</property>
                 <property name="title" translatable="yes" context="shortcut window">Show Help</property>
               </object>
@@ -31,7 +27,6 @@
 
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="visible">1</property>
                 <property name="accelerator">&lt;Primary&gt;F1</property>
                 <property name="title" translatable="yes" context="shortcut window">Show Shortcuts</property>
               </object>

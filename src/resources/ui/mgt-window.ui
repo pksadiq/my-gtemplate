@@ -7,24 +7,18 @@
     <!-- Headerbar -->
     <child type="titlebar">
       <object class="GtkHeaderBar">
-        <property name="visible">1</property>
         <property name="title" translatable="yes">My GTemplate</property>
         <property name="subtitle" translatable="yes">Simple Gtk+ Template</property>
         <property name="show-title-buttons">1</property>
 
         <!-- Menu Button -->
-        <child>
+        <child type="end">
           <object class="GtkMenuButton" id="menu_button">
-            <property name="visible">1</property>
             <property name="can-focus">0</property>
             <property name="focus-on-click">0</property>
             <property name="direction">none</property>
             <property name="popover">main_menu</property>
-            <accelerator key="F10" signal="clicked" />
           </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
         </child>
 
       </object> <!-- ./GtkHeaderBar -->
@@ -34,26 +28,22 @@
   <object class="GtkPopoverMenu" id="main_menu">
     <child>
       <object class="GtkBox">
-        <property name="visible">1</property>
         <property name="orientation">vertical</property>
 
         <child>
           <object class="GtkModelButton">
-            <property name="visible">1</property>
             <property name="text" translatable="yes">_Shortcuts</property>
             <property name="action-name">win.show-help-overlay</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton" id="menu_help_button">
-            <property name="visible">1</property>
             <property name="text" translatable="yes">_Help</property>
             <property name="action-name">app.help</property>
           </object>
         </child>
         <child>
           <object class="GtkModelButton">
-            <property name="visible">1</property>
             <property name="text" translatable="yes">_About My GTemplate</property>
             <signal name="clicked" handler="mgt_window_show_about" swapped="1" />
           </object>
