@@ -3,25 +3,6 @@ stages:
   - test
   - deploy
 
-build-gtk3:
-  image: pksadiq/gtk:alpine-amd64
-  stage: build
-  variables:
-    CCACHE_BASEDIR: "${CI_PROJECT_DIR}"
-    CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk3"
-    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
-  script:
-    - ./new-project.sh gtk3
-    - cd gee-tasks
-    - meson ${MESON_ARGS} _build
-    - ccache --zero-stats
-    - ninja -C _build
-    - ccache --show-stats
-  cache:
-    key: build-gtk3
-    paths:
-      - _ccache-gtk3/
-
 build:
   image: pksadiq/gtk:fedora-amd64
   stage: build
