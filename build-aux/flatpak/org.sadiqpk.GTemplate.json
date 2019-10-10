@@ -1,0 +1,55 @@
+{
+    "app-id"  : "org.sadiqpk.GTemplate",
+    "runtime" : "org.gnome.Platform",
+    "command" : "my-gtemplate",
+    "sdk"     : "org.gnome.Sdk",
+    "runtime-version" : "master",
+    "tags" : [
+        "nightly"
+    ],
+    "desktop-file-name-prefix" : "(Nightly) ",
+    "finish-args" : [
+        "--device=dri",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
+    ],
+    "build-options" : {
+        "cflags": "-O2 -g3",
+        "env" : {
+            "BASH_COMPLETIONSDIR" : "/app/share/bash-completion/completions",
+            "V" : "1"
+        }
+    },
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/share/pkgconfig",
+        "/man",
+        "/share/man",
+        "/share/gtk-doc",
+        "/share/bash-completion",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name"        : "my-gtemplate",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dtracing=true",
+                "-Dprofile=development"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.com/sadiq/my-gtemplate.git"
+                }
+            ]
+        }
+    ]
+}
