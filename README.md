@@ -46,7 +46,7 @@ Some source files have GNU GPLv3+ blurb to simply ease creating
 free software projects.  If you wish to use a different license
 term for you project, go for it.  Don’t even mention me.
 
-Written in 2017, 2018 by Mohammed Sadiq <sadiq@sadiqpk.org>
+Written in 2017, 2018, 2019 by Mohammed Sadiq <sadiq@sadiqpk.org>
 
 To the extent possible under law, the author(s) have dedicated all
 copyright and related and neighboring rights to this software to
