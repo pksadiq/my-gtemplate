@@ -64,13 +64,7 @@ along with this software.  If not, see
 * Written in C programming language
 * [G]Object Oriented Design
 * Supports GTK3 and GTK4
-* Meson build system with fallback configure script
-* Configure script for compatibility.
-  * the good old `./configure && make && make install` works out of
-    the box
-  * **Note:** If you are intending to package it in Distributions like
-    Debian, you may better rename `configure` script to something else,
-    so that it won’t interfere with the the distribution build scripts.
+* Uses Meson build system
 * Builtin flatpak support
 * GitLab CI configuration included (Gtk3 only)
 * Microsoft Windows support with MinGW and msitools
@@ -96,25 +90,13 @@ along with this software.  If not, see
 
 ## Build system
 
-`meson` is used as the build system.
-`./configure && make && sudo make install` will build the application
-and install it to the install directory (by default `/usr/local/`).
+`meson` is used as the build system.  Run the following to build:
+* `meson _build`
+* `cd _build && ninja`
+* `sudo ninja install`
 
-The following arguments are understood by `make`:
-* `make`: Build the application.
-* `make install`: Install the application built.
-* `make check`: Run meson tests.
-* `make authors`: Build AUTHORS file, sorted with commit count
-                   in the repository.
-* `make po`: Create po file for the Application in the languages
-             given.  The languages are also added to `po/LINGUAS`
-             file if required.
-* `make help-po`: The same for help files
-* `make update-po`: update the po files with adding new strings.
-
-And much more.  You can get the targets via TAB completion after `make`
-command.
-
+Here `_build` is a non-existing directory name.  You may use any
+name of your choice.
 
 ### Detailing the paths and files
 
@@ -123,7 +105,6 @@ my-gtemplate
 ├── build-aux ── Helper scripts for build
 ├── completion
 │   └── my-gtemplate ── Add your commandline TAB completions in this file
-├── configure
 ├── COPYING ── By default GNU GPLv3.  Use the one you wish
 ├── data
 │   ├── icons
@@ -141,7 +122,7 @@ my-gtemplate
 │   ├── help ──
 │   │   ├── C
 │   │   │   └── index.page ── Add the help pages shown in GNOME Help
-│   │   ├── LINGUAS ── Automatilly updated with ~make help-po~
+│   │   ├── LINGUAS ── Automatilly updated with ~ninja make-help-po~
 │   ├── man
 │   │   └── my-gtemplate.xml
 │   └── reference
