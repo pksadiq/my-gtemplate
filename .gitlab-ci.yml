@@ -11,7 +11,6 @@ build:
     CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk3"
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
-    - cd gee-tasks
     - meson ${MESON_ARGS} _build
     - ccache --zero-stats
     - ninja -C _build
