@@ -3,7 +3,7 @@ stages:
   - test
   - deploy
 
-build-gtk3:
+build:
   image: pksadiq/gtk:alpine-amd64
   stage: build
   variables:
@@ -11,7 +11,6 @@ build-gtk3:
     CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk3"
     MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
   script:
-    - ./new-project.sh gtk3
     - cd gee-tasks
     - meson ${MESON_ARGS} _build
     - ccache --zero-stats
@@ -21,31 +20,6 @@ build-gtk3:
     key: build-gtk3
     paths:
       - _ccache-gtk3/
-
-build:
-  image: pksadiq/gtk:fedora-amd64
-  stage: build
-  variables:
-    CCACHE_BASEDIR: "${CI_PROJECT_DIR}"
-    CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk4"
-    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
-  script:
-    - meson ${MESON_ARGS} -Db_coverage=true _build
-    - ccache --zero-stats
-    - meson test -C _build
-    - ccache --show-stats
-    - mkdir -p _build/meson-logs/coveragereport
-    - gcovr --root=_build --html-details --print-summary
-      -o _build/meson-logs/coveragereport/index.html
-  coverage: '/^lines:.*\s+(\S+\%).*$/'
-  cache:
-    key: build-gtk4
-    paths:
-      - _ccache-gtk4/
-  artifacts:
-    when: always
-    paths:
-      - _build
 
 pages:
   image: busybox:1
