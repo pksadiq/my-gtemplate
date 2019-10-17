@@ -159,9 +159,6 @@ find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_FIRST_NAME}
 find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_LAST_NAME}|${LAST_NAME}|g"
 find . -type f -not -iname '*.sh' -print0 | xargs -0 sed -i "s|${OLD_EMAIL}|${EMAIL}|g"
 
-# Reset author changes in configure file
-cp ../configure .
-
 find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID_SLASH|$APP_ID_SLASH|g"
 find . -type f -print0 | xargs -0 sed -i "s|$OLD_ID|$APP_ID|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_ID_LOWER}|${APP_ID_LOWER}|g"

@@ -39,8 +39,7 @@ Please visit the [website][home] for more details.
 
 Despite of whatever some source file contain as License blurb,
 All code included in this repository are **released into Public
-Domain** (except the `configure` script, which is new-BSD).
-If you wish to contribute to this project, it is assumed
+Domain**.  If you wish to contribute to this project, it is assumed
 that you are contributing under the same terms below.
 
 Some source files have GNU GPLv3+ blurb to simply ease creating
