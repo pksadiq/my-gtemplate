@@ -81,16 +81,6 @@ mgt_application_show_help (GSimpleAction *action,
     g_warning ("Failed to launch help: %s", error->message);
 }
 
-static void
-mgt_application_finalize (GObject *object)
-{
-  MgtApplication *self = (MgtApplication *)object;
-
-  g_clear_object (&self->settings);
-
-  G_OBJECT_CLASS (mgt_application_parent_class)->finalize (object);
-}
-
 static int
 mgt_application_handle_local_options (GApplication *application,
                                       GVariantDict *options)
@@ -188,6 +178,16 @@ mgt_application_activate (GApplication *application)
     window = GTK_WINDOW (mgt_window_new (GTK_APPLICATION (self), self->settings));
 
   gtk_window_present (window);
+}
+
+static void
+mgt_application_finalize (GObject *object)
+{
+  MgtApplication *self = (MgtApplication *)object;
+
+  g_clear_object (&self->settings);
+
+  G_OBJECT_CLASS (mgt_application_parent_class)->finalize (object);
 }
 
 static void
