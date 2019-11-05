@@ -91,7 +91,7 @@ mgt_application_finalize (GObject *object)
   G_OBJECT_CLASS (mgt_application_parent_class)->finalize (object);
 }
 
-static gint
+static int
 mgt_application_handle_local_options (GApplication *application,
                                       GVariantDict *options)
 {
@@ -113,8 +113,8 @@ mgt_application_add_actions (MgtApplication *self)
 
   struct
   {
-    const gchar *action;
-    const gchar *accel[2];
+    const char *action;
+    const char *accel[2];
   } accels[] = {
     { "app.help", { "F1", NULL } },
   };
@@ -151,7 +151,7 @@ mgt_application_startup (GApplication *application)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
-static gint
+static int
 mgt_application_command_line (GApplication            *application,
                               GApplicationCommandLine *command_line)
 {

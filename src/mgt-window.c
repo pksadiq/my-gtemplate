@@ -58,7 +58,7 @@ static GParamSpec *properties[N_PROPS];
 static void
 mgt_window_show_about (MgtWindow *self)
 {
-  const gchar *authors[] = {
+  const char *authors[] = {
     "Mohammed Sadiq https://www.sadiqpk.org",
     NULL
   };
