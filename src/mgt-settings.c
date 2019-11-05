@@ -55,7 +55,7 @@ static void
 mgt_settings_constructed (GObject *object)
 {
   MgtSettings *self = (MgtSettings *)object;
-  g_autofree gchar *version = NULL;
+  g_autofree char *version = NULL;
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
 
