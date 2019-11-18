@@ -24,6 +24,7 @@
 
 #undef NDEBUG
 #undef G_DISABLE_ASSERT
+#undef G_DISABLE_CHECKS
 #undef G_DISABLE_CAST_CHECKS
 #undef G_LOG_DOMAIN
 
