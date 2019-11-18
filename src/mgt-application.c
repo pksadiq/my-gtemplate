@@ -193,8 +193,8 @@ mgt_application_finalize (GObject *object)
 static void
 mgt_application_class_init (MgtApplicationClass *klass)
 {
-  GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
   object_class->finalize = mgt_application_finalize;
 
