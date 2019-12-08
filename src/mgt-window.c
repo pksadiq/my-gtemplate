@@ -65,8 +65,11 @@ mgt_window_show_about (MgtWindow *self)
 
   g_assert (MGT_IS_WINDOW (self));
 
+  /*
+   * If “program-name” is not set, it is retrieved from
+   * g_get_application_name().
+   */
   gtk_show_about_dialog (GTK_WINDOW (self),
-                         "program-name", _("My GTemplate"),
                          "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
                          "version", PACKAGE_VCS_VERSION,
                          "copyright", "Copyright \xC2\xA9 2019 Mohammed Sadiq",
