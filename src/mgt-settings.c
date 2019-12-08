@@ -101,7 +101,7 @@ mgt_settings_init (MgtSettings *self)
  * Free with g_object_unref().
  */
 MgtSettings *
-mgt_settings_new ()
+mgt_settings_new (void)
 {
   return g_object_new (MGT_TYPE_SETTINGS,
                        "schema-id", PACKAGE_ID,
