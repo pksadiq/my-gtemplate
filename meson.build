@@ -28,7 +28,6 @@ src_inc       = include_directories('src')
 
 gnome = import('gnome')
 i18n  = import('i18n')
-pkg   = import('pkgconfig')
 cc    = meson.get_compiler('c')
 
 
