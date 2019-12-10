@@ -120,6 +120,8 @@ main (int   argc,
 {
   g_test_init (&argc, &argv, NULL);
 
+  g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
+
   g_test_add_func ("/settings/first_run", test_settings_first_run);
   g_test_add_func ("/settings/geometry", test_settings_geometry);
 
