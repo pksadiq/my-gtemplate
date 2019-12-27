@@ -1,7 +1,7 @@
 /* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* mgt-window.c
  *
- * Copyright 2019 Mohammed Sadiq <sadiq@sadiqpk.org>
+ * Copyright 2020 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ mgt_window_show_about (MgtWindow *self)
   gtk_show_about_dialog (GTK_WINDOW (self),
                          "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
                          "version", PACKAGE_VCS_VERSION,
-                         "copyright", "Copyright \xC2\xA9 2019 Mohammed Sadiq",
+                         "copyright", "Copyright © 2020 Mohammed Sadiq",
                          "license-type", GTK_LICENSE_GPL_3_0,
                          "authors", authors,
                          "logo-icon-name", PACKAGE_ID,
