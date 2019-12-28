@@ -91,11 +91,11 @@ mgt_window_unmap (GtkWidget *widget)
   is_maximized = gtk_window_is_maximized (window);
   mgt_settings_set_window_maximized (self->settings, is_maximized);
 
-  if (is_maximized)
-    return;
-
-  gtk_window_get_size (window, &geometry.width, &geometry.height);
-  mgt_settings_set_window_geometry (self->settings, &geometry);
+  if (!is_maximized)
+    {
+      gtk_window_get_size (window, &geometry.width, &geometry.height);
+      mgt_settings_set_window_geometry (self->settings, &geometry);
+    }
 
   GTK_WIDGET_CLASS (mgt_window_parent_class)->unmap (widget);
 }
