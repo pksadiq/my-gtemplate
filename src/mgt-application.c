@@ -74,11 +74,7 @@ mgt_application_show_help (GSimpleAction *action,
 
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
-  if (!gtk_show_uri_on_window (window,
-                               "help:" PACKAGE_ID,
-                               GDK_CURRENT_TIME,
-                               &error))
-    g_warning ("Failed to launch help: %s", error->message);
+  gtk_show_uri (window, "help:" PACKAGE_ID, GDK_CURRENT_TIME);
 }
 
 static int
