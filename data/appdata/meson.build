@@ -13,7 +13,7 @@ appstream_util = find_program('appstream-util', required: false)
 if not get_option('network_tests')
   appstream_args += '--nonet'
 endif
-appstream_args += ['validate', appstream_file]
+appstream_args += ['validate-relax', appstream_file]
 
 if appstream_util.found()
   test('Validate appstream file', appstream_util,
