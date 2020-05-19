@@ -9,8 +9,6 @@ env.set('G_TEST_BUILDDIR', meson.current_build_dir())
 env.set('GSETTINGS_SCHEMA_DIR', join_paths(meson.build_root(), 'data'))
 env.set('G_DEBUG', 'gc-friendly')
 env.set('MALLOC_CHECK_', '2')
-# Guaranteed to be random
-env.set('MALLOC_PERTURB_', '4')
 
 test_items = [
   'settings',
