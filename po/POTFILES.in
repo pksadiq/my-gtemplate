@@ -1,6 +1,6 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/appdata/org.sadiqpk.GTemplate.appdata.xml.in
+data/metainfo/org.sadiqpk.GTemplate.metainfo.xml.in
 data/org.sadiqpk.GTemplate.desktop.in
 data/org.sadiqpk.GTemplate.gschema.xml
 src/mgt-application.c

@@ -60,7 +60,7 @@ GIT_URL="$BASE_URL.git"
 DONATE_URL="https://liberapay.com/sadiq/donate"
 
 # This is the URL where your screenshots are available.
-# That is, APPDATA_URL/data/appdata/01-window.png should
+# That is, APPDATA_URL/data/metainfo/01-window.png should
 # be a direct link to the window image.
 APPDATA_URL="$BASE_URL/raw/master"
 
@@ -144,7 +144,7 @@ else
   sed -i "s|${OLD_WEBSITE}\"|<${EMAIL}>\"|" src/$OLD_SHRT-application.c
 fi
 
-sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/appdata/$OLD_ID.appdata.xml.in
+sed -i "s|${OLD_APPDATA_URL}|${APPDATA_URL}|" ./data/metainfo/$OLD_ID.metainfo.xml.in
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_URL}|${URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_BUG_URL}|${BUG_URL}|g"
 find . -type f -print0 | xargs -0 sed -i "s|${OLD_GIT_URL}|${GIT_URL}|g"
@@ -185,7 +185,7 @@ echo "done"
 rm -rf COPYING
 mv COPYING.GPL COPYING
 sed -i "s|CC0-1.0</project_license>|GPL-3.0+</project_license>|" \
-    ./data/appdata/${APP_ID}.appdata.xml.in
+    ./data/metainfo/${APP_ID}.metainfo.xml.in
 
 # Set GNOME user-id
 if [ "$GNOME_ID" ]; then
@@ -204,7 +204,7 @@ fi
 # Reset some values so that CI works
 if [ "$CI" ]; then
   echo "Setting Continues Integration changes"
-  sed -i "s|${APPDATA_URL}|${OLD_APPDATA_URL}|" ./data/appdata/${APP_ID}.appdata.xml.in
+  sed -i "s|${APPDATA_URL}|${OLD_APPDATA_URL}|" ./data/metainfo/${APP_ID}.metainfo.xml.in
 fi
 
 echo "Done"
