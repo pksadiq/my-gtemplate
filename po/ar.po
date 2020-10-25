@@ -22,7 +22,7 @@ msgid "My GTemplate"
 msgstr ""
 
 #: data/org.sadiqpk.GTemplate.desktop.in:4
-msgid "Template for Gtk+ Applications"
+msgid "Template for GTK Applications"
 msgstr ""
 
 #. Translators: Do NOT translate. This is icon name.

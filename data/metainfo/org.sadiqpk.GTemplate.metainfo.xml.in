@@ -4,14 +4,14 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>CC0-1.0</project_license>
   <name>My GTemplate</name>
-  <summary>A GTK+ template application</summary>
+  <summary>A GTK template application</summary>
   <developer_name>Mohammed Sadiq</developer_name>
   <launchable type="desktop-id">org.sadiqpk.GTemplate.desktop</launchable>
 
   <description>
     <p>
-      My GTemplate is a simple Gtk+ Application that can be used as a
-      template to begin your Gtk+ Application development.  The
+      My GTemplate is a simple GTK Application that can be used as a
+      template to begin your GTK Application development.  The
       application is not by itself any much interesting.  Get the
       source code and build your favorite application on top.
 

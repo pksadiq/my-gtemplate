@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=My GTemplate
-Comment=Template for Gtk+ Applications
+Comment=Template for GTK Applications
 Exec=my-gtemplate
 # Translators: Do NOT translate. This is an icon file name.
 Icon=org.sadiqpk.GTemplate

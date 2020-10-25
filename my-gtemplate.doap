@@ -7,10 +7,10 @@
 
   <name xml:lang="en">My GTemplate</name>
   <shortdesc xml:lang="en">
-    A simple Gtk+ Template Application
+    A simple GTK Template Application
   </shortdesc>
   <description xml:lang="en">
-    My GTemplate is a simple Gtk+ Application template with
+    My GTemplate is a simple GTK Application template with
     many base features builtin, above which your real application
     can be developed.
   </description>

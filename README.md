@@ -18,8 +18,8 @@
 
 ---
 
-My GTemplate is a simple Gtk+ Application that can be used as a
-template to begin your Gtk+ Application developement.
+My GTemplate is a simple GTK Application that can be used as a
+template to begin your GTK Application developement.
 
 By default, the template itself does nothing other than showing
 an empty window.
