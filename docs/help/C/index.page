@@ -18,7 +18,7 @@
     </license>
 
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude" />
-    <desc>A GTK+ template application</desc>
+    <desc>A GTK template application</desc>
   </info>
 
   <title>
@@ -28,14 +28,14 @@
   </title>
 
   <p>
-    <app>My GTemplate</app> is a simple GTK+ application template in C which
+    <app>My GTemplate</app> is a simple GTK application template in C which
     will help you to develop your own application without much hassles.
   </p>
 
   <note>
     <p>
       <app>My GTemplate</app> is not useful by itself.  It is supposed
-      to be used as a template for building GTK+ applications.
+      to be used as a template for building GTK applications.
     </p>
   </note>
 

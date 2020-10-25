@@ -6,7 +6,7 @@
 
 <refentryinfo>
   <title>my-gtemplate</title>
-  <productname>GTK+ Template</productname>
+  <productname>GTK Template</productname>
   <authorgroup>
     <author>
       <contrib>Developer</contrib>
@@ -24,7 +24,7 @@
 
 <refnamediv>
   <refname>my-gtemplate</refname>
-  <refpurpose>Gtk+ Template Application</refpurpose>
+  <refpurpose>GTK Template Application</refpurpose>
 </refnamediv>
 
 <refsynopsisdiv>
@@ -40,11 +40,11 @@
 <refsect1>
   <title>Description</title>
 <para>
-  <command>my-gtemplate</command> is a simple Gtk+ application
-  that can be used as a template for developing Gtk+ applications in C.
+  <command>my-gtemplate</command> is a simple GTK application
+  that can be used as a template for developing GTK applications in C.
 </para>
 <para>
-  The template contains basic Gtk+ application with meson build script,
+  The template contains basic GTK application with meson build script,
   basic tests using glib test, an example man page, help page using
   mallard, and gtk-doc documentation, etc. are included.
 </para>

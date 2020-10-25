@@ -31,7 +31,7 @@ is a shorter version:
   call paren, or immediatly after (ie, before the first argument).
 * Almost always put a space before a paren.
 
-This project follows Gtk+ coding style.  Read it online
+This project follows GTK coding style.  Read it online
 at https://gitlab.gnome.org/GNOME/gtk/blob/master/docs/CODING-STYLE
 
 The following exceptions apply:

@@ -96,7 +96,7 @@ install_packages ()
 DNF=$(which dnf)
 
 # Fedora seems to be the only OS that officially supports
-# Mingw GTK+.
+# Mingw GTK.
 if [ "$DNF" = "" ]; then
   echo "WARNING: OS is not Fedora."
   echo "Packages shall be automatically installed only on Fedora."
