@@ -49,7 +49,7 @@
     <screenshot type="default">
       <caption>Main window</caption>
       <image width="764" height="524">
-        https://gitlab.com/sadiq/my-gtemplate/raw/master/data/appdata/01-window.png
+        https://gitlab.com/sadiq/my-gtemplate/raw/master/data/metainfo/01-window.png
       </image>
     </screenshot>
   </screenshots>

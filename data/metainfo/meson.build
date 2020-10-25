@@ -1,8 +1,8 @@
 appstream_args = []
 
 appstream_file = i18n.merge_file(
-  input: pkg_id + '.appdata.xml.in',
-  output: pkg_id + '.appdata.xml',
+  input: pkg_id + '.metainfo.xml.in',
+  output: pkg_id + '.metainfo.xml',
   po_dir: pkg_po_dir,
   install: true,
   install_dir: join_paths(pkg_datadir, 'metainfo'),

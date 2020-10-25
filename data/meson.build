@@ -39,5 +39,5 @@ configure_file(
   configuration: service_conf
 )
 
-subdir('appdata')
+subdir('metainfo')
 subdir('icons')
