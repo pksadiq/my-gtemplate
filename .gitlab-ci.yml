@@ -13,7 +13,7 @@ build:
   script:
     - meson ${MESON_ARGS} -Db_coverage=true _build
     - ccache --zero-stats
-    - meson test -C _build
+    - xvfb-run -a meson test -C _build
     - ccache --show-stats
     - mkdir -p _build/meson-logs/coveragereport
     - gcovr --root=_build --html-details --print-summary
