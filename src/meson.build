@@ -25,6 +25,22 @@ libgtemplate = both_libraries(
   dependencies: pkg_dep,
 )
 
+ui_files = files(
+  'resources/gtk/help-overlay.ui',
+  'resources/ui/mgt-window.ui',
+)
+
+gtk_builder_tool = find_program('gtk4-builder-tool', required: false)
+if gtk_builder_tool.found()
+  # Separate multiple libraries by ‘:’ eg.: 'LD_PRELOAD=@0@:libhandy-1.so'...
+  preload_env = 'LD_PRELOAD=@0@'.format(libgtemplate.get_shared_lib().full_path())
+  foreach file: ui_files
+    test('Validate @0@'.format(file), gtk_builder_tool,
+         env: [preload_env],
+         args: ['validate', file])
+  endforeach
+endif
+
 src += [
   'main.c',
   'mgt-application.c',
