@@ -70,7 +70,6 @@ mgt_application_show_help (GSimpleAction *action,
                            gpointer       user_data)
 {
   GtkWindow *window;
-  g_autoptr(GError) error = NULL;
 
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
