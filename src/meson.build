@@ -4,6 +4,7 @@ revision_tag = vcs_tag(
   input: 'version.h.in',
   output: 'version.h',
 )
+pkg_dep += declare_dependency(sources: revision_tag)
 
 resources = gnome.compile_resources(
   'resources',
