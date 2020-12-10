@@ -20,7 +20,7 @@ foreach item: test_items
     item,
     item + '.c',
     include_directories: tests_inc,
-    link_with: libgtemplate,
+    link_with: libgtemplate.get_static_lib(),
     dependencies: pkg_dep,
   )
   test(item, t, env: env)
