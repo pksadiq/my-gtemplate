@@ -93,7 +93,11 @@ mgt_window_unmap (GtkWidget *widget)
 
   if (!is_maximized)
     {
-      gtk_window_get_size (window, &geometry.width, &geometry.height);
+      GdkSurface *surface;
+
+      surface = gtk_native_get_surface (GTK_NATIVE (window));
+      geometry.width = gdk_surface_get_width (surface);
+      geometry.height = gdk_surface_get_height (surface);
       mgt_settings_set_window_geometry (self->settings, &geometry);
     }
 
