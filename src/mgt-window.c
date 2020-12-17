@@ -41,7 +41,6 @@ struct _MgtWindow
   MgtSettings *settings;
 
   GtkWidget   *menu_button;
-  GtkWidget   *menu_help_button;
 };
 
 G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
@@ -176,7 +175,6 @@ mgt_window_class_init (MgtWindowClass *klass)
                                                "ui/mgt-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_button);
-  gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_help_button);
 
   gtk_widget_class_bind_template_callback (widget_class, mgt_window_show_about);
 }
