@@ -73,7 +73,7 @@ mgt_application_show_help (GSimpleAction *action,
 
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
-  gtk_show_uri (window, "help:" PACKAGE_ID, GDK_CURRENT_TIME);
+  gtk_show_uri (window, PACKAGE_HELP_URL, GDK_CURRENT_TIME);
 }
 
 static int

@@ -41,7 +41,11 @@ conf.set_quoted('PACKAGE_NAME', pkg_name)
 conf.set_quoted('PACKAGE_VERSION', pkg_version)
 conf.set_quoted('PACKAGE_ID', pkg_id)
 conf.set_quoted('PACKAGE_LOCALE_DIR', pkg_localedir)
-conf.set('PACKAGE_HELP_ENABLED', get_option('help'))
+if get_option('help')
+  conf.set_quoted('PACKAGE_HELP_URL', 'help:' + pkg_id)
+else
+  conf.set_quoted('PACKAGE_HELP_URL', 'https://gitlab.com/sadiq/my-gtemplate/wiki')
+endif
 
 configure_file(
   output: 'config.h',
