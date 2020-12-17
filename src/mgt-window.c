@@ -180,7 +180,8 @@ mgt_window_class_init (MgtWindowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, MgtWindow, menu_button);
 
-  gtk_widget_class_install_action (widget_class, "win.about", NULL, mgt_window_show_about);
+  gtk_widget_class_install_action (widget_class, "win.about", NULL,
+                                   (GtkWidgetActionActivateFunc)mgt_window_show_about);
 }
 
 static void
