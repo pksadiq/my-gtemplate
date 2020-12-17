@@ -132,10 +132,6 @@ mgt_window_constructed (GObject *object)
   if (mgt_settings_get_window_maximized (self->settings))
     gtk_window_maximize (window);
 
-#ifndef PACKAGE_HELP_ENABLED
-  gtk_widget_hide (self->menu_help_button);
-#endif
-
   G_OBJECT_CLASS (mgt_window_parent_class)->constructed (object);
 }
 
