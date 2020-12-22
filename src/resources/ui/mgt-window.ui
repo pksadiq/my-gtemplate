@@ -8,7 +8,6 @@
     <!-- Headerbar -->
     <child type="titlebar">
       <object class="GtkHeaderBar">
-        <property name="show-title-buttons">1</property>
 
         <!-- Menu Button -->
         <child type="end">
