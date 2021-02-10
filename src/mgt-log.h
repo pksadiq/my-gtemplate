@@ -46,6 +46,5 @@
                     G_STRFUNC, __LINE__, _msg)
 
 void mgt_log_init               (void);
-/* void mgt_log_finalize           (void); */
 void mgt_log_increase_verbosity (void);
 int  mgt_log_get_verbosity      (void);
