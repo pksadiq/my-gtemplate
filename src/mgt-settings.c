@@ -29,7 +29,7 @@
 #endif
 
 #include "mgt-settings.h"
-#include "mgt-trace.h"
+#include "mgt-log.h"
 
 /**
  * SECTION: mgt-settings
@@ -71,6 +71,8 @@ static void
 mgt_settings_dispose (GObject *object)
 {
   MgtSettings *settings = (MgtSettings *)object;
+
+  MGT_TRACE_MSG ("disposing settings");
 
   g_settings_set_string (G_SETTINGS (settings), "version", PACKAGE_VERSION);
   g_settings_apply (G_SETTINGS (settings));

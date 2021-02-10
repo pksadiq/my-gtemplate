@@ -29,7 +29,6 @@
 #endif
 
 #include "mgt-utils.h"
-#include "mgt-trace.h"
 
 /**
  * SECTION: mgt-utils

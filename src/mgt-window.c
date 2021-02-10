@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 
 #include "mgt-window.h"
-#include "mgt-trace.h"
+#include "mgt-log.h"
 
 struct _MgtWindow
 {
@@ -138,6 +138,8 @@ static void
 mgt_window_finalize (GObject *object)
 {
   MgtWindow *self = (MgtWindow *)object;
+
+  MGT_TRACE_MSG ("finalizing window");
 
   g_object_unref (self->settings);
 

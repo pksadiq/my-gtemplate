@@ -33,7 +33,7 @@
 
 #include "mgt-window.h"
 #include "mgt-application.h"
-#include "mgt-trace.h"
+#include "mgt-log.h"
 
 /**
  * SECTION: mgt-application
@@ -52,10 +52,20 @@ struct _MgtApplication
 G_DEFINE_TYPE (MgtApplication, mgt_application, GTK_TYPE_APPLICATION)
 
 
+static gboolean
+cmd_verbose_cb (const char *option_name,
+                const char *value,
+                gpointer    data,
+                GError    **error);
+
 static GOptionEntry cmd_options[] = {
   {
     "quit", 0, G_OPTION_FLAG_NONE, G_OPTION_ARG_NONE, NULL,
     N_("Quit all running instances of the application"), NULL
+  },
+  {
+    "verbose", 'v', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, cmd_verbose_cb,
+    N_("Show verbose logs"), NULL
   },
   {
     "version", 0, G_OPTION_FLAG_NONE, G_OPTION_ARG_NONE, NULL,
@@ -63,6 +73,17 @@ static GOptionEntry cmd_options[] = {
   },
   { NULL }
 };
+
+static gboolean
+cmd_verbose_cb (const char  *option_name,
+                const char  *value,
+                gpointer     data,
+                GError     **error)
+{
+  mgt_log_increase_verbosity ();
+
+  return TRUE;
+}
 
 static void
 mgt_application_show_help (GSimpleAction *action,
@@ -121,6 +142,9 @@ mgt_application_startup (GApplication *application)
 {
   MgtApplication *self = (MgtApplication *)application;
   g_autoptr(GtkCssProvider) css_provider = NULL;
+
+  g_info ("%s %s, git version: %s", PACKAGE_NAME,
+          PACKAGE_VERSION, PACKAGE_VCS_VERSION);
 
   G_APPLICATION_CLASS (mgt_application_parent_class)->startup (application);
 
@@ -181,6 +205,8 @@ static void
 mgt_application_finalize (GObject *object)
 {
   MgtApplication *self = (MgtApplication *)object;
+
+  MGT_TRACE_MSG ("disposing application");
 
   g_clear_object (&self->settings);
 

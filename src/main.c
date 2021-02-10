@@ -32,15 +32,19 @@
 
 #include "mgt-utils.h"
 #include "mgt-application.h"
+#include "mgt-log.h"
 
 int
 main (int   argc,
       char *argv[])
 {
-  g_autoptr(MgtApplication) application = mgt_application_new ();
+  g_autoptr(MgtApplication) application = NULL;
 
   g_assert (MGT_IS_MAIN_THREAD ());
 
+  mgt_log_init ();
+
+  application = mgt_application_new ();
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
