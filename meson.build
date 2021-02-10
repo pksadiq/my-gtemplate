@@ -32,7 +32,6 @@ cc    = meson.get_compiler('c')
 
 
 conf = configuration_data()
-conf.set('ENABLE_TRACING', get_option('tracing'))
 conf.set('NDEBUG', (not pkg_is_debug))
 conf.set('G_DISABLE_ASSERT', (not pkg_is_debug))
 conf.set('G_DISABLE_CAST_CHECKS', (not pkg_is_debug))
@@ -55,6 +54,7 @@ configure_file(
 common_flags = [
   '-DHAVE_CONFIG_H',
   '-D_FORTIFY_SOURCE=2',
+  '-DG_LOG_USE_STRUCTURED',
 ]
 
 add_global_arguments(common_flags, language: 'c')
@@ -152,7 +152,6 @@ output += '        compiler:        ' + cc.get_id() + ' ' + cc.version()+ '\n'
 output += '        compiler args:   ' + ' '.join(c_link_args) + '\n'
 output += '        build type:      ' + get_option('buildtype') + '\n'
 output += '        host system:     ' + system + '\n'
-output += '        tracing:         ' + get_option('tracing').to_string() + '\n'
 output += '        tests:           ' + get_option('tests').to_string() + '\n'
 output += '        manpage:         ' + get_option('man').to_string() + '\n'
 output += '        documentation:   ' + get_option('gtk_doc').to_string() + '\n'

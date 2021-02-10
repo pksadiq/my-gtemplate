@@ -37,7 +37,6 @@
             "name"        : "my-gtemplate",
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Dtracing=true",
                 "-Dprofile=development"
             ],
             "sources" : [

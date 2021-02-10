@@ -9,7 +9,7 @@ build:
   variables:
     CCACHE_BASEDIR: "${CI_PROJECT_DIR}"
     CCACHE_DIR: "${CCACHE_BASEDIR}/_ccache-gtk4"
-    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dtracing=true"
+    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true"
   script:
     - meson ${MESON_ARGS} -Db_coverage=true _build
     - ccache --zero-stats

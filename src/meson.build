@@ -14,6 +14,7 @@ resources = gnome.compile_resources(
 )
 
 libsrc = [
+  'mgt-log.c',
   'mgt-utils.c',
   'mgt-settings.c',
   'mgt-window.c',
