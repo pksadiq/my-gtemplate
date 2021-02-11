@@ -157,6 +157,5 @@ output += '        manpage:         ' + get_option('man').to_string() + '\n'
 output += '        documentation:   ' + get_option('gtk_doc').to_string() + '\n'
 output += '        translations:    ' + get_option('po').to_string() + '\n'
 output += '        help:            ' + get_option('help').to_string() + '\n'
-output += '        translation:     ' + get_option('po').to_string() + '\n'
 output += '        bash-completion: ' + get_option('bash_completion').to_string() + '\n'
 message(output)
