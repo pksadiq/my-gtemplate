@@ -11,7 +11,7 @@
   <br>
 
   <a href="https://gitlab.com/sadiq/my-gtemplate/pipelines"><img
-       src="https://gitlab.com/sadiq/my-gtemplate/badges/master/build.svg" /></a>
+       src="https://gitlab.com/sadiq/my-gtemplate/badges/master/pipeline.svg" /></a>
   <a href="https://sadiq.gitlab.io/my-gtemplate/coverage"><img
        src="https://gitlab.com/sadiq/my-gtemplate/badges/master/coverage.svg" /></a>
 </div>
