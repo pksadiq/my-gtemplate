@@ -180,7 +180,7 @@ mgt_log_handler (GLogLevelFlags   log_level,
 
     case MGT_LOG_LEVEL_TRACE:
       if (verbosity < 4)
-      return G_LOG_WRITER_HANDLED;
+        return G_LOG_WRITER_HANDLED;
       break;
 
     default:
