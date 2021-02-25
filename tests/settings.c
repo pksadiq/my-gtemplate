@@ -31,6 +31,7 @@
 #include <glib.h>
 
 #include "mgt-settings.h"
+#include "mgt-log.h"
 
 static void
 test_settings_geometry (void)
@@ -119,6 +120,14 @@ main (int   argc,
       char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
+
+  mgt_log_init ();
+  /* Set enough verbosity */
+  mgt_log_increase_verbosity ();
+  mgt_log_increase_verbosity ();
+  mgt_log_increase_verbosity ();
+  mgt_log_increase_verbosity ();
+  mgt_log_increase_verbosity ();
 
   g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
 
