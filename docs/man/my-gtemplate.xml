@@ -30,11 +30,11 @@
 <refsynopsisdiv>
   <cmdsynopsis>
     <command>my-gtemplate</command>
+    <arg choice="opt">--dummy <replaceable>EXAMPLE</replaceable></arg>
     <arg choice="opt">--help</arg>
+    <arg choice="opt">--quit</arg>
     <arg choice="opt">--verbose</arg>
     <arg choice="opt">--version</arg>
-    <arg choice="opt">--quit</arg>
-    <arg choice="opt">--dummy <replaceable>EXAMPLE</replaceable></arg>
   </cmdsynopsis>
 </refsynopsisdiv>
 
@@ -55,12 +55,36 @@
   <title>Options</title>
 <para>The following options are understood:</para>
 <variablelist>
+
+  <varlistentry>
+    <term>
+      <option>--dummy <optional>EXAMPLE</optional></option>
+    </term>
+    <listitem>
+      <para>
+        This doesn't exist.  Just to show how an optional argument
+        can be added.
+      </para>
+    </listitem>
+  </varlistentry>
+
   <varlistentry>
     <term>
       <option>-h</option>, <option>--help</option>
     </term>
     <listitem>
       <para>Show help options</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <option>--quit</option>
+    </term>
+    <listitem>
+      <para>
+      Force quit the application.  Any unsaved changes will be lost
+      </para>
     </listitem>
   </varlistentry>
 
@@ -88,28 +112,6 @@
     </listitem>
   </varlistentry>
 
-  <varlistentry>
-    <term>
-      <option>--quit</option>
-    </term>
-    <listitem>
-      <para>
-      Force quit the application.  Any unsaved changes will be lost
-      </para>
-    </listitem>
-  </varlistentry>
-
-  <varlistentry>
-    <term>
-      <option>--dummy <optional>EXAMPLE</optional></option>
-    </term>
-    <listitem>
-      <para>
-        This doesn't exist.  Just to show how an optional argument
-        can be added.
-      </para>
-    </listitem>
-  </varlistentry>
 </variablelist>
 </refsect1>
 
