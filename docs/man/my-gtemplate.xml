@@ -31,6 +31,7 @@
   <cmdsynopsis>
     <command>my-gtemplate</command>
     <arg choice="opt">--help</arg>
+    <arg choice="opt">--verbose</arg>
     <arg choice="opt">--version</arg>
     <arg choice="opt">--quit</arg>
     <arg choice="opt">--dummy <replaceable>EXAMPLE</replaceable></arg>
@@ -60,6 +61,18 @@
     </term>
     <listitem>
       <para>Show help options</para>
+    </listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term>
+      <option>-v</option>, <option>--verbose</option>
+    </term>
+    <listitem>
+      <para>
+        Show verbose logs when running. Use multiple times to increase
+        log verbosity.
+      </para>
     </listitem>
   </varlistentry>
 
