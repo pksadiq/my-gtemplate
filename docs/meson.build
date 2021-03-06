@@ -2,6 +2,7 @@ if get_option('help')
   subdir('help')
 endif
 
+build_man = false
 if get_option('man')
   subdir('man')
 endif
