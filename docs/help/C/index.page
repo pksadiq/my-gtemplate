@@ -6,7 +6,7 @@
 
   <info>
     <title type="text">My GTemplate</title>
-    <revision pkgversion="1.1.1" version="0.1" date="2018-01-09"
+    <revision pkgversion="0.0.1" version="0.1" date="2021-03-06"
               status="draft" />
     <credit type="author">
       <name>Mohammed Sadiq</name>
