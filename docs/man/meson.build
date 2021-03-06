@@ -1,4 +1,11 @@
-xsltproc = find_program('xsltproc', required: true)
+xsltproc = find_program('xsltproc', required: false)
+
+if not xsltproc.found()
+  message ('xsltproc not found, disabling man')
+  subdir_done()
+endif
+
+build_man = true
 
 xsltproc_args = [
   '--nonet',
