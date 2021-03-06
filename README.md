@@ -87,15 +87,37 @@ along with this software.  If not, see
 * Meson based unit tests
 
 
-## Build system
+## Building My GTemplate
+
+Install required dependencies.
+
+On Debian and derivatives (like Ubuntu):
+* `sudo apt install -y build-essential meson libgtk-3-dev \
+  appstream-util xsltproc docbook-xsl uncrustify`
+
+* On Fedora and derivatives
+* `sudo dnf install -y @c-development @development-tools \
+  gettext-devel gtk3-devel meson desktop-file-utils \
+  docbook-style-xsl uncrustify`
 
 `meson` is used as the build system.  Run the following to build:
-* `meson _build`
-* `cd _build && ninja`
-* `sudo ninja install`
+* `meson build`
+* `cd build && ninja`
+* `sudo ninja install # To install` 
 
-Here `_build` is a non-existing directory name.  You may use any
+Here `build` is a non-existing directory name.  You may use any
 name of your choice.
+
+## Running My GTemplate
+
+If you have installed application:
+* `my-gtemplate`
+
+If you want to run the application without installing:
+* do `./run` from the build directory
+
+You can add `-v` multiple times to get verbose logs:
+* `./run -vvvv`
 
 ### Detailing the paths and files
 
