@@ -51,6 +51,14 @@ configure_file(
   configuration: conf,
 )
 
+run_conf = configuration_data()
+run_conf.set('BUILD_DIR', meson.current_build_dir())
+configure_file(
+  input: 'run.in',
+  output: 'run',
+  configuration: run_conf,
+)
+
 common_flags = [
   '-DHAVE_CONFIG_H',
   '-D_FORTIFY_SOURCE=2',
