@@ -70,12 +70,12 @@ mgt_settings_constructed (GObject *object)
 static void
 mgt_settings_dispose (GObject *object)
 {
-  MgtSettings *settings = (MgtSettings *)object;
+  MgtSettings *self = (MgtSettings *)object;
 
   MGT_TRACE_MSG ("disposing settings");
 
-  g_settings_set_string (G_SETTINGS (settings), "version", PACKAGE_VERSION);
-  g_settings_apply (G_SETTINGS (settings));
+  g_settings_set_string (G_SETTINGS (self), "version", PACKAGE_VERSION);
+  g_settings_apply (G_SETTINGS (self));
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->dispose (object);
 }
