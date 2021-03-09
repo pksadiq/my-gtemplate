@@ -32,8 +32,10 @@ create_icons()
 
   for file in scalable/$dir/*.svg
   do
-      $INKSCAPE -z "$file" -e "$SIZE/$dir/$(basename ${file%.svg}.png)"\
-                -w $TARGET -h $TARGET -y 0.0
+    # background-opacity can't be set to 0 as there is some issue with option parsing
+    # See https://gitlab.com/inkscape/inkscape/-/issues/1942
+    $INKSCAPE -w $TARGET -h $TARGET -y 0.001 -o "$SIZE/$dir/$(basename ${file%.svg}.png)" \
+              "$file"
   done
 }
 
@@ -49,7 +51,7 @@ do
   done
 done
 
-if [ "$(which convert) "]; then
+if [ "$(which convert)" ]; then
   # Use "-compress None" argument to disable compression
   convert -density 384 256x256/apps/org.sadiqpk.GTemplate.png icon.ico
 else
