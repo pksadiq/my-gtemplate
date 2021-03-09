@@ -1,5 +1,12 @@
+desktop_conf = configuration_data()
+desktop_conf.set('bindir', pkg_bindir)
+
 desktop_file = i18n.merge_file(
-  input: pkg_id + '.desktop.in',
+  input:  configure_file(
+    input: pkg_id + '.desktop.in.in',
+    output: pkg_id + 'desktop.in',
+    configuration: desktop_conf,
+  ),
   output: pkg_id + '.desktop',
   type: 'desktop',
   po_dir: pkg_po_dir,
