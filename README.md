@@ -92,13 +92,13 @@ along with this software.  If not, see
 Install required dependencies.
 
 On Debian and derivatives (like Ubuntu):
-* `sudo apt install -y build-essential meson libgtk-3-dev \
-  appstream-util xsltproc docbook-xsl uncrustify`
+* `sudo apt install -y build-essential meson libgtk-4-dev \
+  appstream-util xsltproc docbook-xsl uncrustify bash-completion`
 
-* On Fedora and derivatives
+On Fedora and derivatives:
 * `sudo dnf install -y @c-development @development-tools \
-  gettext-devel gtk3-devel meson desktop-file-utils \
-  docbook-style-xsl uncrustify`
+  gettext-devel gtk4-devel meson desktop-file-utils \
+  docbook-style-xsl uncrustify bash-completion`
 
 `meson` is used as the build system.  Run the following to build:
 * `meson build`
