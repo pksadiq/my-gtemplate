@@ -1,8 +1,9 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
 data/metainfo/org.sadiqpk.GTemplate.metainfo.xml.in
-data/org.sadiqpk.GTemplate.desktop.in
+data/org.sadiqpk.GTemplate.desktop.in.in
 data/org.sadiqpk.GTemplate.gschema.xml
 src/mgt-application.c
+src/mgt-window.c
 src/resources/gtk/help-overlay.ui
 src/resources/ui/mgt-window.ui
