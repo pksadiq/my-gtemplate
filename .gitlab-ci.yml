@@ -28,10 +28,18 @@ build:
     when: always
     paths:
       - _build
+  only:
+    changes:
+      - data/*
+      - docs/*
+      - src/*
+      - tests/*
+      - meson*
 
 pages:
   image: busybox:1
   stage: deploy
+  needs: ["build"]
   script:
     - mkdir public
     - mv _build/meson-logs/coveragereport ${CI_PROJECT_DIR}/public/coverage
