@@ -25,6 +25,7 @@ build:
       - src/*
       - tests/*
       - meson*
+      - .gitlab-ci.yml
 
 pages:
   image: busybox:1
