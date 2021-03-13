@@ -3,12 +3,12 @@ My GTemplate crashes when
 <!-- Replace with the right details -->
 <!-- Backend May be X11, Wayland, Flatpak, Windows, Mac, etc. -->
 * Version: 0.0.1
-* Operating System: Debian GNU/Linux 9.5
-* Backend: Flatpak X11
+* Operating System: Debian GNU/Linux 10.8
+* Backend: Flatpak, Wayland
 
 
 # How to reproduce
-1. Open `my-gtemplate`
+1. Open `my-gtemplate -vvvv`
 1.
 1.
 
