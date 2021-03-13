@@ -93,12 +93,13 @@ Install required dependencies.
 
 On Debian and derivatives (like Ubuntu):
 * `sudo apt install -y build-essential meson libgtk-4-dev \
-  appstream-util xsltproc docbook-xsl uncrustify bash-completion`
+  appstream-util xsltproc docbook-xsl bash-completion \
+  gettext uncrustify`
 
 On Fedora and derivatives:
 * `sudo dnf install -y @c-development @development-tools \
   gettext-devel gtk4-devel meson desktop-file-utils \
-  docbook-style-xsl uncrustify bash-completion`
+  docbook-style-xsl uncrustify bash-completion libxslt`
 
 `meson` is used as the build system.  Run the following to build:
 * `meson build`
