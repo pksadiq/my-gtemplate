@@ -37,8 +37,8 @@ pages:
     paths:
       - public
   only:
-    - master
-  only:
+    refs:
+      - master
     changes:
       - docs/*
       - src/*
