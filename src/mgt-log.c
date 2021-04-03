@@ -34,6 +34,7 @@
 char *domains;
 static int verbosity;
 gboolean any_domain;
+gboolean stderr_is_journal;
 
 static void
 log_str_append_log_domain (GString    *log_str,
@@ -111,6 +112,10 @@ mgt_log_write (GLogLevelFlags   log_level,
   g_autoptr(GString) log_str = NULL;
   FILE *stream = stdout;
   gboolean can_color;
+
+  if (stderr_is_journal)
+    if (g_log_writer_journald (log_level, fields, n_fields, user_data) == G_LOG_WRITER_HANDLED)
+      return G_LOG_WRITER_HANDLED;
 
   if (log_level & (G_LOG_LEVEL_ERROR |
                    G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
@@ -249,6 +254,7 @@ mgt_log_init (void)
       if (!domains || g_str_equal (domains, "all"))
         any_domain = TRUE;
 
+      stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
       g_log_set_writer_func (mgt_log_handler, NULL, NULL);
       g_once_init_leave (&initialized, 1);
       atexit (mgt_log_finalize);
