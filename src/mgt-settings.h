@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 
 #define MGT_TYPE_SETTINGS (mgt_settings_get_type ())
 
-G_DECLARE_FINAL_TYPE (MgtSettings, mgt_settings, MGT, SETTINGS, GSettings)
+G_DECLARE_FINAL_TYPE (MgtSettings, mgt_settings, MGT, SETTINGS, GObject)
 
 MgtSettings *mgt_settings_new                  (void);
 void         mgt_settings_save                 (MgtSettings *self);

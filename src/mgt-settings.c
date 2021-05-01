@@ -43,29 +43,14 @@
 
 struct _MgtSettings
 {
-  GSettings parent_instance;
+  GObject    parent_instance;
 
-  gboolean first_run;
+  GSettings *app_settings;
+  gboolean   first_run;
 };
 
-G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_SETTINGS)
+G_DEFINE_TYPE (MgtSettings, mgt_settings, G_TYPE_OBJECT)
 
-
-static void
-mgt_settings_constructed (GObject *object)
-{
-  MgtSettings *self = (MgtSettings *)object;
-  g_autofree char *version = NULL;
-
-  G_OBJECT_CLASS (mgt_settings_parent_class)->constructed (object);
-
-  version = g_settings_get_string (G_SETTINGS (self), "version");
-
-  if (!g_str_equal (version, PACKAGE_VERSION))
-    self->first_run = TRUE;
-
-  g_settings_delay (G_SETTINGS (self));
-}
 
 static void
 mgt_settings_dispose (GObject *object)
@@ -74,8 +59,8 @@ mgt_settings_dispose (GObject *object)
 
   MGT_TRACE_MSG ("disposing settings");
 
-  g_settings_set_string (G_SETTINGS (self), "version", PACKAGE_VERSION);
-  g_settings_apply (G_SETTINGS (self));
+  g_settings_set_string (self->app_settings, "version", PACKAGE_VERSION);
+  g_settings_apply (self->app_settings);
 
   G_OBJECT_CLASS (mgt_settings_parent_class)->dispose (object);
 }
@@ -85,13 +70,21 @@ mgt_settings_class_init (MgtSettingsClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->constructed = mgt_settings_constructed;
   object_class->dispose = mgt_settings_dispose;
 }
 
 static void
 mgt_settings_init (MgtSettings *self)
 {
+  g_autofree char *version = NULL;
+
+  self->app_settings = g_settings_new (PACKAGE_ID);
+  version = g_settings_get_string (self->app_settings, "version");
+
+  if (!g_str_equal (version, PACKAGE_VERSION))
+    self->first_run = TRUE;
+
+  g_settings_delay (self->app_settings);
 }
 
 /**
@@ -105,9 +98,7 @@ mgt_settings_init (MgtSettings *self)
 MgtSettings *
 mgt_settings_new (void)
 {
-  return g_object_new (MGT_TYPE_SETTINGS,
-                       "schema-id", PACKAGE_ID,
-                       NULL);
+  return g_object_new (MGT_TYPE_SETTINGS, NULL);
 }
 
 /**
@@ -124,7 +115,7 @@ mgt_settings_save (MgtSettings *self)
 {
   g_return_if_fail (MGT_IS_SETTINGS (self));
 
-  g_settings_apply (G_SETTINGS (self));
+  g_settings_apply (self->app_settings);
 }
 
 /**
@@ -158,7 +149,7 @@ mgt_settings_get_window_maximized (MgtSettings *self)
 {
   g_return_val_if_fail (MGT_IS_SETTINGS (self), FALSE);
 
-  return g_settings_get_boolean (G_SETTINGS (self), "window-maximized");
+  return g_settings_get_boolean (self->app_settings, "window-maximized");
 }
 
 /**
@@ -174,7 +165,7 @@ mgt_settings_set_window_maximized (MgtSettings *self,
 {
   g_return_if_fail (MGT_IS_SETTINGS (self));
 
-  g_settings_set_boolean (G_SETTINGS (self), "window-maximized", !!maximized);
+  g_settings_set_boolean (self->app_settings, "window-maximized", !!maximized);
 }
 
 /**
@@ -188,13 +179,11 @@ void
 mgt_settings_get_window_geometry (MgtSettings  *self,
                                   GdkRectangle *geometry)
 {
-  GSettings *settings;
-
   g_return_if_fail (MGT_IS_SETTINGS (self));
   g_return_if_fail (geometry != NULL);
 
-  settings = G_SETTINGS (self);
-  g_settings_get (settings, "window-size", "(ii)", &geometry->width, &geometry->height);
+  g_settings_get (self->app_settings, "window-size", "(ii)",
+                  &geometry->width, &geometry->height);
   geometry->x = geometry->y = -1;
 }
 
@@ -209,12 +198,9 @@ void
 mgt_settings_set_window_geometry (MgtSettings  *self,
                                   GdkRectangle *geometry)
 {
-  GSettings *settings;
-
   g_return_if_fail (MGT_IS_SETTINGS (self));
   g_return_if_fail (geometry != NULL);
 
-  settings = G_SETTINGS (self);
-
-  g_settings_set (settings, "window-size", "(ii)", geometry->width, geometry->height);
+  g_settings_set (self->app_settings, "window-size", "(ii)",
+                  geometry->width, geometry->height);
 }
