@@ -216,7 +216,7 @@ mgt_log_handler (GLogLevelFlags   log_level,
 
   /* GdkPixbuf logs are too much verbose, skip unless asked not to. */
   if (g_strcmp0 (log_domain, "GdkPixbuf") == 0 &&
-      !strstr (domains, log_domain))
+      (!domains || !strstr (domains, log_domain)))
     return G_LOG_WRITER_HANDLED;
 
   if (!log_message)
