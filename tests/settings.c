@@ -64,7 +64,7 @@ test_settings_geometry (void)
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
   out = reset;
-  g_object_unref (settings);
+  g_assert_finalize_object (settings);
 
   /* create a new object, and check again */
   settings = mgt_settings_new ();
@@ -76,7 +76,7 @@ test_settings_geometry (void)
   mgt_settings_get_window_geometry (settings, &out);
   g_assert_cmpint (out.width, ==, geometry.width);
   g_assert_cmpint (out.height, ==, geometry.height);
-  g_object_unref (settings);
+  g_assert_finalize_object (settings);
 }
 
 static void
