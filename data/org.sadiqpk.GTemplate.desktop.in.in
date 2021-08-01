@@ -12,3 +12,5 @@ Categories=Utility;GTK;GNOME;
 # also end with a semicolon
 Keywords=Template;
 DBusActivatable=true
+# Translators: Do NOT translate NOR transliterate (these are enum types)
+X-Purism-FormFactor=Workstation;Mobile;
