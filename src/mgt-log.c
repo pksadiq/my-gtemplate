@@ -228,7 +228,7 @@ mgt_log_handler (GLogLevelFlags   log_level,
     return mgt_log_write (log_level, log_domain, log_message,
                           fields, n_fields, user_data);
 
-  if (!log_domain || strstr (domains, log_domain))
+  if (strstr (domains, log_domain))
     return mgt_log_write (log_level, log_domain, log_message,
                           fields, n_fields, user_data);
 
