@@ -57,7 +57,7 @@ mgt_settings_dispose (GObject *object)
 {
   MgtSettings *self = (MgtSettings *)object;
 
-  MGT_TRACE_MSG ("disposing settings");
+  MGT_TRACE ("disposing settings");
 
   g_settings_set_string (self->app_settings, "version", PACKAGE_VERSION);
   g_settings_apply (self->app_settings);

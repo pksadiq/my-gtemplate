@@ -24,27 +24,35 @@
 
 #pragma once
 
+#include <glib.h>
+
 #ifndef MGT_LOG_LEVEL_TRACE
 # define MGT_LOG_LEVEL_TRACE ((GLogLevelFlags)(1 << G_LOG_LEVEL_USER_SHIFT))
+# define MGT_LOG_DETAILED ((GLogLevelFlags)(1 << (G_LOG_LEVEL_USER_SHIFT + 1)))
 #endif
 
-/* XXX: Should we use the semi-private g_log_structured_standard() API? */
-#define MGT_TRACE_MSG(fmt, ...)                         \
-  g_log_structured (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,  \
-                    "MESSAGE", "%s():%d: " fmt,         \
-                    G_STRFUNC, __LINE__, ##__VA_ARGS__)
+#define MGT_TRACE_MSG(fmt, ...)                 \
+  mgt_log (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,   \
+           __FILE__, G_STRINGIFY (__LINE__),    \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
 #define MGT_TRACE(fmt, ...)                             \
-  g_log_structured (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,  \
-                    "MESSAGE",  fmt, ##__VA_ARGS__)
-#define MGT_DEBUG_MSG(fmt, ...)                         \
-  g_log_structured (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG,    \
-                    "MESSAGE", "%s():%d: " fmt,         \
-                    G_STRFUNC, __LINE__, ##__VA_ARGS__)
-#define MGT_TODO(_msg)                                  \
-  g_log_structured (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,  \
-                    "MESSAGE", "TODO: %s():%d: %s",     \
-                    G_STRFUNC, __LINE__, _msg)
+  mgt_log (G_LOG_DOMAIN,                                \
+           MGT_LOG_LEVEL_TRACE | MGT_LOG_DETAILED,      \
+           __FILE__, G_STRINGIFY (__LINE__),            \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
+#define MGT_DEBUG(fmt, ...)                             \
+  mgt_log (G_LOG_DOMAIN,                                \
+           G_LOG_LEVEL_DEBUG | MGT_LOG_DETAILED,        \
+           __FILE__, G_STRINGIFY (__LINE__),            \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
 
 void mgt_log_init               (void);
 void mgt_log_increase_verbosity (void);
 int  mgt_log_get_verbosity      (void);
+void mgt_log                    (const char *domain,
+                                 GLogLevelFlags log_level,
+                                 const char *file,
+                                 const char *line,
+                                 const char *func,
+                                 const char *message_format,
+                                 ...) G_GNUC_PRINTF (6, 7);

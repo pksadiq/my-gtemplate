@@ -29,7 +29,7 @@
 
 #include "mgt-log.h"
 
-#define DEFAULT_DOMAIN "mgt"
+#define DEFAULT_DOMAIN_PREFIX "mgt"
 
 char *domains;
 static int verbosity;
@@ -71,6 +71,9 @@ static const char *
 get_log_level_prefix (GLogLevelFlags log_level,
                       gboolean       use_color)
 {
+  /* Ignore custom flags set */
+  log_level = log_level & ~MGT_LOG_DETAILED;
+
   if (use_color)
     {
       switch ((int)log_level)        /* Same colors as used in GLib */
@@ -113,12 +116,11 @@ mgt_log_write (GLogLevelFlags   log_level,
   FILE *stream = stdout;
   gboolean can_color;
 
-  if (stderr_is_journal)
-    if (g_log_writer_journald (log_level, fields, n_fields, user_data) == G_LOG_WRITER_HANDLED)
-      return G_LOG_WRITER_HANDLED;
+  if (stderr_is_journal &&
+      g_log_writer_journald (log_level, fields, n_fields, user_data) == G_LOG_WRITER_HANDLED)
+    return G_LOG_WRITER_HANDLED;
 
-  if (log_level & (G_LOG_LEVEL_ERROR |
-                   G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
+  if (log_level & (G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
     stream = stderr;
 
   log_str = g_string_new (NULL);
@@ -144,6 +146,33 @@ mgt_log_write (GLogLevelFlags   log_level,
   g_string_append_printf (log_str, "[%5d]:", getpid ());
 
   g_string_append_printf (log_str, "%s: ", get_log_level_prefix (log_level, can_color));
+
+  if (log_level & MGT_LOG_DETAILED)
+    {
+      const char *code_func = NULL, *code_line = NULL;
+      for (guint i = 0; i < n_fields; i++)
+        {
+          const GLogField *field = &fields[i];
+
+          if (!code_func && g_strcmp0 (field->key, "CODE_FUNC") == 0)
+            code_func = field->value;
+          else if (!code_line && g_strcmp0 (field->key, "CODE_LINE") == 0)
+            code_line = field->value;
+
+          if (code_func && code_line)
+            break;
+        }
+
+      if (code_func)
+        {
+          g_string_append_printf (log_str, "%s():", code_func);
+
+          if (code_line)
+            g_string_append_printf (log_str, "%s:", code_line);
+          g_string_append_c (log_str, ' ');
+        }
+    }
+
   g_string_append (log_str, log_message);
 
   fprintf (stream, "%s\n", log_str->str);
@@ -211,7 +240,7 @@ mgt_log_handler (GLogLevelFlags   log_level,
   if (any_domain && !domains &&
       verbosity < 5 &&
       log_level > G_LOG_LEVEL_MESSAGE &&
-      !strstr (log_domain, DEFAULT_DOMAIN))
+      !strstr (log_domain, DEFAULT_DOMAIN_PREFIX))
     return G_LOG_WRITER_HANDLED;
 
   /* GdkPixbuf logs are too much verbose, skip unless asked not to. */
@@ -224,11 +253,7 @@ mgt_log_handler (GLogLevelFlags   log_level,
   if (!log_message)
     log_message = "(NULL) message";
 
-  if (any_domain)
-    return mgt_log_write (log_level, log_domain, log_message,
-                          fields, n_fields, user_data);
-
-  if (strstr (domains, log_domain))
+  if (any_domain || strstr (domains, log_domain))
     return mgt_log_write (log_level, log_domain, log_message,
                           fields, n_fields, user_data);
 
@@ -273,4 +298,27 @@ int
 mgt_log_get_verbosity (void)
 {
   return verbosity;
+}
+
+void
+mgt_log (const char     *domain,
+         GLogLevelFlags  log_level,
+         const char     *file,
+         const char     *line,
+         const char     *func,
+         const char     *message_format,
+         ...)
+{
+  g_autofree char *message = NULL;
+  va_list args;
+
+  va_start (args, message_format);
+  message = g_strdup_vprintf (message_format, args);
+  va_end (args);
+
+  g_log_structured (domain, log_level,
+                    "CODE_FILE", file,
+                    "CODE_LINE", line,
+                    "CODE_FUNC", func,
+                    "MESSAGE", "%s", message);
 }
