@@ -140,7 +140,7 @@ mgt_window_finalize (GObject *object)
 {
   MgtWindow *self = (MgtWindow *)object;
 
-  MGT_TRACE_MSG ("finalizing window");
+  MGT_TRACE ("finalizing window");
 
   g_object_unref (self->settings);
 
