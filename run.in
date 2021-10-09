@@ -1,6 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 export GSETTINGS_SCHEMA_DIR="@BUILD_DIR@/data"
 set -x
-exec "@BUILD_DIR@/src/my-gtemplate" "$@"
+export MALLOC_PERTURB_="$(($RANDOM % 255 + 1))"
+G_SLICE=always-malloc MALLOC_CHECK_=2 exec "@BUILD_DIR@/src/my-gtemplate" "$@"
