@@ -31,28 +31,46 @@
 # define MGT_LOG_DETAILED ((GLogLevelFlags)(1 << (G_LOG_LEVEL_USER_SHIFT + 1)))
 #endif
 
-#define MGT_TRACE_MSG(fmt, ...)                 \
-  mgt_log (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,   \
-           __FILE__, G_STRINGIFY (__LINE__),    \
+#define MGT_TRACE_MSG(fmt, ...)                         \
+  mgt_log (G_LOG_DOMAIN, MGT_LOG_LEVEL_TRACE,           \
+           NULL, __FILE__, G_STRINGIFY (__LINE__),      \
            G_STRFUNC, fmt, ##__VA_ARGS__)
-#define MGT_TRACE(fmt, ...)                             \
+#define MGT_TRACE(value, fmt, ...)                      \
+  mgt_log (G_LOG_DOMAIN,                                \
+           MGT_LOG_LEVEL_TRACE,                         \
+           value, __FILE__, G_STRINGIFY (__LINE__),     \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
+#define MGT_TRACE_DETAILED(value, fmt, ...)             \
   mgt_log (G_LOG_DOMAIN,                                \
            MGT_LOG_LEVEL_TRACE | MGT_LOG_DETAILED,      \
-           __FILE__, G_STRINGIFY (__LINE__),            \
+           value, __FILE__, G_STRINGIFY (__LINE__),     \
            G_STRFUNC, fmt, ##__VA_ARGS__)
-#define MGT_DEBUG(fmt, ...)                             \
+#define MGT_DEBUG_MSG(fmt, ...)                         \
   mgt_log (G_LOG_DOMAIN,                                \
            G_LOG_LEVEL_DEBUG | MGT_LOG_DETAILED,        \
-           __FILE__, G_STRINGIFY (__LINE__),            \
+           NULL, __FILE__, G_STRINGIFY (__LINE__),      \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
+#define MGT_DEBUG(value, fmt, ...)                      \
+  mgt_log (G_LOG_DOMAIN,                                \
+           G_LOG_LEVEL_DEBUG | MGT_LOG_DETAILED,        \
+           value, __FILE__, G_STRINGIFY (__LINE__),     \
+           G_STRFUNC, fmt, ##__VA_ARGS__)
+#define MGT_WARNING(value, fmt, ...)                    \
+  mgt_log (G_LOG_DOMAIN,                                \
+           G_LOG_LEVEL_WARNING | MGT_LOG_DETAILED,      \
+           value, __FILE__, G_STRINGIFY (__LINE__),     \
            G_STRFUNC, fmt, ##__VA_ARGS__)
 
 void mgt_log_init               (void);
 void mgt_log_increase_verbosity (void);
 int  mgt_log_get_verbosity      (void);
-void mgt_log                    (const char *domain,
-                                 GLogLevelFlags log_level,
-                                 const char *file,
-                                 const char *line,
-                                 const char *func,
-                                 const char *message_format,
-                                 ...) G_GNUC_PRINTF (6, 7);
+void mgt_log                    (const char     *domain,
+                                 GLogLevelFlags  log_level,
+                                 const char     *value,
+                                 const char     *file,
+                                 const char     *line,
+                                 const char     *func,
+                                 const char     *message_format,
+                                 ...) G_GNUC_PRINTF (7, 8);
+void mgt_log_anonymize_value    (GString        *str,
+                                 const char     *value);
