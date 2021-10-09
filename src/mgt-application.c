@@ -206,7 +206,7 @@ mgt_application_finalize (GObject *object)
 {
   MgtApplication *self = (MgtApplication *)object;
 
-  MGT_TRACE ("disposing application");
+  MGT_TRACE_MSG ("disposing application");
 
   g_clear_object (&self->settings);
 
