@@ -1,7 +1,7 @@
 project(
   'my-gtemplate', 'c',
   version: '0.0.1',
-  meson_version: '>= 0.50.0',
+  meson_version: '>= 0.56.0',
   license: 'GPL3+',
   default_options: [
     'c_std=gnu11',
@@ -15,8 +15,8 @@ pkg_version   = meson.project_version()
 pkg_is_debug  = get_option('buildtype').startswith('debug')
 
 pkg_prefix    = get_option('prefix')
-pkg_srcdir    = meson.source_root()
-pkg_builddir  = meson.build_root()
+pkg_srcdir    = meson.project_source_root()
+pkg_builddir  = meson.project_build_root()
 pkg_bindir    = join_paths(pkg_prefix, get_option('bindir'))
 pkg_libdir    = join_paths(pkg_prefix, get_option('libdir'))
 pkg_localedir = join_paths(pkg_prefix, get_option('localedir'))
@@ -148,22 +148,24 @@ run_target('make-help-po',
              'true',
            ])
 
-system = host_machine.system()
+system = target_machine.system()
 if system == 'linux'
   system = 'GNU/Linux'
 endif
 
-output = '\n        ' + pkg_name + ' ' + pkg_version + '\n'
-output += '        ==============================\n\n'
-output += '        prefix:          ' + pkg_prefix + '\n'
-output += '        compiler:        ' + cc.get_id() + ' ' + cc.version()+ '\n'
-output += '        compiler args:   ' + ' '.join(c_link_args) + '\n'
-output += '        build type:      ' + get_option('buildtype') + '\n'
-output += '        host system:     ' + system + '\n'
-output += '        tests:           ' + get_option('tests').to_string() + '\n'
-output += '        manpage:         ' + build_man.to_string() + '\n'
-output += '        documentation:   ' + get_option('gtk_doc').to_string() + '\n'
-output += '        translations:    ' + get_option('po').to_string() + '\n'
-output += '        help:            ' + get_option('help').to_string() + '\n'
-output += '        bash-completion: ' + get_option('bash_completion').to_string() + '\n'
-message(output)
+summary({'Target': system,
+         'Target arch': target_machine.cpu(),
+         'Compiler': cc.get_id(),
+         'Version': cc.version(),
+         'Linker': cc.get_linker_id(),
+         }, section: 'Toolchain')
+
+summary({
+         'Build type': get_option('buildtype'),
+         'Tests': get_option('tests'),
+         'Manpage': build_man,
+         'Documentation': get_option('gtk_doc'),
+         'Translations': get_option('po'),
+         'Help': get_option('help'),
+         'Bash Completion': get_option('bash_completion'),
+         }, section: 'Configuration')
