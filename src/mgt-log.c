@@ -36,16 +36,62 @@ static int verbosity;
 gboolean any_domain;
 gboolean no_anonymize;
 gboolean stderr_is_journal;
+gboolean fatal_criticals, fatal_warnings;
+
+static gboolean
+should_show_log_for_level (GLogLevelFlags log_level,
+                           int            verbosity)
+{
+  if (verbosity >= 5)
+    return TRUE;
+
+  if (log_level & MGT_LOG_LEVEL_TRACE)
+    return verbosity >= 4;
+
+  if (log_level & G_LOG_LEVEL_DEBUG)
+    return verbosity >= 3;
+
+  if (log_level & G_LOG_LEVEL_INFO)
+    return verbosity >= 2;
+
+  if (log_level & G_LOG_LEVEL_MESSAGE)
+    return verbosity >= 1;
+
+  return FALSE;
+}
+
+static gboolean
+matches_domain (const char *domains,
+                const char *domain)
+{
+  g_auto(GStrv) domain_list = NULL;
+
+  if (!domains || !*domains ||
+      !domain || !*domain)
+    return FALSE;
+
+  domain_list = g_strsplit (domains, ",", -1);
+
+  for (guint i = 0; domain_list[i]; i++)
+    {
+      if (g_str_has_prefix (domain, domain_list[i]))
+        return TRUE;
+    }
+
+  return FALSE;
+}
 
 static gboolean
 should_log (const char     *log_domain,
             GLogLevelFlags  log_level)
 {
+  g_assert (log_domain);
+
   /* Ignore custom flags set */
   log_level = log_level & ~MGT_LOG_DETAILED;
 
   /* Don't skip serious logs */
-  if (log_level & (G_LOG_LEVEL_ERROR | G_LOG_LEVEL_WARNING))
+  if (log_level & (G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
     return TRUE;
 
   if (any_domain && domains) {
@@ -57,53 +103,21 @@ should_log (const char     *log_domain,
     return verbosity >= 4;
   }
 
-  if (!any_domain && domains && log_domain && strstr (domains, log_domain))
+  if (!domains && g_str_has_prefix (log_domain, DEFAULT_DOMAIN_PREFIX))
+    return should_show_log_for_level (log_level, verbosity);
+
+  if (domains && matches_domain (domains, log_domain))
+    return should_show_log_for_level (log_level, verbosity);
+
+  /* If we didn't handle domains in the preceding statement,
+   * we should no longer log them */
+  if (domains)
+    return FALSE;
+
+  if (verbosity >= 6)
     return TRUE;
 
-  switch ((int)log_level)
-    {
-    case G_LOG_LEVEL_MESSAGE:
-      if (verbosity < 1)
-        return FALSE;
-      break;
-
-    case G_LOG_LEVEL_INFO:
-      if (verbosity < 2)
-        return FALSE;
-      break;
-
-    case G_LOG_LEVEL_DEBUG:
-      if (verbosity < 3)
-        return FALSE;
-      break;
-
-    case MGT_LOG_LEVEL_TRACE:
-      if (verbosity < 4)
-        return FALSE;
-      break;
-
-    default:
-      break;
-    }
-
-  if (!log_domain)
-    log_domain = "**";
-
-  /* Skip logs from other domains if verbosity level is low */
-  if (any_domain && !domains &&
-      verbosity < 5 &&
-      log_level > G_LOG_LEVEL_MESSAGE &&
-      !strstr (log_domain, DEFAULT_DOMAIN_PREFIX))
-    return FALSE;
-
-  /* GdkPixbuf logs are too much verbose, skip unless asked not to. */
-  if (log_level >= G_LOG_LEVEL_MESSAGE &&
-      verbosity < 7 &&
-      g_strcmp0 (log_domain, "GdkPixbuf") == 0 &&
-      (!domains || !strstr (domains, log_domain)))
-    return FALSE;
-
-  return TRUE;
+  return FALSE;
 }
 
 static void
@@ -248,6 +262,13 @@ mgt_log_write (GLogLevelFlags   log_level,
   fprintf (stream, "%s\n", log_str->str);
   fflush (stream);
 
+  if (fatal_criticals &&
+      (log_level | G_LOG_LEVEL_CRITICAL))
+    G_BREAKPOINT ();
+  else if (fatal_warnings &&
+           (log_level | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
+    G_BREAKPOINT ();
+
   return G_LOG_WRITER_HANDLED;
 }
 
@@ -270,24 +291,17 @@ mgt_log_handler (GLogLevelFlags   log_level,
         log_message = field->value;
     }
 
-  if (!should_log (log_domain, log_level))
-    return G_LOG_WRITER_HANDLED;
-
   if (!log_domain)
     log_domain = "**";
 
   if (!log_message)
     log_message = "(NULL) message";
 
-  if (any_domain || strstr (domains, log_domain))
-    return mgt_log_write (log_level, log_domain, log_message,
-                          fields, n_fields, user_data);
+  if (!should_log (log_domain, log_level))
+    return G_LOG_WRITER_HANDLED;
 
-  if (!log_domain || strstr (domains, log_domain))
-    return mgt_log_write (log_level, log_domain, log_message,
-                             fields, n_fields, user_data);
-
-  return G_LOG_WRITER_HANDLED;
+  return mgt_log_write (log_level, log_domain, log_message,
+                        fields, n_fields, user_data);
 }
 
 static void
@@ -317,6 +331,11 @@ mgt_log_init (void)
           no_anonymize = TRUE;
           g_clear_pointer (&domains, g_free);
         }
+
+      if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-criticals") == 0)
+        fatal_criticals = TRUE;
+      else if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-warnings") == 0)
+        fatal_warnings = TRUE;
 
       stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
       g_log_set_writer_func (mgt_log_handler, NULL, NULL);
@@ -378,13 +397,14 @@ mgt_log_anonymize_value (GString    *str,
 
   g_assert (str);
 
+  if (str->len && str->str[str->len - 1] != ' ')
+    g_string_append_c (str, ' ');
+
   if (no_anonymize)
     {
       g_string_append (str, value);
       return;
     }
-
-  g_string_append_c (str, ' ');
 
   if (!isalnum (*value))
     g_string_append_c (str, *value++);
