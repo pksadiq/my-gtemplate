@@ -141,6 +141,14 @@ mgt_application_startup (GApplication *application)
   MgtApplication *self = (MgtApplication *)application;
   g_autoptr(GtkCssProvider) css_provider = NULL;
 
+  {
+    g_autoptr(GString) str = NULL;
+
+    str = g_string_new (NULL);
+    mgt_log_anonymize_value (str, g_get_real_name ());
+    g_debug ("Run by user: %s", str->str);
+  }
+
   g_info ("%s %s, git version: %s", PACKAGE_NAME,
           PACKAGE_VERSION, PACKAGE_VCS_VERSION);
 
