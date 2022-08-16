@@ -40,37 +40,37 @@ gboolean fatal_criticals, fatal_warnings;
 
 static gboolean
 should_show_log_for_level (GLogLevelFlags log_level,
-                           int            verbosity)
+                           int            verbosity_level)
 {
-  if (verbosity >= 5)
+  if (verbosity_level >= 5)
     return TRUE;
 
   if (log_level & MGT_LOG_LEVEL_TRACE)
-    return verbosity >= 4;
+    return verbosity_level >= 4;
 
   if (log_level & G_LOG_LEVEL_DEBUG)
-    return verbosity >= 3;
+    return verbosity_level >= 3;
 
   if (log_level & G_LOG_LEVEL_INFO)
-    return verbosity >= 2;
+    return verbosity_level >= 2;
 
   if (log_level & G_LOG_LEVEL_MESSAGE)
-    return verbosity >= 1;
+    return verbosity_level >= 1;
 
   return FALSE;
 }
 
 static gboolean
-matches_domain (const char *domains,
+matches_domain (const char *log_domains,
                 const char *domain)
 {
   g_auto(GStrv) domain_list = NULL;
 
-  if (!domains || !*domains ||
+  if (!log_domains || !*log_domains ||
       !domain || !*domain)
     return FALSE;
 
-  domain_list = g_strsplit (domains, ",", -1);
+  domain_list = g_strsplit (log_domains, ",", -1);
 
   for (guint i = 0; domain_list[i]; i++)
     {
