@@ -8,7 +8,7 @@ build:
   stage: build
   variables:
     CCACHE_DIR: "${CI_PROJECT_DIR}/_ccache"
-    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dbash-completion=false"
+    MESON_ARGS: "--buildtype=debugoptimized -Dhelp=true -Dgtk_doc=true -Dbash_completion=false"
   script:
     - meson ${MESON_ARGS} _build
     - ccache --zero-stats
