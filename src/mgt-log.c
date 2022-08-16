@@ -114,6 +114,12 @@ should_log (const char     *log_domain,
   if (domains)
     return FALSE;
 
+  /* GdkPixbuf logs are too much verbose, skip unless asked not to. */
+  if (verbosity < 8 &&
+      g_strcmp0 (log_domain, "GdkPixbuf") == 0 &&
+      (!domains || !strstr (domains, log_domain)))
+    return FALSE;
+
   if (verbosity >= 6)
     return TRUE;
 
