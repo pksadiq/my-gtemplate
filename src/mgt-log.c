@@ -269,10 +269,10 @@ mgt_log_write (GLogLevelFlags   log_level,
   fflush (stream);
 
   if (fatal_criticals &&
-      (log_level | G_LOG_LEVEL_CRITICAL))
+      (log_level & G_LOG_LEVEL_CRITICAL))
     G_BREAKPOINT ();
   else if (fatal_warnings &&
-           (log_level | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
+           (log_level & (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING)))
     G_BREAKPOINT ();
 
   return G_LOG_WRITER_HANDLED;
