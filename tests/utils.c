@@ -32,7 +32,7 @@
 
 #include "mgt-utils.h"
 
-gpointer
+static gpointer
 test_main_thread (gpointer user_data)
 {
   /*
