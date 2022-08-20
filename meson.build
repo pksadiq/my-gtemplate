@@ -5,7 +5,7 @@ project(
   license: 'GPL3+',
   default_options: [
     'c_std=gnu11',
-    'warning_level=1',
+    'warning_level=2',
     'buildtype=debugoptimized'
   ])
 
@@ -86,6 +86,9 @@ c_args = cc.get_supported_arguments(
    '-Wmissing-include-dirs',
    '-Wmissing-prototypes',
    '-Wnested-externs',
+   '-Wno-cast-function-type',
+   '-Wno-missing-field-initializers',
+   '-Wno-unused-parameter',
    '-Wold-style-declaration',
    '-Wold-style-definition',
    '-Wpointer-arith',
