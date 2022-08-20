@@ -66,10 +66,9 @@ common_flags = [
 ]
 
 add_global_arguments(common_flags, language: 'c')
-c_link_args = cc.get_supported_arguments(
+c_args = cc.get_supported_arguments(
   ['-fasynchronous-unwind-tables',
    '-fno-strict-aliasing',
-   '-Wall',
    '-Wcast-align',
    '-Wdate-time',
    '-Werror=format-security',
@@ -97,6 +96,8 @@ c_link_args = cc.get_supported_arguments(
    '-Wunused',
    '-pipe',
   ])
+
+add_project_arguments(c_args, language: 'c')
 
 if cc.get_id() == 'msvc'
   warning('Your compiler doesn\'t support C99/C11 features.' +

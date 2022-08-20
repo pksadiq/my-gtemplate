@@ -55,7 +55,6 @@ executable(
   src,
   install: true,
   win_subsystem: 'windows',
-  link_args: c_link_args,
   link_with: libgtemplate.get_static_lib(),
   include_directories: top_inc,
   dependencies: pkg_dep,
