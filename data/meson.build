@@ -21,6 +21,7 @@ install_data(
 
 if get_option('tests')
   compiled = gnome.compile_schemas(build_by_default: true)
+  pkg_dep += declare_dependency(sources: compiled)
 endif
 
 desktop_utils = find_program('desktop-file-validate', required: false)
