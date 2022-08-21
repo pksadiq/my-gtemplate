@@ -94,12 +94,13 @@ Install required dependencies.
 On Debian and derivatives (like Ubuntu):
 * `sudo apt install -y build-essential meson libgtk-4-dev \
   appstream-util xsltproc docbook-xsl bash-completion \
-  gettext uncrustify`
+  gettext uncrustify libadwaita-1-dev`
 
 On Fedora and derivatives:
 * `sudo dnf install -y @c-development @development-tools \
   gettext-devel gtk4-devel meson desktop-file-utils \
-  docbook-style-xsl uncrustify bash-completion libxslt`
+  docbook-style-xsl uncrustify bash-completion libxslt \
+  itstool libadwaita-devel`
 
 `meson` is used as the build system.  Run the following to build:
 * `meson build`
