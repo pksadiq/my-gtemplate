@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "mgt-settings.h"
 
@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 
 #define MGT_TYPE_WINDOW (mgt_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (MgtWindow, mgt_window, MGT, WINDOW, GtkApplicationWindow)
+G_DECLARE_FINAL_TYPE (MgtWindow, mgt_window, MGT, WINDOW, AdwApplicationWindow)
 
 GtkWidget *mgt_window_new (GtkApplication *application,
                            MgtSettings    *settings);

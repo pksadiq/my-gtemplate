@@ -36,14 +36,14 @@
 
 struct _MgtWindow
 {
-  GtkApplicationWindow parent_instance;
+  AdwApplicationWindow parent_instance;
 
   MgtSettings *settings;
 
   GtkWidget   *menu_button;
 };
 
-G_DEFINE_TYPE (MgtWindow, mgt_window, GTK_TYPE_APPLICATION_WINDOW)
+G_DEFINE_TYPE (MgtWindow, mgt_window, ADW_TYPE_APPLICATION_WINDOW)
 
 
 enum {
