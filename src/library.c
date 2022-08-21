@@ -1,6 +1,7 @@
 /* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* library.h
  *
+ * Copyright 2022 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * Author(s):
  *   Mohammed Sadiq <sadiq@sadiqpk.org>
