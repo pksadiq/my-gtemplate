@@ -6,7 +6,7 @@
  * Author(s):
  *   Mohammed Sadiq <sadiq@sadiqpk.org>
  *
- * SPDX-License-Identifier: GPL-2-or-later OR CC0-1.0
+ * SPDX-License-Identifier: GPL-2.0-or-later OR CC0-1.0
  */
 
 #include <adwaita.h>
