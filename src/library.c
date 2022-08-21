@@ -1,5 +1,5 @@
 /* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
-/* library.h
+/* library.c
  *
  * Copyright 2022 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
