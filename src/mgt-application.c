@@ -139,7 +139,6 @@ static void
 mgt_application_startup (GApplication *application)
 {
   MgtApplication *self = (MgtApplication *)application;
-  g_autoptr(GtkCssProvider) css_provider = NULL;
 
   {
     g_autoptr(GString) str = NULL;
@@ -159,13 +158,6 @@ mgt_application_startup (GApplication *application)
   gtk_window_set_default_icon_name (PACKAGE_ID);
 
   self->settings = mgt_settings_new ();
-  css_provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (css_provider,
-                                       "/org/sadiqpk/GTemplate/css/gtk.css");
-
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (css_provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static int
