@@ -57,26 +57,28 @@ static GParamSpec *properties[N_PROPS];
 static void
 mgt_window_show_about (MgtWindow *self)
 {
-  const char *authors[] = {
+  GtkWidget *about;
+  const char *developers[] = {
     "Mohammed Sadiq https://www.sadiqpk.org",
     NULL
   };
 
   g_assert (MGT_IS_WINDOW (self));
 
-  /*
-   * If “program-name” is not set, it is retrieved from
-   * g_get_application_name().
-   */
-  gtk_show_about_dialog (GTK_WINDOW (self),
-                         "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
-                         "version", PACKAGE_VCS_VERSION,
-                         "copyright", "Copyright © 2022 Mohammed Sadiq",
-                         "license-type", GTK_LICENSE_GPL_3_0,
-                         "authors", authors,
-                         "logo-icon-name", PACKAGE_ID,
-                         "translator-credits", _("translator-credits"),
-                         NULL);
+  about = g_object_new (ADW_TYPE_ABOUT_WINDOW,
+                        "transient-for", self,
+                        "application-name", _("My GTemplate"),
+                        "application-icon", PACKAGE_ID,
+                        "developer-name", "Mohammed Sadiq",
+                        "copyright", _("Copyright © 2022 Mohammed Sadiq"),
+                        "license-type", GTK_LICENSE_GPL_3_0,
+                        "version", PACKAGE_VERSION,
+                        "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
+                        "developers", developers,
+                        "translator-credits", _("translator-credits"),
+                        NULL);
+
+  gtk_window_present (GTK_WINDOW (about));
 }
 
 static void
