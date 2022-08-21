@@ -44,12 +44,12 @@
 
 struct _MgtApplication
 {
-  GtkApplication  parent_instance;
+  AdwApplication  parent_instance;
 
   MgtSettings *settings;
 };
 
-G_DEFINE_TYPE (MgtApplication, mgt_application, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE (MgtApplication, mgt_application, ADW_TYPE_APPLICATION)
 
 
 static gboolean

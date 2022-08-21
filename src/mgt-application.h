@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #include "mgt-settings.h"
 
@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 #define MGT_APPLICATION_DEFAULT() ((MgtApplication *)g_application_get_default ())
 #define MGT_TYPE_APPLICATION (mgt_application_get_type ())
 
-G_DECLARE_FINAL_TYPE (MgtApplication, mgt_application, MGT, APPLICATION, GtkApplication)
+G_DECLARE_FINAL_TYPE (MgtApplication, mgt_application, MGT, APPLICATION, AdwApplication)
 
 MgtApplication *mgt_application_new    (void);
 
