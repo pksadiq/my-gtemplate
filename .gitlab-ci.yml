@@ -12,7 +12,7 @@ build:
   script:
     - CC_LD=mold meson ${MESON_ARGS} -Db_coverage=true _build
     - ccache --zero-stats
-    - xvfb-run -a meson test -C _build
+    - ninja -C _build && xvfb-run -a meson test -C _build
     - ccache --show-stats
     - mkdir -p _build/meson-logs/coveragereport
     - gcovr --root=_build --html-details --print-summary
