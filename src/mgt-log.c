@@ -398,6 +398,8 @@ void
 mgt_log_anonymize_value (GString    *str,
                          const char *value)
 {
+  gunichar c, next_c, prev_c;
+
   if (!value || !*value)
     return;
 
@@ -412,30 +414,33 @@ mgt_log_anonymize_value (GString    *str,
       return;
     }
 
-  if (!isalnum (*value))
-    g_string_append_c (str, *value++);
-
-  if (*value)
-    g_string_append_c (str, *value++);
-
-  if (*value)
-    g_string_append_c (str, *value++);
-
   if (!*value)
     return;
 
-  /* Replace all but the last two alnum chars with 'x' */
+  if (!g_utf8_validate (value, -1, NULL))
+    {
+      g_string_append (str, "******");
+      return;
+    }
+
+  c = g_utf8_get_char (value);
+  g_string_append_unichar (str, c);
+
+  value = g_utf8_next_char (value);
+
   while (*value)
     {
-      while (isalnum (*value) && value[1] && value[2])
-        {
-          if (value[1] == ':' || value[1] == '@' || value[1] == ' ' ||
-              value[-1] == ':' || value[-1] == '@' || value[-1] == ' ')
-            g_string_append_c (str, *value);
-          else
-            g_string_append_c (str, '#');
-          value++;
-        }
-      g_string_append_c (str, *value++);
+      prev_c = c;
+      c = g_utf8_get_char (value);
+
+      value = g_utf8_next_char (value);
+      next_c = g_utf8_get_char (value);
+
+      if (!g_unichar_isalnum (c))
+        g_string_append_unichar (str, c);
+      else if (!g_unichar_isalnum (prev_c) || !g_unichar_isalnum (next_c))
+        g_string_append_unichar (str, c);
+      else
+        g_string_append_c (str, '#');
     }
 }

@@ -12,6 +12,7 @@ env.set('G_DEBUG', 'gc-friendly')
 env.set('MALLOC_CHECK_', '2')
 
 test_items = [
+  'log',
   'settings',
   'utils',
 ]
