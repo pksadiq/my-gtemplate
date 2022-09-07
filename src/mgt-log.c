@@ -414,9 +414,6 @@ mgt_log_anonymize_value (GString    *str,
       return;
     }
 
-  if (!*value)
-    return;
-
   if (!g_utf8_validate (value, -1, NULL))
     {
       g_string_append (str, "******");
