@@ -38,6 +38,35 @@ gboolean no_anonymize;
 gboolean stderr_is_journal;
 gboolean fatal_criticals, fatal_warnings;
 
+/* Copied from GLib, LGPLv2.1+ */
+static void
+_g_log_abort (gboolean breakpoint)
+{
+  gboolean debugger_present;
+
+  if (g_test_subprocess ())
+    {
+      /* If this is a test case subprocess then it probably caused
+       * this error message on purpose, so just exit() rather than
+       * abort()ing, to avoid triggering any system crash-reporting
+       * daemon.
+       */
+      _exit (1);
+    }
+
+#ifdef G_OS_WIN32
+  debugger_present = IsDebuggerPresent ();
+#else
+  /* Assume GDB is attached. */
+  debugger_present = TRUE;
+#endif /* !G_OS_WIN32 */
+
+  if (debugger_present && breakpoint)
+    G_BREAKPOINT ();
+  else
+    g_abort ();
+}
+
 static gboolean
 should_show_log_for_level (GLogLevelFlags log_level,
                            int            verbosity_level)
@@ -270,10 +299,13 @@ mgt_log_write (GLogLevelFlags   log_level,
 
   if (fatal_criticals &&
       (log_level & G_LOG_LEVEL_CRITICAL))
-    G_BREAKPOINT ();
+    log_level |= G_LOG_FLAG_FATAL;
   else if (fatal_warnings &&
            (log_level & (G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING)))
-    G_BREAKPOINT ();
+    log_level |= G_LOG_FLAG_FATAL;
+
+  if (log_level & (G_LOG_FLAG_FATAL | G_LOG_LEVEL_ERROR))
+    _g_log_abort (!(log_level & G_LOG_FLAG_RECURSION));
 
   return G_LOG_WRITER_HANDLED;
 }
