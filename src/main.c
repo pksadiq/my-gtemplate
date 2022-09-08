@@ -81,12 +81,11 @@ main (int   argc,
 
   g_assert (MGT_IS_MAIN_THREAD ());
 
-  g_set_prgname (PACKAGE_NAME);
+  g_set_prgname (PACKAGE_ID);
   enable_backtrace ();
 
   mgt_log_init ();
 
-  g_set_prgname (PACKAGE_ID);
   application = mgt_application_new ();
   setlocale (LC_ALL, "");
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
