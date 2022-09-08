@@ -34,6 +34,15 @@
 #include "mgt-application.h"
 #include "mgt-log.h"
 
+static void
+show_backtrace (int signum)
+{
+  g_on_error_stack_trace (g_get_prgname ());
+  g_print ("signum %d: %s\n", signum, g_strsignal (signum));
+
+  exit (128 + signum);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -41,6 +50,12 @@ main (int   argc,
   g_autoptr(MgtApplication) application = NULL;
 
   g_assert (MGT_IS_MAIN_THREAD ());
+
+  g_set_prgname (PACKAGE_NAME);
+
+  signal (SIGABRT, show_backtrace);
+  signal (SIGTRAP, show_backtrace);
+  signal (SIGSEGV, show_backtrace);
 
   mgt_log_init ();
 
