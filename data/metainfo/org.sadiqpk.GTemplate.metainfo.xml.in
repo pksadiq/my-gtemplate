@@ -16,7 +16,7 @@
       source code and build your favorite application on top.
 
 
-      Both GTK3 and GTK4 are supported.  Use new-project.sh script
+      Both GTK3 and GTK4 are supported.  Use create-project.py script
       to create a new project.
     </p>
     <p>Features:</p>
