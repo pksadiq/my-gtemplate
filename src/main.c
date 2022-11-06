@@ -37,7 +37,14 @@
 static void
 show_backtrace (int signum)
 {
-  g_on_error_stack_trace (g_get_prgname ());
+  /* Log only if we have set some verbosity so that the trace
+   * shall be shown only if the user have explicitly asked for.
+   * Thus avoid logging sensitive information to system log
+   * without user's knowledge.
+   */
+  if (mgt_log_get_verbosity () > 0)
+    g_on_error_stack_trace (g_get_prgname ());
+
   g_print ("signum %d: %s\n", signum, g_strsignal (signum));
 
   exit (128 + signum);
