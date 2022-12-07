@@ -427,13 +427,13 @@ mgt_log_to_file (const char *file_path,
 
 void
 mgt_log (const char     *domain,
-            GLogLevelFlags  log_level,
-            const char     *value,
-            const char     *file,
-            const char     *line,
-            const char     *func,
-            const char     *message_format,
-            ...)
+         GLogLevelFlags  log_level,
+         const char     *value,
+         const char     *file,
+         const char     *line,
+         const char     *func,
+         const char     *message_format,
+         ...)
 {
   g_autoptr(GString) str = NULL;
   va_list args;
