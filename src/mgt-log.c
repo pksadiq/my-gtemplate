@@ -23,6 +23,7 @@
  */
 
 #include <glib.h>
+#include <glib/gstdio.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -31,6 +32,7 @@
 
 #define DEFAULT_DOMAIN_PREFIX "mgt"
 
+FILE *ostream;
 char *domains;
 static int verbosity;
 gboolean any_domain;
@@ -232,15 +234,24 @@ mgt_log_write (GLogLevelFlags   log_level,
                gpointer         user_data)
 {
   g_autoptr(GString) log_str = NULL;
-  FILE *stream = stdout;
+  FILE *stream;
   gboolean can_color;
 
-  if (stderr_is_journal &&
-      g_log_writer_journald (log_level, fields, n_fields, user_data) == G_LOG_WRITER_HANDLED)
-    return G_LOG_WRITER_HANDLED;
+  if (ostream)
+    {
+      stream = ostream;
+    }
+  else
+    {
+      stream = stdout;
 
-  if (log_level & (G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
-    stream = stderr;
+      if (stderr_is_journal &&
+          g_log_writer_journald (log_level, fields, n_fields, user_data) == G_LOG_WRITER_HANDLED)
+        return G_LOG_WRITER_HANDLED;
+
+      if (log_level & (G_LOG_LEVEL_ERROR | G_LOG_LEVEL_CRITICAL | G_LOG_LEVEL_WARNING))
+        stream = stderr;
+    }
 
   log_str = g_string_new (NULL);
 
@@ -392,6 +403,26 @@ int
 mgt_log_get_verbosity (void)
 {
   return verbosity;
+}
+
+void
+mgt_log_to_file (const char *file_path,
+                 gboolean    append)
+{
+  gboolean file_exists;
+
+  g_assert (file_path && *file_path);
+  g_assert (!ostream);
+
+  file_exists = g_file_test (file_path, G_FILE_TEST_IS_REGULAR);
+  ostream = g_fopen (file_path, append ? "a" : "w");
+  g_assert (ostream);
+
+  if (file_exists)
+    {
+      fprintf (ostream, "\n\n\n\n");
+      fflush (ostream);
+    }
 }
 
 void
