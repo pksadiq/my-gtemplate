@@ -64,6 +64,8 @@
 void mgt_log_init               (void);
 void mgt_log_increase_verbosity (void);
 int  mgt_log_get_verbosity      (void);
+void mgt_log_to_file            (const char     *file_path,
+                                 gboolean        append);
 void mgt_log                    (const char     *domain,
                                  GLogLevelFlags  log_level,
                                  const char     *value,
