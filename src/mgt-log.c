@@ -418,7 +418,7 @@ mgt_log_to_file (const char *file_path,
   ostream = g_fopen (file_path, append ? "a" : "w");
   g_assert (ostream);
 
-  if (file_exists)
+  if (file_exists && append)
     {
       fprintf (ostream, "\n\n\n\n");
       fflush (ostream);
