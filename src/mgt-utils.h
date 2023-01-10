@@ -1,4 +1,3 @@
-/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* mgt-utils.h
  *
  * Copyright 2023 Mohammed Sadiq <sadiq@sadiqpk.org>

@@ -1,4 +1,3 @@
-/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
 /* library.c
  *
  * Copyright 2023 Mohammed Sadiq <sadiq@sadiqpk.org>
