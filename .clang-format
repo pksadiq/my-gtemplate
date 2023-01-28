@@ -1,0 +1,48 @@
+# -*- mode: conf; -*-
+
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+BasedOnStyle: GNU
+
+AlignAfterOpenBracket: true
+AlignConsecutiveMacros: Consecutive
+AlignEscapedNewlines: Left
+MaxEmptyLinesToKeep: 2
+# Requires Clang 16
+# AlignTrailingComments:
+#   Kind: Always
+#   OverEmptyLines: 1
+
+AllowAllParametersOfDeclarationOnNextLine: false
+AlwaysBreakAfterReturnType: AllDefinitions
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: None
+ColumnLimit: 0
+SeparateDefinitionBlocks: Always
+
+IndentPPDirectives: AfterHash
+IndentWidth: 2
+# Requires Clang 16
+# InsertNewlineAtEOF: true
+PPIndentWidth: 1
+UseTab: Never
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterControlStatement: Always
+  AfterEnum: false
+  AfterFunction: true
+  AfterStruct: true
+  AfterUnion: false
+  BeforeElse: true
+  BeforeWhile: false
+  IndentBraces: true
+
+StatementMacros:
+  - G_BEGIN_DECLS
+  - G_END_DECLS
+
+WhitespaceSensitiveMacros:
+  - g_autoptr
+  - g_auto
