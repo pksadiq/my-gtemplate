@@ -35,6 +35,7 @@ FILE *ostream;
 char *domains;
 static int verbosity;
 gboolean any_domain;
+gboolean enable_trace;
 gboolean no_anonymize;
 gboolean stderr_is_journal;
 gboolean fatal_criticals, fatal_warnings;
@@ -358,13 +359,76 @@ mgt_log_finalize (void)
   g_clear_pointer (&domains, g_free);
 }
 
+static void
+show_backtrace (int signum)
+{
+  /* Log only if we have set some verbosity so that the trace
+   * shall be shown only if the user have explicitly asked for.
+   * Thus avoid logging sensitive information to system log
+   * without user's knowledge.
+   */
+  if (mgt_log_get_verbosity () > 0)
+    g_on_error_stack_trace (g_get_prgname ());
+
+  g_print ("signum %d: %s\n", signum, g_strsignal (signum));
+
+  /* Reset signal handlers */
+  signal (SIGABRT, SIG_DFL);
+  signal (SIGTRAP, SIG_DFL);
+  signal (SIGSEGV, SIG_DFL);
+
+  /* Raise the signal again, so that the default handlers are run */
+  raise (signum);
+}
+
+static void
+enable_backtrace (void)
+{
+  const char *env;
+
+  env = g_getenv ("LD_PRELOAD");
+
+  if (enable_trace)
+    return;
+
+  /* Don't log backtrace if run inside valgrind */
+  if (env && (strstr (env, "/valgrind/") || strstr (env, "/vgpreload")))
+    return;
+
+  enable_trace = TRUE;
+  signal (SIGABRT, show_backtrace);
+  signal (SIGTRAP, show_backtrace);
+
+#ifndef __has_feature
+#  define __has_feature(x) (0)
+#endif
+
+#if __has_feature (address_sanitizer) ||        \
+  defined(__SANITIZE_ADDRESS__) ||              \
+  defined(__SANITIZE_THREAD__)
+  return;
+#endif
+
+  /* Trap SIGSEGV only if not compiled with sanitizers */
+  /* as sanitizers shall handle this better. */
+  /* fixme: How to check if leak sanitizer is enabled? */
+  signal (SIGSEGV, show_backtrace);
+}
+
 void
 mgt_log_init (void)
 {
   static gsize initialized = 0;
+  const GDebugKey keys[] = {
+    { "gc-friendly", 1 },
+    { "fatal-warnings",  G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL },
+    { "fatal-criticals", G_LOG_LEVEL_CRITICAL }
+  };
 
   if (g_once_init_enter (&initialized))
     {
+      GLogLevelFlags flags;
+
       domains = g_strdup (g_getenv ("G_MESSAGES_DEBUG"));
 
       if (domains && !*domains)
@@ -380,9 +444,14 @@ mgt_log_init (void)
           g_clear_pointer (&domains, g_free);
         }
 
-      if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-criticals") == 0)
+      flags = g_parse_debug_string (g_getenv ("G_DEBUG"), keys, G_N_ELEMENTS (keys));
+
+      if (flags & 1)
+        g_mem_gc_friendly = TRUE;
+
+      if (flags & G_LOG_LEVEL_WARNING)
         fatal_criticals = TRUE;
-      else if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-warnings") == 0)
+      if (flags & G_LOG_LEVEL_CRITICAL)
         fatal_warnings = TRUE;
 
       stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
@@ -396,6 +465,7 @@ void
 mgt_log_increase_verbosity (void)
 {
   verbosity++;
+  enable_backtrace ();
 }
 
 int
@@ -421,6 +491,35 @@ mgt_log_to_file (const char *file_path,
     {
       fprintf (ostream, "\n\n\n\n");
       fflush (ostream);
+    }
+}
+
+const char *
+mgt_log_bool_str (gboolean value,
+                  gboolean use_success)
+{
+  if (!g_log_writer_supports_color (fileno (stdout)) ||
+      stderr_is_journal)
+    {
+      if (value)
+        return use_success ? "succeeded" : "true";
+      else
+        return use_success ? "failed" : "false";
+    }
+
+  if (value)
+    {
+      if (use_success)
+        return "\033[1;32m" "succeeded" "\033[0m";
+      else
+        return "\033[1;32m" "true" "\033[0m";
+    }
+  else
+    {
+      if (use_success)
+        return "\033[1;31m" "failed" "\033[0m";
+      else
+        return "\033[1;31m" "false" "\033[0m";
     }
 }
 

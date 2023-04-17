@@ -60,18 +60,20 @@
            value, __FILE__, G_STRINGIFY (__LINE__),     \
            G_STRFUNC, fmt, ##__VA_ARGS__)
 
-void mgt_log_init               (void);
-void mgt_log_increase_verbosity (void);
-int  mgt_log_get_verbosity      (void);
-void mgt_log_to_file            (const char     *file_path,
-                                 gboolean        append);
-void mgt_log                    (const char     *domain,
-                                 GLogLevelFlags  log_level,
-                                 const char     *value,
-                                 const char     *file,
-                                 const char     *line,
-                                 const char     *func,
-                                 const char     *message_format,
-                                 ...) G_GNUC_PRINTF (7, 8);
-void mgt_log_anonymize_value    (GString        *str,
-                                 const char     *value);
+void         mgt_log_init               (void);
+void         mgt_log_increase_verbosity (void);
+int          mgt_log_get_verbosity      (void);
+void         mgt_log_to_file            (const char     *file_path,
+                                         gboolean        append);
+const char  *mgt_log_bool_str           (gboolean        value,
+                                         gboolean        use_success);
+void         mgt_log                    (const char     *domain,
+                                         GLogLevelFlags  log_level,
+                                         const char     *value,
+                                         const char     *file,
+                                         const char     *line,
+                                         const char     *func,
+                                         const char     *message_format,
+                                         ...) G_GNUC_PRINTF (7, 8);
+void         mgt_log_anonymize_value    (GString        *str,
+                                         const char     *value);
