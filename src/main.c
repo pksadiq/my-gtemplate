@@ -33,52 +33,6 @@
 #include "mgt-application.h"
 #include "mgt-log.h"
 
-static void
-show_backtrace (int signum)
-{
-  /* Log only if we have set some verbosity so that the trace
-   * shall be shown only if the user have explicitly asked for.
-   * Thus avoid logging sensitive information to system log
-   * without user's knowledge.
-   */
-  if (mgt_log_get_verbosity () > 0)
-    g_on_error_stack_trace (g_get_prgname ());
-
-  g_print ("signum %d: %s\n", signum, g_strsignal (signum));
-
-  exit (128 + signum);
-}
-
-static void
-enable_backtrace (void)
-{
-  const char *env;
-
-  env = g_getenv ("LD_PRELOAD");
-
-  /* Don't log backtrace if run inside valgrind */
-  if (env && (strstr (env, "/valgrind/") || strstr (env, "/vgpreload")))
-    return;
-
-  signal (SIGABRT, show_backtrace);
-  signal (SIGTRAP, show_backtrace);
-
-#ifndef __has_feature
-#  define __has_feature(x) (0)
-#endif
-
-#if __has_feature (address_sanitizer) ||        \
-  defined(__SANITIZE_ADDRESS__) ||              \
-  defined(__SANITIZE_THREAD__)
-  return;
-#endif
-
-  /* Trap SIGSEGV only if not compiled with sanitizers */
-  /* as sanitizers shall handle this better. */
-  /* fixme: How to check if leak sanitizer is enabled? */
-  signal (SIGSEGV, show_backtrace);
-}
-
 int
 main (int   argc,
       char *argv[])
@@ -88,8 +42,6 @@ main (int   argc,
   g_assert (MGT_IS_MAIN_THREAD ());
 
   g_set_prgname (PACKAGE_ID);
-  enable_backtrace ();
-
   mgt_log_init ();
 
   application = mgt_application_new ();
