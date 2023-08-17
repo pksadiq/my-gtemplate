@@ -45,7 +45,7 @@ struct _MgtApplication
 {
   AdwApplication  parent_instance;
 
-  MgtSettings *settings;
+  MgtSettings    *settings;
 };
 
 G_DEFINE_TYPE (MgtApplication, mgt_application, ADW_TYPE_APPLICATION)
