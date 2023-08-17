@@ -35,11 +35,11 @@
 
 struct _MgtWindow
 {
-  AdwApplicationWindow parent_instance;
+  AdwApplicationWindow  parent_instance;
 
-  MgtSettings *settings;
+  MgtSettings          *settings;
 
-  GtkWidget   *menu_button;
+  GtkWidget            *menu_button;
 };
 
 G_DEFINE_TYPE (MgtWindow, mgt_window, ADW_TYPE_APPLICATION_WINDOW)
