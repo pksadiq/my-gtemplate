@@ -39,7 +39,7 @@ def get_valid_str(value_type: str, initial_value: str) -> str:
 
 def email_is_valid(email: str) -> bool:
     email = parseemail(email)[1]
-    if email and '@' in email and '.' in email:
+    if email and "@" in email and "." in email:
         return True
     return False
 
@@ -65,7 +65,7 @@ def get_project_name(name: str) -> str:
 
 
 def get_app_id(name: str) -> str:
-    app_id = "org.example." + name.title().replace(' ', '')
+    app_id = "org.example." + name.title().replace(" ", "")
 
     # A unique ID for your application.
     # This is also used as the base resource path (replacing . with /)
@@ -85,7 +85,7 @@ def get_app_name_prefix(name: str) -> str:
     if not name:
         name = "My App"
     regex = "^[a-z][a-z]+$"
-    prefix = ''.join([c for c in name if c.isupper()]).lower()
+    prefix = "".join([c for c in name if c.isupper()]).lower()
     prefix = input(f"Project Prefix ({regex})[{prefix}]: ") or prefix
     while not re.match(regex, prefix):
         print(f"'{prefix}' is not a valid Application prefix")
@@ -124,19 +124,19 @@ def guess_author_details() -> tuple[str, str]:
     email = ""
 
     config = configparser.ConfigParser()
-    git_config = config.read(os.path.expanduser('~/.gitconfig'))
+    git_config = config.read(os.path.expanduser("~/.gitconfig"))
 
     # Try if we have some name in gitconfig
     if git_config:
         try:
-            name = config['user']['name']
-            email = config['user']['email']
+            name = config["user"]["name"]
+            email = config["user"]["email"]
         except KeyError:
             pass
 
     # If we didn't get a name from git, guess the name from OS
     if not name:
-        name = pwd.getpwuid(os.getuid())[4].split(',')[0]
+        name = pwd.getpwuid(os.getuid())[4].split(",")[0]
 
     return name, email
 
@@ -203,7 +203,8 @@ def update_project_files_content():
             content = content.replace(old_app_name_prefix, app_name_prefix)
             content = content.replace(old_app_name_suffix, app_name_suffix)
             content = content.replace(
-                old_app_name_prefix.upper(), app_name_prefix.upper())
+                old_app_name_prefix.upper(), app_name_prefix.upper()
+            )
             content = content.replace(old_app_class_prefix, app_class_prefix)
             if not f.name.endswith(".sh"):
                 content = content.replace(old_author_name, author_name)
@@ -229,12 +230,14 @@ def rename_project_files():
             new_path = f.parent / str(f.name).replace(old_app_name, app_name)
             shutil.move(f, new_path)
         elif f.name.find(old_app_name_prefix) != -1:
-            new_path = f.parent / \
-                str(f.name).replace(old_app_name_prefix, app_name_prefix)
+            new_path = f.parent / str(f.name).replace(
+                old_app_name_prefix, app_name_prefix
+            )
             shutil.move(f, new_path)
         elif f.name.find(old_app_name_suffix) != -1:
-            new_path = f.parent / \
-                str(f.name).replace(old_app_name_suffix, app_name_suffix)
+            new_path = f.parent / str(f.name).replace(
+                old_app_name_suffix, app_name_suffix
+            )
             shutil.move(f, new_path)
 
 
@@ -256,7 +259,7 @@ def cleanup_project_files():
     if index != -1:
         with open(new_project_dir / "meson.build", "w") as fp:
             fp.writelines(lines[:index])
-            fp.writelines(lines[index + 4:])
+            fp.writelines(lines[index + 4 :])
 
 
 def main():
@@ -285,7 +288,8 @@ def main():
         remove_existing = ""
         while not remove_existing:
             remove_existing = input(
-                f"Directory '{project_dir}' exists, do you want to remove it? [y/n]: ").lower()
+                f"Directory '{project_dir}' exists, do you want to remove it? [y/n]: "
+            ).lower()
         if remove_existing == "y":
             shutil.rmtree(project_dir)
             print(f"Removed directory '{project_dir}'")
