@@ -1,6 +1,6 @@
 /* library.c
  *
- * Copyright 2023 Mohammed Sadiq <sadiq@sadiqpk.org>
+ * Copyright 2024 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * Author(s):
  *   Mohammed Sadiq <sadiq@sadiqpk.org>
