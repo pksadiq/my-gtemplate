@@ -1,6 +1,6 @@
 /* utils.c
  *
- * Copyright 2023 Mohammed Sadiq <sadiq@sadiqpk.org>
+ * Copyright 2024 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
