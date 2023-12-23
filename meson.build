@@ -121,7 +121,7 @@ libadwaita_dep = dependency(
 
 pkg_dep = [
   dependency('glib-2.0', version: '>= 2.62.0'),
-  dependency('gtk4', version: '>= 3.94.0'),
+  dependency('gtk4', version: '>= 4.6.0'),
   libadwaita_dep,
 ]
 
