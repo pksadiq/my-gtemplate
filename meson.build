@@ -110,7 +110,7 @@ endif
 pkg_dep = [
   dependency('glib-2.0', version: '>= 2.62.0'),
   dependency('gtk4', version: '>= 4.6.0'),
-  dependency('libadwaita-1', version: '>= 1.1'),
+  dependency('libadwaita-1', version: '>= 1.4'),
 ]
 
 subdir('src')
