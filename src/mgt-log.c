@@ -450,9 +450,9 @@ mgt_log_init (void)
         g_mem_gc_friendly = TRUE;
 
       if (flags & G_LOG_LEVEL_WARNING)
-        fatal_criticals = TRUE;
-      if (flags & G_LOG_LEVEL_CRITICAL)
         fatal_warnings = TRUE;
+      if (flags & G_LOG_LEVEL_CRITICAL)
+        fatal_criticals = TRUE;
 
       stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
       g_log_set_writer_func (mgt_log_handler, NULL, NULL);
