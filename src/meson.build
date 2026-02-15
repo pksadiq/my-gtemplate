@@ -21,7 +21,7 @@ libsrc = [
 ]
 
 libgtemplate = both_libraries(
-  'gtemplate', [libsrc, 'library.c', resources],
+  'gtemplate', [libsrc, resources],
   install: false,
   include_directories: top_inc,
   dependencies: pkg_dep,
