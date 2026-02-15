@@ -85,11 +85,13 @@ mgt_application_show_help (GSimpleAction *action,
                            GVariant      *parameter,
                            gpointer       user_data)
 {
+  g_autoptr(GtkUriLauncher) launcher = NULL;
   GtkWindow *window;
 
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
-  gtk_show_uri (window, PACKAGE_HELP_URL, GDK_CURRENT_TIME);
+  launcher = gtk_uri_launcher_new (PACKAGE_HELP_URL);
+  gtk_uri_launcher_launch (launcher, window, NULL, NULL, NULL);
 }
 
 static void
