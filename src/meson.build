@@ -20,15 +20,9 @@ libsrc = [
   'mgt-window.c',
 ]
 
-libgtemplate_shared = shared_library(
+libgtemplate = both_libraries(
   'gtemplate', [libsrc, 'library.c', resources],
   install: false,
-  include_directories: top_inc,
-  dependencies: pkg_dep,
-)
-
-libgtemplate_static = static_library(
-  'gtemplate', libsrc,
   include_directories: top_inc,
   dependencies: pkg_dep,
 )
@@ -40,9 +34,10 @@ ui_files = files(
 
 gtk_builder_tool = find_program('gtk4-builder-tool', required: false)
 if gtk_builder_tool.found()
-  preload_env = 'LD_PRELOAD=libadwaita-1.so:@0@'.format(libgtemplate_shared.full_path())
+  preload_env = 'LD_PRELOAD=libadwaita-1.so:@0@'.format(libgtemplate.get_shared_lib().full_path())
   foreach file: ui_files
     test('Validate @0@'.format(file), gtk_builder_tool,
+         depends: libgtemplate,
          env: [preload_env],
          args: ['validate', file])
   endforeach
@@ -60,7 +55,7 @@ executable(
   src,
   install: true,
   win_subsystem: 'windows',
-  link_with: libgtemplate_static,
+  link_with: libgtemplate.get_static_lib(),
   include_directories: top_inc,
   dependencies: pkg_dep,
 )
