@@ -1,6 +1,6 @@
 /* mgt-window.c
  *
- * Copyright 2024 Mohammed Sadiq <sadiq@sadiqpk.org>
+ * Copyright 2026 Mohammed Sadiq <sadiq@sadiqpk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ mgt_window_show_about (MgtWindow *self)
                         "application-name", _("My GTemplate"),
                         "application-icon", PACKAGE_ID,
                         "developer-name", "Mohammed Sadiq",
-                        "copyright", _("Copyright © 2024 Mohammed Sadiq"),
+                        "copyright", _("Copyright © 2026 Mohammed Sadiq"),
                         "license-type", GTK_LICENSE_GPL_3_0,
                         "version", PACKAGE_VERSION,
                         "website", "https://www.sadiqpk.org/projects/my-gtemplate.html",
