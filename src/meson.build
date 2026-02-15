@@ -21,7 +21,7 @@ libsrc = [
 ]
 
 libgtemplate_shared = shared_library(
-  'gtemplate', [libsrc, 'library.c'],
+  'gtemplate', [libsrc, 'library.c', resources],
   install: false,
   include_directories: top_inc,
   dependencies: pkg_dep,
