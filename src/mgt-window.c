@@ -56,7 +56,7 @@ static GParamSpec *properties[N_PROPS];
 static void
 mgt_window_show_about (MgtWindow *self)
 {
-  GtkWidget *about;
+  AdwDialog *about;
   const char *developers[] = {
     "Mohammed Sadiq https://www.sadiqpk.org",
     NULL
@@ -64,8 +64,7 @@ mgt_window_show_about (MgtWindow *self)
 
   g_assert (MGT_IS_WINDOW (self));
 
-  about = g_object_new (ADW_TYPE_ABOUT_WINDOW,
-                        "transient-for", self,
+  about = g_object_new (ADW_TYPE_ABOUT_DIALOG,
                         "application-name", _("My GTemplate"),
                         "application-icon", PACKAGE_ID,
                         "developer-name", "Mohammed Sadiq",
@@ -77,7 +76,7 @@ mgt_window_show_about (MgtWindow *self)
                         "translator-credits", _("translator-credits"),
                         NULL);
 
-  gtk_window_present (GTK_WINDOW (about));
+  adw_dialog_present (about, GTK_WIDGET (self));
 }
 
 static void
