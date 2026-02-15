@@ -66,10 +66,6 @@ static GOptionEntry cmd_options[] = {
     "verbose", 'v', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, cmd_verbose_cb,
     N_("Show verbose logs"), NULL
   },
-  {
-    "version", 0, G_OPTION_FLAG_NONE, G_OPTION_ARG_NONE, NULL,
-    N_("Show release version"), NULL
-  },
   { NULL }
 };
 
@@ -94,19 +90,6 @@ mgt_application_show_help (GSimpleAction *action,
   window = gtk_application_get_active_window (GTK_APPLICATION (user_data));
 
   gtk_show_uri (window, PACKAGE_HELP_URL, GDK_CURRENT_TIME);
-}
-
-static int
-mgt_application_handle_local_options (GApplication *application,
-                                      GVariantDict *options)
-{
-  if (g_variant_dict_contains (options, "version"))
-    {
-      g_print ("%s %s\n", PACKAGE_NAME, PACKAGE_VCS_VERSION);
-      return 0;
-    }
-
-  return -1;
 }
 
 static void
@@ -218,7 +201,6 @@ mgt_application_class_init (MgtApplicationClass *klass)
 
   object_class->finalize = mgt_application_finalize;
 
-  application_class->handle_local_options = mgt_application_handle_local_options;
   application_class->startup = mgt_application_startup;
   application_class->command_line = mgt_application_command_line;
   application_class->activate = mgt_application_activate;
@@ -236,5 +218,6 @@ mgt_application_new (void)
   return g_object_new (MGT_TYPE_APPLICATION,
                        "application-id", PACKAGE_ID,
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
+                       "version", PACKAGE_VCS_VERSION,
                        NULL);
 }
