@@ -33,6 +33,7 @@
 
 FILE *ostream;
 char *domains;
+GStrv domain_list;
 static int verbosity;
 gboolean any_domain;
 gboolean enable_trace;
@@ -95,17 +96,13 @@ static gboolean
 matches_domain (const char *log_domains,
                 const char *domain)
 {
-  g_auto(GStrv) domain_list = NULL;
-
   if (!log_domains || !*log_domains ||
       !domain || !*domain)
     return FALSE;
 
-  domain_list = g_strsplit (log_domains, ",", -1);
-
   for (guint i = 0; domain_list[i]; i++)
     {
-      if (g_str_has_prefix (domain, domain_list[i]))
+      if (*domain_list[i] && g_str_has_prefix (domain, domain_list[i]))
         return TRUE;
     }
 
@@ -357,6 +354,7 @@ static void
 mgt_log_finalize (void)
 {
   g_clear_pointer (&domains, g_free);
+  g_clear_pointer (&domain_list, g_strfreev);
 }
 
 static void
@@ -436,6 +434,8 @@ mgt_log_init (void)
 
       if (!domains || g_str_equal (domains, "all"))
         any_domain = TRUE;
+      else
+        domain_list = g_strsplit_set (domains, ", ", -1);
 
       if (domains && strstr (domains, "no-anonymize"))
         {
