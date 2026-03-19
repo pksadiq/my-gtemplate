@@ -601,6 +601,6 @@ mgt_log_anonymize_value (GString    *str,
       else if (!g_unichar_isalnum (prev_c) || !g_unichar_isalnum (next_c))
         g_string_append_unichar (str, c);
       else
-        g_string_append_c (str, '#');
+        g_string_append_c (str, '*');
     }
 }
