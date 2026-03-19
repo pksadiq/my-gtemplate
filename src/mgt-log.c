@@ -34,7 +34,7 @@
 FILE *ostream;
 char *domains;
 GStrv domain_list;
-static int verbosity;
+static MgtLogLevel verbosity;
 gboolean any_domain;
 gboolean enable_trace;
 gboolean no_anonymize;
@@ -74,17 +74,17 @@ static gboolean
 should_show_log_for_level (GLogLevelFlags log_level,
                            int            verbosity_level)
 {
-  if (verbosity_level >= 6)
+  if (verbosity_level >= MGT_LOG_LEVEL_TRACE3)
     return TRUE;
 
   if (log_level & MGT_LOG_LEVEL_TRACE)
-    return verbosity_level >= 3;
+    return verbosity_level >= MGT_LOG_LEVEL_TRACE1;
 
   if (log_level & G_LOG_LEVEL_DEBUG)
-    return verbosity_level >= 2;
+    return verbosity_level >= MGT_LOG_LEVEL_DEBUG;
 
   if (log_level & G_LOG_LEVEL_INFO)
-    return verbosity_level >= 1;
+    return verbosity_level >= MGT_LOG_LEVEL_INFO;
 
   return FALSE;
 }
@@ -128,8 +128,8 @@ should_log (const char     *log_domain,
     if (log_level & ~MGT_LOG_LEVEL_TRACE)
       return TRUE;
 
-    /* If the log is trace level, log if verbosity >= 3 */
-    return verbosity >= 3;
+    /* Otherwise, log the text only if verbosity is trace level or more */
+    return verbosity >= MGT_LOG_LEVEL_TRACE1;
   }
 
   if (!domains && g_str_has_prefix (log_domain, DEFAULT_DOMAIN_PREFIX))
@@ -144,12 +144,12 @@ should_log (const char     *log_domain,
     return FALSE;
 
   /* GdkPixbuf logs are too much verbose, skip unless asked not to. */
-  if (verbosity < 7 &&
+  if (verbosity < MGT_LOG_LEVEL_TRACE3 &&
       g_strcmp0 (log_domain, "GdkPixbuf") == 0 &&
       (!domains || !strstr (domains, log_domain)))
     return FALSE;
 
-  if (verbosity >= 5)
+  if (verbosity >= MGT_LOG_LEVEL_TRACE2)
     return TRUE;
 
   return FALSE;
@@ -366,7 +366,7 @@ show_backtrace (int signum)
    * Thus avoid logging sensitive information to system log
    * without user's knowledge.
    */
-  if (mgt_log_get_verbosity () > 0)
+  if (mgt_log_get_verbosity ())
     g_on_error_stack_trace (g_get_prgname ());
 
   g_print ("signum %d: %s\n", signum, g_strsignal (signum));
@@ -465,11 +465,12 @@ mgt_log_init (void)
 void
 mgt_log_increase_verbosity (void)
 {
-  verbosity++;
+  if (verbosity < MGT_LOG_LEVEL_LAST)
+    verbosity++;
   enable_backtrace ();
 }
 
-int
+MgtLogLevel
 mgt_log_get_verbosity (void)
 {
   return verbosity;

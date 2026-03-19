@@ -25,6 +25,17 @@
 
 #include <glib.h>
 
+/* Log levels sorted as log priority */
+typedef enum MgtLogLevel {
+  MGT_LOG_LEVEL_NONE,
+  MGT_LOG_LEVEL_INFO,
+  MGT_LOG_LEVEL_DEBUG,
+  MGT_LOG_LEVEL_TRACE1,
+  MGT_LOG_LEVEL_TRACE2,
+  MGT_LOG_LEVEL_TRACE3,
+  MGT_LOG_LEVEL_LAST = MGT_LOG_LEVEL_TRACE3,
+} MgtLogLevel;
+
 #ifndef MGT_LOG_LEVEL_TRACE
 # define MGT_LOG_LEVEL_TRACE ((GLogLevelFlags)(1 << G_LOG_LEVEL_USER_SHIFT))
 # define MGT_LOG_DETAILED ((GLogLevelFlags)(1 << (G_LOG_LEVEL_USER_SHIFT + 1)))
@@ -62,7 +73,7 @@
 
 void         mgt_log_init               (void);
 void         mgt_log_increase_verbosity (void);
-int          mgt_log_get_verbosity      (void);
+MgtLogLevel  mgt_log_get_verbosity      (void);
 void         mgt_log_to_file            (const char     *file_path,
                                          gboolean        append);
 const char  *mgt_log_bool_str           (gboolean        value,
