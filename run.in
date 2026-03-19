@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-set -e
 
-export GSETTINGS_SCHEMA_DIR="@BUILD_DIR@/data"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd $SCRIPT_DIR
+
 set -x
 export MALLOC_PERTURB_="$(($RANDOM % 255 + 1))"
-G_SLICE=always-malloc MALLOC_CHECK_=2 exec "@BUILD_DIR@/src/my-gtemplate" "$@"
+G_SLICE=always-malloc MALLOC_CHECK_=2 exec meson devenv @PACKAGE@ "$@"

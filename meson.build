@@ -52,7 +52,7 @@ configure_file(
 )
 
 run_conf = configuration_data()
-run_conf.set('BUILD_DIR', meson.current_build_dir())
+run_conf.set('PACKAGE', pkg_name)
 configure_file(
   input: 'run.in',
   output: 'run',

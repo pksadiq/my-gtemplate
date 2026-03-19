@@ -19,8 +19,9 @@ install_data(
   install_dir: pkg_schemadir,
 )
 
+compiled = gnome.compile_schemas(build_by_default: true)
+
 if get_option('tests')
-  compiled = gnome.compile_schemas(build_by_default: true)
   pkg_dep += declare_dependency(sources: compiled)
 endif
 
