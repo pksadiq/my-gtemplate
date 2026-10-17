@@ -28,12 +28,14 @@ endif
 desktop_utils = find_program('desktop-file-validate', required: false)
 if desktop_utils.found()
   test('Validate desktop file', desktop_utils,
+       suite: 'validate',
        args: [desktop_file])
 endif
 
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found()
   test('Validate schema file', compile_schemas,
+       suite: 'validate',
        args: ['--strict', '--dry-run', meson.current_source_dir()])
 endif
 

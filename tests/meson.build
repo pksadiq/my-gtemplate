@@ -11,6 +11,21 @@ env.set('GSETTINGS_BACKEND', 'memory')
 env.set('G_DEBUG', 'gc-friendly')
 env.set('MALLOC_CHECK_', '2')
 
+add_test_setup(
+  'valgrind',
+  exclude_suites: [
+    'validate',
+  ],
+  exe_wrapper: [
+    'valgrind',
+    '--leak-check=full',
+    '--show-leak-kinds=definite',
+    '--error-exitcode=1',
+    '--suppressions=' + glib_dep.get_variable('glib_valgrind_suppressions'),
+    '--suppressions=/usr/share/gtk-4.0/valgrind/gtk.supp',
+  ],
+)
+
 test_items = [
   'log',
   'settings',

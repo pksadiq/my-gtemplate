@@ -37,6 +37,7 @@ if gtk_builder_tool.found()
   preload_env = 'LD_PRELOAD=libadwaita-1.so:@0@'.format(libgtemplate.get_shared_lib().full_path())
   foreach file: ui_files
     test('Validate @0@'.format(file), gtk_builder_tool,
+         suite: 'validate',
          depends: libgtemplate,
          env: [preload_env],
          args: ['validate', file])

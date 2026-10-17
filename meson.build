@@ -107,8 +107,9 @@ if cc.get_id() == 'msvc'
           ' Please use MinGW or native GNU/Linux')
 endif
 
+glib_dep = dependency('glib-2.0', version: '>= 2.80.0')
 pkg_dep = [
-  dependency('glib-2.0', version: '>= 2.80.0'),
+  glib_dep,
   dependency('gtk4', version: '>= 4.10.0'),
   dependency('libadwaita-1', version: '>= 1.5'),
 ]

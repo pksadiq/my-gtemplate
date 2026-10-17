@@ -17,5 +17,6 @@ appstream_args += ['validate-relax', appstream_file]
 
 if appstream_util.found()
   test('Validate appstream file', appstream_util,
+       suite: 'validate',
        args: appstream_args)
 endif
