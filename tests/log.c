@@ -34,7 +34,7 @@
 static void
 test_log_anonymize (void)
 {
-  GString *str;
+  g_autoptr(GString) str = NULL;
   const char *strings[][2] = {
     {"hunter2", "h*****2"},
     {"alice@example.com", "a***e@e*****e.c*m"},
